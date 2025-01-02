@@ -1,0 +1,408 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/tElnmtQ6yz1PjN1kePNl8yMSb59.jpg",
+      "genre_ids": [
+        16,
+        12,
+        10751,
+        35
+      ],
+      "id": 1241982,
+      "original_language": "en",
+      "original_title": "Moana 2",
+      "overview": "Vaiana 2 embarquera les spectateurs dans un périple inédit en compagnie de Vaiana, Maui et d’un improbable nouvel équipage de marins. Après avoir reçu un appel inattendu de ses ancêtres, la jeune femme entreprend un voyage qui la conduira jusqu’aux eaux dangereuses des confins des mers d’Océanie pour y vivre une aventure comme jamais vécue auparavant.",
+      "popularity": 3633.267,
+      "poster_path": "/8OulAqoorQy4X3hI4jNOiFLJYEk.jpg",
+      "release_date": "2024-11-27",
+      "title": "Vaiana 2",
+      "video": false,
+      "vote_average": 7.204,
+      "vote_count": 103
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/3V4kLQg0kSqPLctI5ziYWabAZYF.jpg",
+      "genre_ids": [
+        878,
+        28,
+        12
+      ],
+      "id": 912649,
+      "original_language": "en",
+      "original_title": "Venom: The Last Dance",
+      "overview": "Eddie et Venom sont en cavale. Chacun est traqué par ses semblables et alors que l'étau se resserre, le duo doit prendre une décision dévastatrice qui annonce la conclusion des aventures d'Eddie et de Venom.",
+      "popularity": 2710.484,
+      "poster_path": "/6Vx7Ew7qKNJx3Tb3LFpYLG6rPiq.jpg",
+      "release_date": "2024-10-22",
+      "title": "Venom : The Last Dance",
+      "video": false,
+      "vote_average": 6.405,
+      "vote_count": 945
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/iR79ciqhtaZ9BE7YFA1HpCHQgX4.jpg",
+      "genre_ids": [
+        27,
+        9648
+      ],
+      "id": 1100782,
+      "original_language": "en",
+      "original_title": "Smile 2",
+      "overview": "Sur le point d’entamer une nouvelle tournée mondiale, la star planétaire de la pop, Skye Riley, commence à vivre des événements de plus en plus terrifiants et inexplicables. Dépassée par l’horreur croissante et la pression de la célébrité, Skye doit affronter son sombre passé pour reprendre le contrôle sur sa vie avant qu’elle n’en perde le contrôle.",
+      "popularity": 1599.314,
+      "poster_path": "/bZQweCDilXNvF8KuaEHcghM3Nwf.jpg",
+      "release_date": "2024-10-16",
+      "title": "Smile 2",
+      "video": false,
+      "vote_average": 6.649,
+      "vote_count": 734
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/v9acaWVVFdZT5yAU7J2QjwfhXyD.jpg",
+      "genre_ids": [
+        16,
+        878,
+        10751
+      ],
+      "id": 1184918,
+      "original_language": "en",
+      "original_title": "The Wild Robot",
+      "overview": "L’incroyable épopée d'un robot -- l'unité ROZZUM 7134 alias \"Roz\" -- qui après avoir fait naufrage sur une île déserte doit apprendre à s'adapter à un environnement hostile en nouant petit à petit des relations avec les animaux de l'île. Il finit par adopter le petit d’une oie, un oison, qui se retrouve orphelin.",
+      "popularity": 1442.21,
+      "poster_path": "/yJGZlmCmQGX6PGe9f0LtZffLHhZ.jpg",
+      "release_date": "2024-09-12",
+      "title": "Le Robot sauvage",
+      "video": false,
+      "vote_average": 8.399,
+      "vote_count": 3196
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/uKb22E0nlzr914bA9KyA5CVCOlV.jpg",
+      "genre_ids": [
+        18,
+        14,
+        10749
+      ],
+      "id": 402431,
+      "original_language": "en",
+      "original_title": "Wicked",
+      "overview": "Elphaba, une jeune femme incomprise à cause de la couleur inhabituelle de sa peau verte ne soupçonne même pas l'étendue de ses pouvoirs. À ses côtés, Glinda qui, aussi populaire que privilégiée, ne connaît pas encore la vraie nature de son cœur.",
+      "popularity": 1436.528,
+      "poster_path": "/aSPF68VOCvm3QqcYUkXGmKAfqzs.jpg",
+      "release_date": "2024-11-20",
+      "title": "Wicked",
+      "video": false,
+      "vote_average": 7.7,
+      "vote_count": 257
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/euYIwmwkmz95mnXvufEmbL6ovhZ.jpg",
+      "genre_ids": [
+        28,
+        12
+      ],
+      "id": 558449,
+      "original_language": "en",
+      "original_title": "Gladiator II",
+      "overview": "Des années après avoir assisté à la mort du héros vénéré Maximus aux mains de son oncle, Lucius est forcé d'entrer dans le Colisée lorsque son pays est conquis par les empereurs tyranniques qui gouvernent désormais Rome d'une main de fer. La rage au cœur et l'avenir de l'Empire en jeu, Lucius doit se tourner vers son passé pour trouver la force et l'honneur de rendre la gloire de Rome à son peuple.",
+      "popularity": 1293.172,
+      "poster_path": "/rTa9otCuUwcJKoI78SkleDUC0pH.jpg",
+      "release_date": "2024-11-13",
+      "title": "Gladiator II",
+      "video": false,
+      "vote_average": 6.7,
+      "vote_count": 809
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/18TSJF1WLA4CkymvVUcKDBwUJ9F.jpg",
+      "genre_ids": [
+        27,
+        53
+      ],
+      "id": 1034541,
+      "original_language": "en",
+      "original_title": "Terrifier 3",
+      "overview": "Après avoir survécu au massacre d'Halloween perpétré par Art Le Clown, Sienna et son frère tentent de reconstruire leur vie. Alors que les fêtes de fin d'année approchent, ils s'efforcent de laisser derrière eux les horreurs passées. Cependant, au moment où ils se croyaient enfin à l'abri, Art refait surface, bien décidé à transformer Noël en un véritable cauchemar.",
+      "popularity": 1072.453,
+      "poster_path": "/fM0B5Jej3jtLqo6J1zC41VipuTy.jpg",
+      "release_date": "2024-10-09",
+      "title": "Terrifier 3",
+      "video": false,
+      "vote_average": 6.872,
+      "vote_count": 1140
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/n4ycOGj2tRLfINTJQ3wl0vNYqpR.jpg",
+      "genre_ids": [
+        16,
+        14,
+        10751,
+        12,
+        35
+      ],
+      "id": 592983,
+      "original_language": "en",
+      "original_title": "Spellbound",
+      "overview": "Un puissant maléfice ayant transformé ses parents en monstres géants, une toute jeune princesse part en expédition en pleine nature pour conjurer le sort avant qu'il ne soit trop tard.",
+      "popularity": 1176.261,
+      "poster_path": "/9NUmEEFRNjHpbXdRrQBfKF7ZyzU.jpg",
+      "release_date": "2024-11-22",
+      "title": "Ellian et le sortilège",
+      "video": false,
+      "vote_average": 6.6,
+      "vote_count": 86
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/2fxnTXr8NwyTFkunkimJkGkhqfy.jpg",
+      "genre_ids": [
+        18,
+        28,
+        27
+      ],
+      "id": 1118031,
+      "original_language": "es",
+      "original_title": "Apocalipsis Z: el principio del fin",
+      "overview": "Lorsqu'une sorte de rage qui transforme les gens en créatures agressives se répand sur la planète, Manel s'isole chez lui avec son chat, ne comptant que sur son intelligence pour survivre. Mais bientôt, ils doivent partir à la recherche de nourriture, par terre et par mer, en esquivant de nombreux dangers.",
+      "popularity": 1134.156,
+      "poster_path": "/yUsH05TXptcKbyYg485y5TQlUUz.jpg",
+      "release_date": "2024-10-04",
+      "title": "Apocalypse Z : le début de la fin",
+      "video": false,
+      "vote_average": 6.767,
+      "vote_count": 606
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/kwXycPsLA6SV3KUOagn343TtMOf.jpg",
+      "genre_ids": [
+        28,
+        878,
+        53
+      ],
+      "id": 791042,
+      "original_language": "en",
+      "original_title": "Levels",
+      "overview": "Après avoir été témoin du meurtre de sa petite amie, Joe risque tout - y compris remettre la réalité elle-même en question - pour découvrir la vérité sur sa mort...",
+      "popularity": 973.541,
+      "poster_path": "/y1xm0jMIlx9Oo2a3jWNyLGm43sJ.jpg",
+      "release_date": "2024-11-01",
+      "title": "Levels",
+      "video": false,
+      "vote_average": 5.661,
+      "vote_count": 28
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/dvBCdCohwWbsP5qAaglOXagDMtk.jpg",
+      "genre_ids": [
+        28,
+        35,
+        878
+      ],
+      "id": 533535,
+      "original_language": "en",
+      "original_title": "Deadpool & Wolverine",
+      "overview": "Un Wade Wilson désabusé s'abrutit de travail dans le civil. Sa vie de mercenaire moralement flexible, Deadpool, est derrière lui. Mais quand son monde est menacé d'anéantissement, il accepte à contrecœur de reprendre le flambeau, et de convaincre un Wolverine non moins contre-cœureux... contre-cordial ? Contre-cardiaque ? Il doit le convaincre de... ah, laisse tomber, va voir le film. Un synopsis, c'est débile. Mais entends l'avertissement : des flashs lumineux dans l'image pourraient affecter les spectateurs photosensibles.",
+      "popularity": 931.245,
+      "poster_path": "/isVYj783kZsgjwFRK0ilhniQVj8.jpg",
+      "release_date": "2024-07-24",
+      "title": "Deadpool & Wolverine",
+      "video": false,
+      "vote_average": 7.687,
+      "vote_count": 5658
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/9SSEUrSqhljBMzRe4aBTh17rUaC.jpg",
+      "genre_ids": [
+        27,
+        878
+      ],
+      "id": 945961,
+      "original_language": "en",
+      "original_title": "Alien: Romulus",
+      "overview": "Quelques années après les événements sur le vaisseau Nostromo, un groupe de jeunes colons de l'espace travaillent en tant que mineurs dans l'espoir de rejoindre une autre planète verdoyante, Yvaga. Un des membres propose d'utiliser une station spatiale abandonnée en orbite autour de leur planète actuelle afin de se rendre sur Yvaga. Cependant, ils se retrouvent face-à-face avec la forme de vie la plus terrifiante de l'univers alors qu'ils fouillent les profondeurs de cette station.",
+      "popularity": 879.685,
+      "poster_path": "/xmDypImhT0OOloQIj3JLslUrBw8.jpg",
+      "release_date": "2024-08-13",
+      "title": "Alien : Romulus",
+      "video": false,
+      "vote_average": 7.3,
+      "vote_count": 2464
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/7h6TqPB3ESmjuVbxCxAeB1c9OB1.jpg",
+      "genre_ids": [
+        18,
+        27,
+        878
+      ],
+      "id": 933260,
+      "original_language": "en",
+      "original_title": "The Substance",
+      "overview": "Elisabeth Sparkle, vedette d’une émission d’aérobic, est licenciée le jour de ses 50 ans à cause de son âge. Le moral au plus bas, elle reçoit une proposition inattendue, celle d'un mystérieux laboratoire lui proposant une « substance » miraculeuse : si elle se l’injecte, elle deviendra la meilleure version d’elle-même, plus jeune, plus belle, plus parfaite grâce à une modification de son ADN...",
+      "popularity": 846.195,
+      "poster_path": "/5Jfj6LqxOludXg454Vxef8dCJln.jpg",
+      "release_date": "2024-09-07",
+      "title": "The Substance",
+      "video": false,
+      "vote_average": 7.3,
+      "vote_count": 2258
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/uMXVeVL2v57lMv6pqBmegDHHPqz.jpg",
+      "genre_ids": [
+        16,
+        878,
+        12,
+        10751
+      ],
+      "id": 698687,
+      "original_language": "en",
+      "original_title": "Transformers One",
+      "overview": "Les origines d'Optimus Prime et de Megatron, autrefois amis proches comme des frères, avant de devenir des ennemis jurés, façonnant ainsi à jamais le destin de Cybertron.",
+      "popularity": 785.538,
+      "poster_path": "/92p2jvyqXiGv9VJyXgP5NJEzA92.jpg",
+      "release_date": "2024-09-11",
+      "title": "Transformers : Le Commencement",
+      "video": false,
+      "vote_average": 8.093,
+      "vote_count": 784
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/kyVcNF6GRthdiT4oZn5XgJtl0F7.jpg",
+      "genre_ids": [
+        28,
+        80
+      ],
+      "id": 1233327,
+      "original_language": "te",
+      "original_title": "మట్కా",
+      "overview": "",
+      "popularity": 784.456,
+      "poster_path": "/jrHIKDq9xvKJhYBDvYwmAfs8qvr.jpg",
+      "release_date": "2024-11-14",
+      "title": "మట్కా",
+      "video": false,
+      "vote_average": 5.714,
+      "vote_count": 7
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/rOmUuQEZfPXglwFs5ELLLUDKodL.jpg",
+      "genre_ids": [
+        28,
+        35,
+        14
+      ],
+      "id": 845781,
+      "original_language": "en",
+      "original_title": "Red One",
+      "overview": "Après l'enlèvement du Père Noël, le chef de la sécurité du pôle Nord doit faire équipe avec le chasseur de primes le plus célèbre du monde dans une mission pleine d'action à travers le monde pour sauver Noël.",
+      "popularity": 781.81,
+      "poster_path": "/2QQHOXe8fBb8vsi2oM8wUC3nUGt.jpg",
+      "release_date": "2024-10-31",
+      "title": "Red One",
+      "video": false,
+      "vote_average": 6.624,
+      "vote_count": 178
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/5O0mkQGfOQM4OktFOCep9YmXK79.jpg",
+      "genre_ids": [
+        28,
+        878,
+        53,
+        35,
+        27
+      ],
+      "id": 995803,
+      "original_language": "en",
+      "original_title": "Arena Wars",
+      "overview": "",
+      "popularity": 893.844,
+      "poster_path": "/4dRtXjk1rcsZlaMJpBn6Nh9cTfO.jpg",
+      "release_date": "2024-06-25",
+      "title": "Arena Wars",
+      "video": false,
+      "vote_average": 5.5,
+      "vote_count": 14
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/6lE2e6j8qbtQR8aHxQNJlwxdmKV.jpg",
+      "genre_ids": [
+        28,
+        18,
+        80,
+        53
+      ],
+      "id": 974453,
+      "original_language": "en",
+      "original_title": "Absolution",
+      "overview": "Ancien boxeur, Thug travaille depuis plus de trente ans comme homme de main pour un bandit de Boston et s'occupe notamment de la perception de dettes auprès de ses clients. Une consultation chez un médecin spécialiste lui révèle qu'il souffre d'encéphalopathie traumatique chronique. Se sentant impuissant devant sa mémoire qui décline, il cherche à reprendre contact avec ses enfants, dont sa fille Daisy, jeune mère de famille monoparentale, qui se montre réticente à renouer avec ce père absent.",
+      "popularity": 730.78,
+      "poster_path": "/8nIpG7fwWoPys51ugN2SWtlRNZs.jpg",
+      "release_date": "2024-10-31",
+      "title": "Absolution",
+      "video": false,
+      "vote_average": 6,
+      "vote_count": 67
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/1FBHAQnq7Bs3djBmaNkfdVbnCUE.jpg",
+      "genre_ids": [
+        28,
+        53
+      ],
+      "id": 1124641,
+      "original_language": "en",
+      "original_title": "Classified",
+      "overview": "Evan Shaw, tueur à gages de la CIA, reçoit ses ordres par les petites annonces des journaux afin de connaître sa prochaine cible. Lorsqu'il fait la rencontre de Kacey, une jeune analyste des services secrets britanniques, celle-ci lui annonce une nouvelle choquante : son contact à la CIA est mort depuis huit ans et la division est fermée depuis longtemps. Ensemble, ils vont tenter de découvrir pour qui il travaille réellement…",
+      "popularity": 690.096,
+      "poster_path": "/4oQNuYThVdrVFdKWYwtI96LbA1O.jpg",
+      "release_date": "2024-09-19",
+      "title": "The Spy Code",
+      "video": false,
+      "vote_average": 5.8,
+      "vote_count": 80
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/zpaodBqO2lcwJh2SQrFFf1Rn8Jy.jpg",
+      "genre_ids": [
+        10749,
+        18,
+        35
+      ],
+      "id": 1100099,
+      "original_language": "en",
+      "original_title": "We Live in Time",
+      "overview": "Un chef prometteur et une jeune divorcée voient leur vie changée à jamais lorsqu'une rencontre fortuite les réunit, dans une histoire d'amour profondément émouvante qui s'étend sur une décennie.",
+      "popularity": 672.31,
+      "poster_path": "/ldMZ3sg5kF3KsmIxZ4T6zw7SXOa.jpg",
+      "release_date": "2024-10-10",
+      "title": "L'Amour au présent",
+      "video": false,
+      "vote_average": 7.6,
+      "vote_count": 119
+    }
+  ],
+  "total_pages": 47391,
+  "total_results": 947813
+}

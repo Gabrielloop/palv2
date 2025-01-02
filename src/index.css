@@ -1,0 +1,226 @@
+:root {
+    --black-text: #000;
+    --black-text-tr: rgba(0, 0, 0, 0.5);
+    --primary-denim: #4E6490;
+    --primary-denim-tr: rgba(78, 100, 144, 0.5);
+    --secondary-terra-cota: #CD5E39;
+    --secondary-terra-cota-tr: rgba(205, 94, 57, 0.5);
+    --dark-blue: #00323E;
+    --dark-blue-tr: rgba(0, 50, 62, 0.5);
+    --off-white: #F2E3CC;
+    --off-white-tr: rgba(242, 227, 204, 0.5);
+}
+
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: var(--primary-denim);
+    background: linear-gradient(0deg, var(--primary-denim) 0%, var(--black-text) 100%);
+    background-attachment: fixed; /* Fixe le fond */
+    background-size: cover; /* Étend le dégradé pour couvrir tout l'écran */
+    background-repeat: no-repeat; /* Évite la répétition du dégradé */
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.my-own-class {
+    height: 100%;
+}
+
+.menu_class_fix {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    z-index: 50;
+    gap: 2px;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 180%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+.menu_class_fix > Button {
+    background-color: #5e6272;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    margin: 10px;
+}
+
+nav {
+    width: 100%;
+    display: flex;
+    z-index: 50;
+    position: fixed;
+    height:50px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 2px !important;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 0%, var(--black-text-tr) 100%);
+    top:0px;
+}
+
+.my-search-bar input {
+    height: 20px;
+    backdrop-filter: blur(10px);
+    background-color: var(--off-white-tr);
+    border-radius: 10px;
+}
+
+.my-search-bar > * {
+    border: none !important;
+}
+
+.my-div-circle {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--off-white);
+    background-color: var(--dark-blue);
+}
+
+.film-card-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 50px;
+    line-height: 1em;
+}
+
+section {
+    margin-top: 60px;
+}
+
+section > h2{
+    margin-top :20px;
+    margin-bottom: 5px;
+    padding:0;
+    height: 50px;
+    color: var(--off-white);
+}
+
+article > h2 {
+    margin-top: 20px;
+    margin-bottom: 5px;
+    padding: 0;
+    height: 50px;
+    color: var(--off-white);
+}
+article {
+    color: var(--off-white);
+}
+.filter-panel {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    backdrop-filter: blur(10px);
+    background-color: var(--off-white-tr);
+    padding: 20px;
+    border-top: 1px solid var(--dark-blue);
+    z-index: 1000;
+    box-shadow: inset 0 7px 9px -7px var(--black-text);
+}
+
+.filter-panel.open {
+    display: block;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    border : 1px solid var(--dark-blue);
+}
+tr{
+    border-collapse: collapse;
+    background-color: var(--off-white-tr);
+}
+tr:hover {
+    background-color: var(--primary-denim-tr);
+}
+.bg-primary {
+    background-color: var(--primary-denim) !important;
+}
+
+.bg-secondary {
+    background-color: var(--secondary-terra-cota) !important;
+}
+
+.bg-dark {
+    background-color: var(--dark-blue) !important;
+}
+
+/* iPhone 6 (portrait et landscape) */
+@media (min-width: 0px) and (max-width: 667px) {
+    .menu_class_fix {
+        justify-content: space-between;
+    }
+    .btn-name-display {
+        display:none;
+    }
+
+    .menu_class_fix > button{
+        width: 30%;
+    }
+    .css-1jsm74t-MuiButton-startIcon > *:nth-of-type(1){
+        font-size: 40px !important;
+    }
+}
+
+/* iPad 4 (portrait et landscape) */
+@media (min-width: 768px) and (max-width: 1024px) {
+
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+
+}
+.login-input {
+    background-color: var(--off-white);
+    width: 100%;
+    margin:auto;
+}
+.login-form{
+    border: 1px solid var(--off-white-tr);
+    background-color: var(--off-white-tr);
+    border-radius: 10px;
+    width: 90%;
+    margin : auto;
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+}
+
+.box-page-content {
+    margin: 5px;
+}
+
+.liste-Favoris button{
+    background-color: pink !important;
+    color: red !important;
+}
+
+.liste-Bibliothèque button {
+    background-color: saddlebrown !important;
+    color: sandybrown !important;
+}
+
+.liste-PAL button {
+    background-color: var(--primary-denim) !important;
+    color: var(--off-white) !important;
+}

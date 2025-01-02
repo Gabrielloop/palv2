@@ -1,0 +1,390 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": "/hziiv14OpD73u9gAak4XDDfBKa2.jpg",
+      "genre_ids": [
+        12,
+        14
+      ],
+      "id": 671,
+      "original_language": "en",
+      "original_title": "Harry Potter and the Philosopher's Stone",
+      "overview": "Orphelin, le jeune Harry Potter peut enfin quitter ses tyranniques oncle et tante Dursley lorsqu'un curieux messager lui révèle qu'il est un sorcier. À 11 ans, Harry va enfin pouvoir intégrer la légendaire école de sorcellerie de Poudlard, y trouver une famille digne de ce nom et des amis, développer ses dons, et préparer son glorieux avenir.",
+      "popularity": 182.532,
+      "poster_path": "/fbxQ44VRdM2PVzHSNajUseUteem.jpg",
+      "release_date": "2001-11-16",
+      "title": "Harry Potter à l'école des sorciers",
+      "video": false,
+      "vote_average": 9,
+      "vote_count": 27420
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/yHzyPJrVqlTySQ9mc379yxrLBYQ.jpg",
+      "genre_ids": [
+        12,
+        14
+      ],
+      "id": 672,
+      "original_language": "en",
+      "original_title": "Harry Potter and the Chamber of Secrets",
+      "overview": "Après de très mauvaises vacances passées chez ses odieux oncle et tante et son affreux cousin, Harry rejoint, non sans mal, l'École des Sorciers où, avec ses amis Ron et Hermione et l'aide ponctuelle de nouveaux venus, il parvient à élucider le mystère de la Chambre des secrets, malgré les pièges tendus par ses ennemis et sans le concours de Lockhart, un nouveau professeur fanfaron et lâche, chargé pourtant de vaincre les Forces du Mal.",
+      "popularity": 141.331,
+      "poster_path": "/8KpHRokGpiaqEGpjYe0rpywtvUx.jpg",
+      "release_date": "2002-11-13",
+      "title": "Harry Potter et la Chambre des secrets",
+      "video": false,
+      "vote_average": 7.7,
+      "vote_count": 21940
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/8f9dnOtpArDrOMEylpSN9Sc6fuz.jpg",
+      "genre_ids": [
+        12,
+        14
+      ],
+      "id": 674,
+      "original_language": "en",
+      "original_title": "Harry Potter and the Goblet of Fire",
+      "overview": "La quatrième année à l’école de Poudlard est marquée par le « Tournoi des trois sorciers ». Les participants sont choisis par la fameuse « Coupe de feu » qui est à l’origine d’un scandale. Elle sélectionne Harry Potter alors qu’il n’a pas l’âge légal requis ! Accusé de tricherie et mis à mal par une série d’épreuves physiques de plus en plus difficiles, ce dernier sera enfin confronté à Celui dont on ne doit pas prononcer le nom, Lord V.",
+      "popularity": 135.419,
+      "poster_path": "/hBak1pn5pbI4ycAbrgMMn1YI7P1.jpg",
+      "release_date": "2005-11-16",
+      "title": "Harry Potter et la Coupe de feu",
+      "video": false,
+      "vote_average": 7.808,
+      "vote_count": 20641
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/htmYEfH7TQgzsXHCnNXxmoYKQtL.jpg",
+      "genre_ids": [
+        12,
+        14
+      ],
+      "id": 673,
+      "original_language": "en",
+      "original_title": "Harry Potter and the Prisoner of Azkaban",
+      "overview": "Sirius Black, un dangereux sorcier criminel, s’échappe de la sombre prison d’Azkaban avec un seul et unique but : retrouver Harry Potter, en troisième année à l’école de Poudlard. Selon la légende, Black aurait jadis livré les parents du jeune sorcier à leur assassin, Lord Voldemort, et serait maintenant déterminé à tuer Harry…",
+      "popularity": 130.693,
+      "poster_path": "/t4P2079IyK19njHDP2GwQrKdvzd.jpg",
+      "release_date": "2004-05-31",
+      "title": "Harry Potter et le Prisonnier d'Azkaban",
+      "video": false,
+      "vote_average": 8,
+      "vote_count": 21531
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/ze6Mx4QE5mQVXRYmG2flncqqle4.jpg",
+      "genre_ids": [
+        12,
+        14
+      ],
+      "id": 767,
+      "original_language": "en",
+      "original_title": "Harry Potter and the Half-Blood Prince",
+      "overview": "Voldemort a renforcé son emprise sur le monde des sorciers aussi bien que sur celui des Moldus, et Poudlard n’est plus un endroit sûr. Harry est d’ailleurs persuadé que le danger rôde à l’intérieur même de l’école mais Dumbledore est plus soucieux de le préparer pour la bataille finale qu’il sent approcher à grands pas. Ensemble, ils tentent de trouver le talon d’Achille de Voldemort et, à cette fin, Dumbledore fait appel au Professeur Horace Slughorn, qui détient des informations cruciales.",
+      "popularity": 129.334,
+      "poster_path": "/A4WWOzWUASfUeESXxduQxVmoD7t.jpg",
+      "release_date": "2009-07-15",
+      "title": "Harry Potter et le Prince de sang-mêlé",
+      "video": false,
+      "vote_average": 7.7,
+      "vote_count": 19396
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/bsaA9qtIR6VTDQykXdBzJc8V5rS.jpg",
+      "genre_ids": [
+        12,
+        14
+      ],
+      "id": 675,
+      "original_language": "en",
+      "original_title": "Harry Potter and the Order of the Phoenix",
+      "overview": "Alors qu’il entame sa cinquième année d’étude à Poudlard, Harry Potter découvre qu’une bonne partie de la communauté des sorciers feint d’ignorer sa récente confrontation avec Lord Voldemort, et préfèrent nier cette aveuglante évidence : le Seigneur des Ténèbres est bel et bien vivant. De plus, la communauté magique lit les mensonges de Rita Skeeter dans la Gazette du Sorcier sous contrôle du Ministère de la Magie. Craignant que le puissant Albus Dumbledore ne mente à propos du retour de Voldemort dans le but de saper son autorité et de lui ravir son poste, le Ministre de la Magie Cornélius Fudge nomme un nouveau Professeur de Défense contre les Forces du Mal, qu’il charge de surveiller le vieux doyen et ses étudiants. Mais celle‐ci, Dolores Ombrage, se révèle incapable de préparer les collégiens à affronter les nouvelles menaces qui planent sur Poudlard…",
+      "popularity": 127.21,
+      "poster_path": "/9ZfpCVNx0y8jpColnnfdA1HI4Zb.jpg",
+      "release_date": "2007-07-08",
+      "title": "Harry Potter et l'Ordre du Phénix",
+      "video": false,
+      "vote_average": 7.7,
+      "vote_count": 19410
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/AqLcLsGGTzAjm3pCCq0CZCQrp6m.jpg",
+      "genre_ids": [
+        12,
+        14
+      ],
+      "id": 12444,
+      "original_language": "en",
+      "original_title": "Harry Potter and the Deathly Hallows: Part 1",
+      "overview": "Le pouvoir de Voldemort s’étend. Celui‐ci contrôle maintenant le Ministère de la Magie et Poudlard. Harry, Ron et Hermione décident de terminer le travail commencé par Dumbledore, et de retrouver les derniers Horcruxes pour vaincre le Seigneur des Ténèbres. Mais il reste bien peu d’espoir aux trois sorciers, qui doivent réussir à tout prix.",
+      "popularity": 118.631,
+      "poster_path": "/yJm61MmTMjOmNXxPxdoaIkdqnOm.jpg",
+      "release_date": "2010-11-17",
+      "title": "Harry Potter et les Reliques de la mort - 1ère partie",
+      "video": false,
+      "vote_average": 7.7,
+      "vote_count": 19016
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/n5A7brJCjejceZmHyujwUTVgQNC.jpg",
+      "genre_ids": [
+        14,
+        12
+      ],
+      "id": 12445,
+      "original_language": "en",
+      "original_title": "Harry Potter and the Deathly Hallows: Part 2",
+      "overview": "Le combat entre les puissances du bien et du mal de l’univers des sorciers se transforme en guerre sans merci. L’école Poudlard est désormais sous la coupe du professeur Rogue et des force des ténèbres. Les enjeux sont devenus considérables et personne n’est plus en sécurité alors que se rapproche l’ultime épreuve de force avec Voldemort…",
+      "popularity": 119.49,
+      "poster_path": "/alQOPmKEPHkH4BLMEla1vTNYrUr.jpg",
+      "release_date": "2011-07-12",
+      "title": "Harry Potter et les Reliques de la mort - 2ème partie",
+      "video": false,
+      "vote_average": 8.1,
+      "vote_count": 20515
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/bqlfDdEnDiyMp5DxYl50FIrvyNO.jpg",
+      "genre_ids": [
+        99
+      ],
+      "id": 899082,
+      "original_language": "en",
+      "original_title": "Harry Potter 20th Anniversary: Return to Hogwarts",
+      "overview": "L'histoire enchanteresse du making-of, racontée à travers de toutes nouvelles interviews et conversations avec les acteurs, invitant les fans à un voyage magique à travers l'une des franchises de films les plus appréciées de tous les temps.",
+      "popularity": 49.953,
+      "poster_path": "/xkohb3dtFG5S5aW61oGVqlqFhQK.jpg",
+      "release_date": "2022-01-01",
+      "title": "Harry Potter fête ses 20 ans : Retour à Poudlard",
+      "video": false,
+      "vote_average": 7.309,
+      "vote_count": 3308
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/mJjOZSaTTqG3an5MkkOX3x18lYX.jpg",
+      "genre_ids": [
+        28,
+        80,
+        53
+      ],
+      "id": 984,
+      "original_language": "en",
+      "original_title": "Dirty Harry",
+      "overview": "Un tueur inconnu menace de poursuivre une série d'assassinats si la police de San Francisco ne lui remet pas immédiatement 200 000 dollars. L'inspecteur Harry Callahan, aux méthodes expéditives mais efficaces, le traque.",
+      "popularity": 29.789,
+      "poster_path": "/uMt4rA1ViG7DPG2GBrWCbuiLQfL.jpg",
+      "release_date": "1971-12-23",
+      "title": "L'Inspecteur Harry",
+      "video": false,
+      "vote_average": 7.5,
+      "vote_count": 2429
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/e2Ppz6IQcukpqyYYJsRkWcsGXvT.jpg",
+      "genre_ids": [
+        35
+      ],
+      "id": 10152,
+      "original_language": "en",
+      "original_title": "Dumb and Dumberer: When Harry Met Lloyd",
+      "overview": "Lorsqu'il arrive au lycée, Harry, qui avait jusque-là seulement étudié chez sa mère, a besoin d'un guide pour lui apprendre la vraie vie. Lloyd, qui habite au sous-sol de l'établissement avec son père adoptif, le concierge Ray, est idéal pour cette mission. C'est le début d'une belle amitié et de gros problèmes... Tout deux vont involontairement servir l'infâme complot du corrompu proviseur Collins et de sa maîtresse, Mrs. Heller : ceux-ci veulent faire des deux garçons les premiers membres d'une fausse \"classe pilote pour élèves délicats\" qui leur permettra de détourner 100 000 dollars d'aide. Naïfs et enthousiastes, Harry et Lloyd se mettent à recruter tous les élèves \"spéciaux\", mais ils éveillent également l'attention de la très belle Jessica Matthews, reporter pour le journal du lycée, qui suspecte l'embrouille...",
+      "popularity": 23.5,
+      "poster_path": "/h9ZvskiTJtSdlW2mTn1TME6104f.jpg",
+      "release_date": "2003-04-14",
+      "title": "Dumb & Dumberer : Quand Harry rencontra Lloyd",
+      "video": false,
+      "vote_average": 4.167,
+      "vote_count": 824
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/AhkirfgU32n0D1uxpaGYJEKy2Hu.jpg",
+      "genre_ids": [
+        18,
+        35,
+        36
+      ],
+      "id": 754609,
+      "original_language": "en",
+      "original_title": "Mrs. Harris Goes to Paris",
+      "overview": "Dans le Londres de l’après-guerre, Ada Harris gagne sa vie en faisant des ménages. Si elle mène une vie très solitaire depuis le décès de son mari Eddie, porté disparu au combat. Ada n’est pourtant pas du style à se plaindre, ni même s’appesantir sur son sort, et pourtant, elle qui se croyait les pieds bien ancrés dans la réalité, est tout à coup submergée par une vague de rêve et d’émerveillement quand elle découvre une magnifique robe signée DIOR, nonchalamment accrochée dans la chambre d’une de ses riches clientes. Elle se surprend alors à penser qu’une si belle œuvre d’art, si pure, si éthérée ne peut que changer la vie de quiconque la possède.",
+      "popularity": 22.513,
+      "poster_path": "/pGkDGRYH5j7wFUgiAn8syVjyPhS.jpg",
+      "release_date": "2022-07-15",
+      "title": "Une robe pour Mrs. Harris",
+      "video": false,
+      "vote_average": 7.294,
+      "vote_count": 424
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/dbdegCWeD4iK5LXxSBjGdIRsVXS.jpg",
+      "genre_ids": [
+        35,
+        10749,
+        18
+      ],
+      "id": 639,
+      "original_language": "en",
+      "original_title": "When Harry Met Sally...",
+      "overview": "Harry et Sally s'entendent comme chien et chat. Après la fac ils prennent la même destination, New York, mais ne se reverront que cinq ans plus tard, par hasard, dans un aéroport. Chacun a fait sa vie, ils se sont fiancés. Cinq ans passent encore, ils se rencontrent à nouveau. Tous deux viennent de rompre et dans cette étape difficile, ils se découvrent une vraie amitié. La complicité les rapproche à tel point qu'ils finissent par admettre, ce que leurs amis savaient déjà : ils sont faits l'un pour l'autre.",
+      "popularity": 42.722,
+      "poster_path": "/ghvbClWDXje0ksaL6ad2k7IZHCc.jpg",
+      "release_date": "1989-07-21",
+      "title": "Quand Harry rencontre Sally…",
+      "video": false,
+      "vote_average": 7.4,
+      "vote_count": 4070
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/7HZ65pJYuiWONhtShHLkUTqngGW.jpg",
+      "genre_ids": [
+        18,
+        27,
+        9648
+      ],
+      "id": 723419,
+      "original_language": "en",
+      "original_title": "Mr. Harrigan's Phone",
+      "overview": "Un adolescent reçoit des messages d'outre-tombe. Ce drame initiatique sinistre traite des amitiés improbables et de leurs conséquences indésirables.",
+      "popularity": 17.123,
+      "poster_path": "/bhcsIMaRLSAOo9Ij2UCEC5DV9l8.jpg",
+      "release_date": "2022-10-05",
+      "title": "Le Téléphone de M. Harrigan",
+      "video": false,
+      "vote_average": 6.415,
+      "vote_count": 828
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/mjCYpJXCBYDZgMr1U1KZcFgFDfC.jpg",
+      "genre_ids": [
+        99
+      ],
+      "id": 482408,
+      "original_language": "en",
+      "original_title": "Harry Potter: A History Of Magic",
+      "overview": "Un voyage passionnant à travers les légendes, les croyances et le folklore, ce film entre dans les coulisses de la British Library alors qu'elle cherche à raconter cette histoire à travers les objets de sa collection, dans une nouvelle exposition ambitieuse: Harry Potter: A History Of Magic. J.K. Rowling, qui prête des manuscrits, des dessins et des brouillons invisibles de ses archives privées (qui côtoient des trésors de la British Library, ainsi que des ébauches et des dessins originaux de Jim Kay) parle de certains des objets personnels qu'elle a prêtés à l'exposition et donne un nouvel aperçu de son écriture, en regardant certains des objets de l'exposition qui ont enflammé son imagination.",
+      "popularity": 9.841,
+      "poster_path": "/kkzDng2S8w2hT1gap7MdMdx7uUE.jpg",
+      "release_date": "2017-10-28",
+      "title": "Harry Potter, aux origines de la magie",
+      "video": false,
+      "vote_average": 7.3,
+      "vote_count": 88
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/i5MaRm0FsJIpXVLAvrMsMt5YQ5p.jpg",
+      "genre_ids": [
+        35,
+        9648
+      ],
+      "id": 11219,
+      "original_language": "en",
+      "original_title": "The Trouble with Harry",
+      "overview": "Des coups de feu, un talon de chaussure, une bouteille, un cadavre et une pléiade de suspects. Un cadavre avec une blessure à la tête est retrouvé dans les collines du Vermont. Miss Graveley pense alors que c'est elle qui a tué l'homme en le frappant avec le talon de sa chaussure parce qu'il l'avait agressé. Le Capitaine Wiles pense également être l'auteur du crime car il chassait ce matin là. Enfin, Jennifer croit reconnaître Harry, son époux, qu'elle avait repoussé en lui donnant un coup de bouteille sur la tête. Chacun va alors tenter de dissimuler le meurtre qu'il pense avoir commis. Mais est-ce réellement un meurtre ?",
+      "popularity": 15.306,
+      "poster_path": "/ctsjhlWkNebCJIJRJ3ELw21YlN7.jpg",
+      "release_date": "1955-10-03",
+      "title": "Mais… qui a tué Harry ?",
+      "video": false,
+      "vote_average": 7,
+      "vote_count": 820
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/cTDoeA4zEJMP0it4VYe0ACFaJ4N.jpg",
+      "genre_ids": [
+        35,
+        18,
+        10751
+      ],
+      "id": 38223,
+      "original_language": "en",
+      "original_title": "Harriet the Spy",
+      "overview": "Harriet rêve de devenir un jour un grand écrivain. Aussi, pour entamer cette glorieuse carrière, elle a pris l'habitude de consigner dans un carnet secret  les faits et gestes de son entourage. Un jour, ce précieux document tombe aux mains de ses camarades de classe. Vexée de s'y voir dépeints sous un jour peu flatteur, ceux-ci se vengent en formant un club de chasseurs d'espions.",
+      "popularity": 16.646,
+      "poster_path": "/spTUUMgIVm4gOdWL35IoYWEuZQl.jpg",
+      "release_date": "1996-07-10",
+      "title": "Harriet la petite espionne",
+      "video": false,
+      "vote_average": 6.006,
+      "vote_count": 179
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/qfJ6aJKRPUZ7kYOp7iuzl5jkyX5.jpg",
+      "genre_ids": [
+        35,
+        18
+      ],
+      "id": 2639,
+      "original_language": "en",
+      "original_title": "Deconstructing Harry",
+      "overview": "Harry, auteur célèbre en panne d'inspiration, est invité par son ancienne université, dont il fut jadis viré, pour un hommage. Il est brouillé avec tout le monde, ses femmes, ses maîtresses, ses psys et ne trouve pour l'accompagner à la cérémonie que Cookie, une prostituée noire, Richard, son ami cardiaque et Hilly, son jeune fils, qu'il a enlevé à la sortie de l'école.",
+      "popularity": 16.654,
+      "poster_path": "/qSZHbERQk8lG7zuDMkh9hl1JOmz.jpg",
+      "release_date": "1997-12-12",
+      "title": "Harry dans tous ses états",
+      "video": false,
+      "vote_average": 7.3,
+      "vote_count": 955
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/eFALDFMBn2C9ywQT8szDPQTh57p.jpg",
+      "genre_ids": [
+        10751,
+        35,
+        18,
+        10770
+      ],
+      "id": 49350,
+      "original_language": "en",
+      "original_title": "Harriet the Spy: Blog Wars",
+      "overview": "Afin de remporter le titre convoité de blogueuse officielle de sa classe, Harriet doit d'abord affronter sa plus grande rivale, Marion, en usant d'astuces. Ainsi, lorsqu'elle apprend que son père va produire la suite d'un film pour ados à succès mettant en vedette l'idole des jeunes filles, Skander Hill, Harriet y voit une belle façon d'impressionner ses camarades. Mais la situation devient vite incontrôlable et Harriet doit réagir rapidement, pour ne pas nuire au succès du film de son père et à la carrière de Skander.",
+      "popularity": 10.163,
+      "poster_path": "/yrskM3gOUGhy5BdIlZ6x5fpcyU5.jpg",
+      "release_date": "2010-03-26",
+      "title": "Harriet l'Espionne - La Guerre des Blogs",
+      "video": false,
+      "vote_average": 5.1,
+      "vote_count": 208
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/bDqchWjPhko0XvRBx4pErPMk0Hv.jpg",
+      "genre_ids": [
+        10749
+      ],
+      "id": 518527,
+      "original_language": "en",
+      "original_title": "Harry & Meghan: A Royal Romance",
+      "overview": "Retour sur l'histoire d'amour entre le Prince Harry et Meghan Markle, de leur première rencontre par des amis communs aux prémices de leur amour tenu secret, en passant par l'attention médiatique autour de leur mariage et la vie passée de Meghan.",
+      "popularity": 11.911,
+      "poster_path": "/2ODzSaM8EKF28mGjNTH3ptb3BJu.jpg",
+      "release_date": "2018-05-13",
+      "title": "Quand Harry rencontre Meghan: Romance Royale",
+      "video": false,
+      "vote_average": 7,
+      "vote_count": 207
+    }
+  ],
+  "total_pages": 35,
+  "total_results": 696
+}
