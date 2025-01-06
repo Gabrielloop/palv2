@@ -1,0 +1,62 @@
+[
+    {
+      "id": 1,
+      "isbn": "9791041100613",
+      "listes": [2],
+      "favoris": true,
+      "avancement": 100,
+      "classement": 5,
+      "commentaire": "Trop cool les chats",
+      "utilisateur_id": 1
+    },
+    {
+      "id": 2,
+      "isbn": "9782344056127",
+      "listes": [2],
+      "favoris": false,
+      "avancement": 50,
+      "classement": 3,
+      "commentaire": "Un livre intéressant mais qui traîne un peu en longueur.",
+      "utilisateur_id": 1
+    },
+    {
+      "id": 3,
+      "isbn": "9782820348999",
+      "listes": [2],
+      "favoris": true,
+      "avancement": 100,
+      "classement": 5,
+      "commentaire": "Un chef-d'œuvre, je recommande vivement.",
+      "utilisateur_id": 1
+    },
+    {
+      "id": 4,
+      "isbn": "9782226477323",
+      "listes": [2, 3],
+      "favoris": false,
+      "avancement": 0,
+      "classement": 0,
+      "commentaire": "Il faut que je le commence un jour...",
+      "utilisateur_id": 1
+    },
+    {
+      "id": 5,
+      "isbn": "9782755673142",
+      "listes": [1],
+      "favoris": true,
+      "avancement": 90,
+      "classement": 5,
+      "commentaire": "Un classique incontournable.",
+      "utilisateur_id": 1
+    },
+    {
+      "id": 6,
+      "isbn": "9782371023048",
+      "listes": [1],
+      "favoris": true,
+      "avancement": 10,
+      "classement": 5,
+      "commentaire": "Un classique incontournable.",
+      "utilisateur_id": 1
+    }
+  ]

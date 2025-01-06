@@ -5,6 +5,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import QrCodeScannerIcon from "@mui/icons-material/QrCodeScanner";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 
+// COmposant Out of date
+
 const titles: string[] = [
   "Empire of Whisper",
   "Adventure of Chronicle",

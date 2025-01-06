@@ -1,28 +1,42 @@
-import React from 'react';
-import {FC} from "react";
+import React from "react";
+import { FC } from "react";
 import Grid2 from "@mui/material/Grid2";
-import {Helmet} from "react-helmet-async";
-import ListeItem from "../../components/ListeItem";
+import { Helmet } from "react-helmet-async";
+import { Box } from "@mui/material";
+import ArrowForwardIosOutLinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
+import ScrollX from "../../components/ScrollX";
+import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
+import RadioButtonUncheckedOutlinedIcon from "@mui/icons-material/RadioButtonUncheckedOutlined";
+import TimelapseOutlined from "@mui/icons-material/TimelapseOutlined";
+import TaskAltOutlinedIcon from "@mui/icons-material/TaskAltOutlined";
+import CollectionsBookmarkOutlinedIxon from "@mui/icons-material/CollectionsBookmarkOutlined";
+import BaseListsItem from "../../components/BaseListsItem";
 
 
-const myBaseList = [
-    {key: 0, name: "Favoris", color: "pink"},
-    {key: 3, name: "Bibliothèque", color : "brown"},
-    {key: 3, name: "PAL", color: "orange"}
-]
+export const myBaseList = [
+  { key: 0, name: "Favoris", type: "fav", icon: <FavoriteOutlinedIcon/> },
+  { key: 1, name: "A lire", type: "notStart", icon: <RadioButtonUncheckedOutlinedIcon/> },
+  { key: 1, name: "En cours", type: "inProgress", icon: <TimelapseOutlined/> },
+  { key: 1, name: "Terminé", type: "finished", icon: <TaskAltOutlinedIcon/> },
+  { key: 2, name: "Enregistré", type: "save", icon: <CollectionsBookmarkOutlinedIxon/> },
+];
 
 const BaseLists: FC<{}> = ({}) => {
-    return (
-            <Grid2 container spacing={2}>
-                {myBaseList.map((lists, index) =>
-                    (
-                            <Grid2 size={{xs: 6, md: 3}} key={index}>
-                                <ListeItem category={lists.name}/>
-                            </Grid2>
-                    ))
-                }
-            </Grid2>
-    );
+  return (
+    <>
+      <ScrollX>
+          {myBaseList.map((lists, index) => (
+            <Box>
+              <BaseListsItem
+                categoryId={index}
+                categoryTitle={lists.name}
+                categoryType={lists.type}
+              />
+            </Box>
+          ))}
+        </ScrollX>
+    </>
+  );
 };
 
 export default BaseLists;

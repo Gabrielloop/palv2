@@ -1,0 +1,20 @@
+[
+    {
+      "id": 1,
+      "titre": "Fantasy",
+      "userId": 1,
+      "type": "liste"
+    },
+    {
+      "id": 2,
+      "titre": "Visuels",
+      "userId": 1,
+      "type": "liste"
+    },
+    {
+      "id": 3,
+      "titre": "Noël",
+      "userId": 1,
+      "type": "liste"
+    }
+  ]

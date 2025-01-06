@@ -8,7 +8,6 @@ import LayoutWB from "./layout/LayoutWB";
 import MyList from "./pages/B_body/MyList";
 import Research from "./pages/B_body/Research";
 import Setting from "./pages/B_body/Setting";
-import MyBook from './pages/B_body/MyBook';
 import Login from "./pages/B_body/Login";
 import { AuthContext } from './context/AuthContext';
 import BookDetails from 'pages/B_body/BookDetails';
@@ -36,7 +35,6 @@ function App() {
                         <Route path="/listes/:mylist" element={<MyList/>}/>
                         <Route path="/options" element={<Setting localtitle={'Options'}/>}/>
                         <Route path="/recherches" element={<Research/>}/>
-                        <Route path="/recherches/:mybook" element={<MyBook/>}/>
                         <Route path="/livre/:isbn" element={<BookDetails/>}/>
                         <Route path="*" element={<div>404</div>}/>
                     </Route>

@@ -11,7 +11,6 @@
     --off-white-tr: rgba(242, 227, 204, 0.5);
 }
 
-
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -20,10 +19,11 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     background: var(--primary-denim);
-    background: linear-gradient(0deg, var(--primary-denim) 0%, var(--black-text) 100%);
-    background-attachment: fixed; /* Fixe le fond */
-    background-size: cover; /* Étend le dégradé pour couvrir tout l'écran */
-    background-repeat: no-repeat; /* Évite la répétition du dégradé */
+    background: linear-gradient(0deg, var(--primary-denim) 0%, rgb(117, 117, 185) 100%);
+    /*background-image: url(fond.jpg);*/
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 code {
@@ -40,20 +40,29 @@ code {
     bottom: 0;
     width: 100%;
     margin: auto;
-    display: flex;
-    align-content: center;
-    justify-content: center;
+    display: flex !important;
+    align-content: center !important;
+    justify-content: center !important;
     z-index: 50;
     gap: 2px;
-    background: linear-gradient(0deg, rgba(0, 0, 0, 0) 180%, rgba(0, 0, 0, 0.8) 100%);
+    border-top: 1px solid var(--primary-denim);
+    backdrop-filter: blur(10px);
+    background-color: var(--black-text-tr);
 }
 
-.menu_class_fix > Button {
-    background-color: #5e6272;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    margin: 10px;
+.menu_class_fix > button {
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    width: 100%;
+    margin :0 !important;
+    padding: 10px !important;
+    align-content: center !important;
+    text-align: center !important;
+    justify-content: center !important;
+    align-items: center !important;
+    align-self: center !important;
 }
-
 nav {
     width: 100%;
     display: flex;
@@ -68,16 +77,6 @@ nav {
     top:0px;
 }
 
-.my-search-bar input {
-    height: 20px;
-    backdrop-filter: blur(10px);
-    background-color: var(--off-white-tr);
-    border-radius: 10px;
-}
-
-.my-search-bar > * {
-    border: none !important;
-}
 
 .my-div-circle {
     border-radius: 50%;
@@ -87,7 +86,7 @@ nav {
     justify-content: center;
     align-items: center;
     color: var(--off-white);
-    background-color: var(--dark-blue);
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .film-card-description {
@@ -101,7 +100,7 @@ nav {
 }
 
 section {
-    margin-top: 60px;
+    margin-bottom: 70px; /* Pour éviter que le footer ne cache le contenu */
 }
 
 section > h2{
@@ -165,24 +164,23 @@ tr:hover {
 
 /* iPhone 6 (portrait et landscape) */
 @media (min-width: 0px) and (max-width: 667px) {
-    .menu_class_fix {
-        justify-content: space-between;
-    }
-    .btn-name-display {
-        display:none;
-    }
-
-    .menu_class_fix > button{
-        width: 30%;
-    }
+    
     .css-1jsm74t-MuiButton-startIcon > *:nth-of-type(1){
         font-size: 40px !important;
     }
+    *::-webkit-scrollbar {
+        display: none; /* Masque la barre de défilement uniquement sur mobile */
+      }
+      html {
+        scroll-behavior: smooth;
+      }
 }
 
 /* iPad 4 (portrait et landscape) */
 @media (min-width: 768px) and (max-width: 1024px) {
-
+    html {
+        scroll-behavior: smooth;
+      }
 }
 
 /* Desktop */
@@ -207,7 +205,8 @@ tr:hover {
 }
 
 .box-page-content {
-    margin: 5px;
+    margin: 1px;
+    color : var(--off-white);
 }
 
 .liste-Favoris button{
@@ -223,4 +222,190 @@ tr:hover {
 .liste-PAL button {
     background-color: var(--primary-denim) !important;
     color: var(--off-white) !important;
+}
+.search-results-list{
+    margin: 0;
+    margin-block-start: 0;
+    padding-inline-start: 0;
+}
+.search-result{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.search-result-item{
+color: var(--off-white);
+}
+.search-result-item-unknown{
+background-color: var(--black-text-tr);
+}
+.search-result-item-tronc{
+    white-space: nowrap; /* Empêche les retours à la ligne */
+    overflow: hidden;    /* Cache le texte qui dépasse */
+    text-overflow: ellipsis; /* Utilise "..." à la fin */
+    max-width: 250px; /* Pour forcer le débordement */
+    box-sizing: border-box;
+}
+.search-result-title{
+    font-size: 1.1em;
+    font-weight: bold;
+}
+.search-result-date{
+    font-size: 0.9em;
+}
+.search-result-item-unknown > *{
+    color: var(--off-white-tr) !important;
+}
+.search-result-item-skeleton > *{
+    color: var(--off-white-tr) !important;
+}
+.header-container {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    margin: auto;
+    z-index: 50;
+    border-top: 1px solid var(--primary-denim);
+    backdrop-filter: blur(10px);
+    background-color: var(--black-text-tr);
+}
+.my-search-bar:first-child{
+    background-color: var(--black-text-tr);
+    border-radius: 5px;
+}
+.my-search-bar > *{
+    color : white !important;
+}
+
+.accordion-container {
+    border-radius: 8px;
+    margin-bottom: 16px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    width:100%;
+    align-items: stretch;
+    background-color: transparent; /* Si vous voulez une couleur d'arrière-plan sur l'en-tête */
+    color: white;
+    cursor: pointer;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.accordion-header button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.accordion-content {
+    padding: 0;
+    width: 100%;
+    border-top: 1px solid var(--primary-denim);
+    opacity: 0; /* Commence masqué */
+    max-height: 0; /* Commence avec une hauteur de 0 */
+    overflow: hidden; /* Empêche le débordement pendant la transition */
+    visibility: hidden; /* Masque l'élément dans l'espace pendant l'animation */
+    transition: max-height 0.5s ease-out, opacity 0.5s ease-out, padding 0.3s ease-out, visibility 0s 0.5s;
+    transition-delay: 0.5s; /* Assurez-vous que la visibilité change après la fin de l'animation */
+}
+
+.accordion-content > form {
+    display: flex;
+    padding: 5px;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.accordion-content > form > *{
+    background-color: var(--black-text-tr);
+    border-radius: 5px;
+}
+.accordion-content > form > * > *{
+    color: white;
+}
+.accordion-content > form > button {
+    background-color: var(--primary-denim);
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.accordion-content.open {
+    opacity: 1; /* Lorsque l'accordéon est ouvert, on le rend visible */
+    max-height: 1000px; /* Permet au contenu d'être visible */
+    visibility: visible; /* Rendre l'élément visible après l'animation */
+}
+
+.accordion-content.closed {
+    opacity: 0; /* Lorsque l'accordéon est fermé, il devient transparent */
+    max-height: 0; /* Masque le contenu */
+    padding: 0; /* Réduit le padding */
+    visibility: hidden; /* Cache totalement l'élément */
+    transition-delay: 0s; /* Enlever le délai de visibilité lorsqu'il est fermé */
+}
+.apercus-liste{
+    position: relative;
+    width : 190px;
+    height : 190px;
+    box-shadow: #000 2px 5px 5px;
+}
+.apercus-liste-fond{
+    position: absolute;
+    width : 190px;
+    height : 190px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+.apercus-liste-content{
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    z-index: 2;
+    top: 20%;
+    font-size: xx-large;
+    background-color: var(--black-text-tr);
+    color: white;
+}
+.apercus-liste-badge{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width : auto;
+    min-width: 15px;
+    height : 15px;
+    z-index: 2;
+    padding:5px;
+    margin : 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: var(--black-text-tr);
+    border: white 3px solid;
+    border-radius: 15px;
+}
+
+
+.apercus-base-liste{
+    width : 190px;
+    height : 50px;
+    box-shadow: #000 2px 5px 5px;
+}
+/* Animation pour faire défiler le contenu */
+@keyframes scroll-animation {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);  /* Le contenu défile de sa largeur totale */
+    }
 }

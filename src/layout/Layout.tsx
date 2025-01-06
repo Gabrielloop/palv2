@@ -7,7 +7,7 @@ import MySection from "../components/MySection";
 const Layout: FC<{}> = ({}) => {
     return (
         <>
-            <NavBarTop/>
+            {/*<NavBarTop/>*/}
             <MySection>
                 <Outlet/>
             </MySection>

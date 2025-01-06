@@ -1,75 +1,81 @@
 import axios from "axios";
 import { XMLParser } from "fast-xml-parser";
 
+// Utilisation de l'API bnf
+// à faire : gestion des erreurs.
+
 export interface Book {
     title: string;
     identifier: string;
-    creators: string[];
+    creators: string;
     date: string;
     publisher: string;
+    docType?: string;
 }
 
+// Point de terminaison SRU
 const SRU_ENDPOINT = "http://localhost:5000/api/sru";
 
+// Fonction utilitaire pour extraire les valeurs des champs
 const extractValue = (value: any): string | string[] => {
-    if (typeof value === "string") {
-        return value;
+    if (typeof value === "string") return value;
+    if (Array.isArray(value)) return value.flatMap((v) => extractValue(v)) as string[]; // Si c'est un tableau, extraire récursivement
+    if (typeof value === "object" && value["#text"]) return value["#text"]; // Si c'est un objet avec la clé "#text", retourner la valeur
+
+    if (typeof value === "number") {
+        return value.toString();
     }
-    if (Array.isArray(value)) {
-        return value.flatMap((v) => extractValue(v)) as string[];
-    }
-    if (typeof value === "object" && value["#text"]) {
-        return value["#text"];
-    }
+
     return "Valeur inconnue";
 };
 
+// Fonction pour extraire un ISBN parmi les identifiants
 const extractISBN = (identifiers: string[]): string => {
     const isbn = identifiers.find((id) => id.includes("ISBN"));
     return isbn ? isbn.replace("ISBN", "").trim() : "ISBN inconnu";
 };
 
+// Fonction pour extraire le type de document, ici "texte imprimé" ou autre
+const extractDocType = (types: any[]): string | undefined => {
+    const type = types.find((t) => t["#text"]?.toLowerCase().includes("texte imprimé"));
+    return type ? type["#text"] : undefined;
+};
+
+// Fonction principale pour rechercher des livres
 export const searchByQuery = async (
-    query: string,
-    type: "ISBN" | "Titre" | "Auteur"
-): Promise<Book | Book[] | null> => {
-    const finalQuery = (() => {
-        switch (type) {
-            case "ISBN":
-                return `isbn="${query.trim()}"`;
-            case "Titre":
-                return `title="${query.trim()}"`;
-            case "Auteur":
-                return `creator="${query.trim()}"`;
-            default:
-                throw new Error(`Type de recherche non supporté : ${type}`);
-        }
-    })();
+    query: string
+): Promise<Book[] | null> => {
+    const isbnRegex = /^(?:\d{9}[\dX]|\d{13})$/;
+    let finalQuery: string;
+
+    if (isbnRegex.test(query.trim())) {
+        finalQuery = `isbn="${query.trim()}"`; 
+    } else {
+        finalQuery = `bib.doctype all "a" AND title="${query.trim()}" AND bib.language any "fre"`;
+    }
+
+    const maximumRecords = isbnRegex.test(query.trim()) ? 1 : 10;
 
     const params = {
         version: "1.2",
         operation: "searchRetrieve",
         query: finalQuery,
-        maximumRecords: type === "ISBN" ? 1 : 10,
+        maximumRecords: maximumRecords,
         recordSchema: "dc",
     };
 
     try {
         const response = await axios.get(SRU_ENDPOINT, { params });
+
         const parser = new XMLParser({ ignoreAttributes: false });
         const parsedData = parser.parse(response.data);
 
-        const records = (() => {
-            const rawRecords = parsedData?.["srw:searchRetrieveResponse"]?.["srw:records"]?.["srw:record"];
-            if (!rawRecords) return [];
-            return Array.isArray(rawRecords) ? rawRecords : [rawRecords];
-        })();
-
-        console.log("Enregistrements extraits :", records);
+        const rawRecords = parsedData?.["srw:searchRetrieveResponse"]?.["srw:records"]?.["srw:record"];
+        const records = Array.isArray(rawRecords) ? rawRecords : rawRecords ? [rawRecords] : [];
 
         if (records.length === 0) {
-            console.warn("Aucun enregistrement trouvé pour cette requête.");
-            return null;
+            console.warn("Aucun enregistrement trouvé.");
+            return [];
         }
 
         const books = records.map((record: any): Book => {
@@ -78,24 +84,45 @@ export const searchByQuery = async (
                 ? (extractValue(recordData["dc:identifier"]) as string[])
                 : [extractValue(recordData["dc:identifier"]) as string];
 
+            const types = Array.isArray(recordData["dc:type"])
+                ? (extractValue(recordData["dc:type"]) as any[])
+                : [extractValue(recordData["dc:type"]) as any];
+            const docType = extractDocType(types);
+
             return {
                 title: extractValue(recordData["dc:title"]) as string || "Titre inconnu",
                 identifier: extractISBN(identifiers),
                 creators: Array.isArray(recordData["dc:creator"])
-                    ? (extractValue(recordData["dc:creator"]) as string[])
-                    : ["Auteur inconnu"],
+                    ? (extractValue(recordData["dc:creator"]) as string[]).join(", ")
+                    : (extractValue(recordData["dc:creator"]) as string) || "Auteur inconnu",
                 date: extractValue(recordData["dc:date"]) as string || "Date inconnue",
                 publisher: extractValue(recordData["dc:publisher"]) as string || "Éditeur inconnu",
+                docType,
             };
         });
 
-        if (type === "ISBN") {
-            return books[0] || null;
-        }
-
         return books;
-    } catch (error: any) {
-        console.error("Erreur lors de la requête SRU :", error.message);
-        return null;
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            console.error("Erreur lors de la requête SRU :", error.message);
+        } else {
+            console.error("Erreur inconnue lors de la requête SRU");
+        }
+        return [];
     }
+};
+
+// Fonction pour rechercher plusieurs ISBNs
+export const searchByISBNs = async (isbns: string[]): Promise<Book[]> => {
+    const books: Book[] = [];
+    console.log("Isbns : ", isbns);
+    console.log("Livres récupérés : ", books);
+    for (const isbn of isbns) {
+        const book = await searchByQuery(isbn);
+        console.log(`Livres récupérés pour ${isbn} : `, book);
+        if (book) {
+            books.push(...book);
+        }
+    }
+    return books;
 };

@@ -28,6 +28,30 @@ app.get("/api/sru", async (req, res) => {
     }
 });
 
+// Route pour récupérer la couverture d'Open Library
+app.get('/fetch-cover', async (req, res) => {
+    const isbn = req.query.isbn;
+  
+    const openLibraryUrl = `https://openlibrary.org/api/books?bibkeys=ISBN:${isbn}&format=json&jscmd=data`;
+  
+    try {
+      const response = await fetch(openLibraryUrl);
+      const data = await response.json();
+      const bookData = data[`ISBN:${isbn}`];
+  
+      if (bookData && bookData.cover) {
+        // Si une couverture est trouvée, on la renvoie au frontend
+        return res.json({ coverUrl: bookData.cover.large });
+      } else {
+        // Si pas de couverture trouvée, on renvoie un message d'erreur
+        return res.json({ coverUrl: null });
+      }
+    } catch (err) {
+      console.error("Erreur lors de la récupération de la couverture Open Library:", err);
+      res.status(500).json({ error: 'Erreur lors de la récupération de la couverture' });
+    }
+  });
+
 // Démarrer le serveur
 app.listen(PORT, () => {
     console.log(`Proxy API SRU en cours d'exécution sur http://localhost:${PORT}`);
