@@ -31,8 +31,8 @@ function App() {
                     <Route element={<Layout/>}>
                         <Route path="/" element={<Navigate to="/listes" replace/>}/>
                         <Route path="/login" element={<Navigate to="/listes" replace/>}/>
-                        <Route path="/listes" element={<Listes localtitle={"Listes"} key={"liste"}/>}/>
-                        <Route path="/listes/:mylist" element={<MyList/>}/>
+                        <Route path="/listes" element={<Listes localtitle={"Listes"} key={"liste"} />}/>
+                        <Route path="/listes/:mylist" element={<MyList userId={1}/>}/>
                         <Route path="/options" element={<Setting localtitle={'Options'}/>}/>
                         <Route path="/recherches" element={<Research/>}/>
                         <Route path="/livre/:isbn" element={<BookDetails/>}/>

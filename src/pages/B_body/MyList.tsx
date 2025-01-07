@@ -1,27 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { FC } from "react";
-import { Box, Grid } from "@mui/material";
+import { Box } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useLocation } from "react-router-dom";
 import ArrowReturn from "components/ArrowReturn";
 import SearchResultItem from "../../components/SearchResultItem";
 import { searchByISBNs, Book } from "../../api/bnfServices";
-import bookData from "../../dataFake/book_data.json";
-import listesData from "../../dataFake/listes_data.json";
+import { db } from "db"; // IndexedDB instance
 import HeaderContainer from "components/HeaderContainer";
 import SkeletonLoader from "components/SkeletonLoader";
 
-// à faire : gérer les errreurs
-
 export const myBaseList = [
-    {key: 0, name: "Favoris", type: "fav", icon: "pink"},
-    {key: 1, name: "A lire", type: "notStart", icon: "brown"},
-    {key: 2, name: "En cours", type: "inProgress", icon: "brown"},
-    {key: 3, name: "Terminé", type: "finished", icon: "brown"},
-    {key: 4, name: "Enregistré", type: "save", icon: "orange"}
+  { key: 0, name: "Favoris", type: "fav", icon: "pink" },
+  { key: 1, name: "A lire", type: "notStart", icon: "brown" },
+  { key: 2, name: "En cours", type: "inProgress", icon: "brown" },
+  { key: 3, name: "Terminé", type: "finished", icon: "brown" },
+  { key: 4, name: "Enregistré", type: "save", icon: "orange" },
 ];
 
-const MyList: FC = () => {
+const MyList: FC<{ userId: number }> = ({ userId }) => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -33,100 +30,127 @@ const MyList: FC = () => {
 
   const listId = lastSegment ? String(lastSegment) : null;
 
-  useEffect(() => {
-    setLoading(true);
-    setError(null);
-
-    let filteredBooks: any[] = [];
-
-    if (listId) {
-      if (!isNaN(Number(listId))) {
-        const selectedList = listesData.find((list) => list.id === Number(listId));
-
-        if (selectedList) {
-          setListTitle(selectedList.titre);
-
-          const booksInList = bookData.filter((book) => book.listes.includes(selectedList.id));
-
-          const isbns = booksInList.map((book) => book.isbn);
-
-          if (isbns.length > 0) {
-            searchByISBNs(isbns)
-              .then((books) => {
-                setBooks(books);
-              })
-              .catch((err) => {
-                console.error("Erreur lors de la recherche :", err);
-                setError("Une erreur s'est produite lors de la recherche.");
-              })
-              .finally(() => {
-                setLoading(false);
-              });
-          } else {
-            setLoading(false);
-            setError("Aucun ISBN associé à cette liste.");
-          }
-        } else {
-          setError("Liste non trouvée.");
-          setLoading(false);
-        }
+  // Centralized book fetching logic
+  const fetchBooks = async (bookIds: string[]) => {
+    try {
+      if (bookIds.length === 0) {
+        setError("Aucun livre trouvé.");
+        return;
+      }
+  
+      // Récupérer les livres par `identifier`
+      const booksData = await db.books.where("identifier").anyOf(bookIds).toArray();
+      const isbns = booksData.map((book) => book.identifier);
+  
+      if (isbns.length > 0) {
+        const fetchedBooks = await searchByISBNs(isbns);
+        setBooks(fetchedBooks);
       } else {
-        
-        const matchedCategory = myBaseList.find((category) => category.type === listId);
+        setError("Aucun ISBN associé aux livres.");
+      }
+    } catch (err) {
+      console.error("Erreur lors de la récupération des livres :", err);
+      setError("Une erreur s'est produite lors de la récupération des livres.");
+    }
+  };
 
+  // Fetching logic for predefined lists
+  const fetchBaseList = async (listType: string) => {
+    try {
+      let bookIds: string[] = [];
+  
+      switch (listType) {
+        case "fav":
+          const favoris = await db.favoris.where("userId").equals(userId).toArray();
+          bookIds = favoris.map((fav) => fav.bookId); // `bookId` est un ISBN
+          break;
+        case "notStart":
+          const notStarted = await db.avancements
+            .where("userId")
+            .equals(userId)
+            .and((av) => av.avancement === 0)
+            .toArray();
+          bookIds = notStarted.map((av) => av.bookId); // `bookId` est un ISBN
+          break;
+        case "inProgress":
+          const inProgress = await db.avancements
+            .where("userId")
+            .equals(userId)
+            .and((av) => av.avancement > 0 && av.avancement < 100)
+            .toArray();
+          bookIds = inProgress.map((av) => av.bookId); // `bookId` est un ISBN
+          break;
+        case "finished":
+          const finished = await db.avancements
+            .where("userId")
+            .equals(userId)
+            .and((av) => av.avancement === 100)
+            .toArray();
+          bookIds = finished.map((av) => av.bookId); // `bookId` est un ISBN
+          break;
+        case "save":
+          const allBooks = await db.books.where("userId").equals(userId).toArray();
+          bookIds = allBooks.map((book) => book.identifier); // Utilisez `identifier` comme clé
+          break;
+        default:
+          setError("Catégorie non trouvée.");
+          return;
+      }
+  
+      await fetchBooks(bookIds); // Appeler fetchBooks avec les `identifier`
+    } catch (err) {
+      console.error("Erreur lors de la récupération des livres :", err);
+      setError("Une erreur s'est produite lors de la récupération des livres.");
+    }
+  };
+  
+
+  // Fetching logic for custom lists
+  const fetchCustomList = async (listId: number) => {
+    try {
+      const userLists = await db.liste_book
+        .where("userId")
+        .equals(userId)
+        .and((rel) => rel.listeId === listId)
+        .toArray();
+  
+      const bookIds = userLists.map((rel) => rel.bookId); // `bookId` correspond à `identifier`
+  
+      await fetchBooks(bookIds); // Appeler fetchBooks avec les `identifier`
+    } catch (err) {
+      console.error("Erreur lors de la récupération de la liste personnalisée :", err);
+      setError("Une erreur s'est produite lors de la récupération des livres.");
+    }
+  };
+
+  useEffect(() => {
+    const fetchListData = async () => {
+      setLoading(true);
+      setError(null);
+
+      if (!listId) {
+        setError("ID de liste invalide.");
+        setLoading(false);
+        return;
+      }
+
+      if (!isNaN(Number(listId))) {
+        await fetchCustomList(Number(listId));
+      } else {
+        const matchedCategory = myBaseList.find((category) => category.type === listId);
         if (matchedCategory) {
           setListTitle(matchedCategory.name);
-          
-          switch (listId) {
-            case "fav":
-              filteredBooks = bookData.filter((book) => book.favoris === true);
-              break;
-            case "notStart":
-              filteredBooks = bookData.filter((book) => book.avancement === 0);
-              break;
-            case "inProgress":
-              filteredBooks = bookData.filter(
-                (book) => book.avancement > 0 && book.avancement < 100
-              );
-              break;
-            case "finished":
-              filteredBooks = bookData.filter((book) => book.avancement === 100);
-              break;
-            case "save":
-              filteredBooks = bookData;
-              break;
-            default:
-              setError("Liste non trouvée");
-              setLoading(false);
-              return;
-          }
-          if (filteredBooks.length > 0) {
-            const isbns = filteredBooks.map((book) => book.isbn);
-            searchByISBNs(isbns)
-              .then((books) => {
-                setBooks(books);
-              })
-              .catch((err) => {
-                console.error("Erreur lors de la recherche :", err);
-                setError("Une erreur s'est produite lors de la recherche.");
-              })
-              .finally(() => {
-                setLoading(false);
-              });
-          } else {
-            setError(`Aucun livre trouvé pour la catégorie ${listId}`);
-            setLoading(false);
-          }
+          await fetchBaseList(listId);
         } else {
           setError("Catégorie non trouvée.");
-          setLoading(false);
         }
       }
-    } else {
-      setError("ID de liste invalide.");
+
       setLoading(false);
-    }
-  }, [listId]);
+    };
+
+    fetchListData();
+  }, [listId, userId]);
 
   const handleDetailsClick = (isbn: string) => {
     if (isbn) {
@@ -157,7 +181,7 @@ const MyList: FC = () => {
 
       <ul className="search-results-list">
         {books.map((book, index) => (
-            <SearchResultItem book={book} handleDetailsClick={handleDetailsClick} key={index}/>
+          <SearchResultItem key={index} book={book} handleDetailsClick={handleDetailsClick} />
         ))}
       </ul>
     </>

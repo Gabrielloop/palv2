@@ -9,7 +9,6 @@ import { Box } from "@mui/material";
 import bookData from "../../dataFake/book_data.json";
 import RateMyBook from "components/RateMyBook";
 import TextField from "@mui/material/TextField";
-import { addOrUpdateBook } from "db/indexedDb.service";
 
 // à faire : gestion des erreurs
 
@@ -95,7 +94,7 @@ const BookDetails: React.FC = () => {
           }}
         >
           <ArrowReturn />
-          <AddToListForm isbn={book.identifier}/>
+          <AddToListForm isbn={book.identifier} userId={1}/>
         </Box>
       </HeaderContainer>
 
