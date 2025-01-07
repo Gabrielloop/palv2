@@ -5,7 +5,7 @@ import { Box, Button, Typography } from "@mui/material";
 import bookData from "../dataFake/book_data.json";
 import BookCover from "./BookCover";
 
-// COmposant pour afficher un apercus d'une liste de l'utilisateur
+// Composant pour afficher un apercus d'une liste de l'utilisateur
 // à faire : fusionner avec baselisteitem
 
 interface ListeItemProps {
@@ -61,7 +61,7 @@ const ListeItem: React.FC<ListeItemProps> = ({
         <div className="apercus-liste-fond">
         <BookCover isbn={randomISBN} />
         </div>
-        <div className="apercus-liste-content">
+        <div className="apercus-liste-titre">
           {categoryTitle}
         </div><div className="apercus-liste-badge">
           <strong>{bookCount}</strong>

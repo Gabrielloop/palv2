@@ -6,7 +6,7 @@ import ProgressBar from "./ProgressBar";
 import { useNavigate } from "react-router-dom";
 
 // Composant qui affiche un carrousel des livres en cours de lecture (avancement entre 0 et 100)
-// à faire : optimiser le précahrgement des couvertures
+//TODO à faire : optimiser le précahrgement des couvertures
 // à faire : ajouter des effets de supperposition/ombres sur les couvertures
 // à faire : transformer en un composant qui peut etre récupéré dans d'autres pages pour afficher d'autres type de carrousel
 //          ex : carrousel de livres recommandés, carrousel de livres populaires, carrousel de livres récents

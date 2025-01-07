@@ -26,7 +26,7 @@ const BaseLists: FC<{}> = ({}) => {
     <>
       <ScrollX>
           {myBaseList.map((lists, index) => (
-            <Box>
+            <Box key={index}>
               <BaseListsItem
                 categoryId={index}
                 categoryTitle={lists.name}

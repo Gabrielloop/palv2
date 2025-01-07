@@ -365,7 +365,7 @@ background-color: var(--black-text-tr);
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1;
 }
-.apercus-liste-content{
+.apercus-liste-titre{
     position: absolute;
     width: 100%;
     text-align: center;
@@ -374,6 +374,7 @@ background-color: var(--black-text-tr);
     font-size: xx-large;
     background-color: var(--black-text-tr);
     color: white;
+    backdrop-filter: blur(10px);
 }
 .apercus-liste-badge{
     position: absolute;
@@ -393,7 +394,6 @@ background-color: var(--black-text-tr);
     border: white 3px solid;
     border-radius: 15px;
 }
-
 
 .apercus-base-liste{
     width : 190px;

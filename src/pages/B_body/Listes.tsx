@@ -21,7 +21,7 @@ const Listes: FC<{ localtitle: string }> = ({ localtitle }) => {
 
       <ScrollX>
         {listesData.map((lists, index) => (
-          <Box>
+          <Box key={index}>
             <ListeItem
               categoryId={lists.id}
               categoryTitle={lists.titre}

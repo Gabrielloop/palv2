@@ -4,6 +4,8 @@ import { useNavigate } from "react-router";
 import { Box, Button, Typography } from "@mui/material";
 import bookData from "../dataFake/book_data.json"; // Importer les données des livres
 
+
+
 // Composant apeler dans la liste des basiques pour afficher un apercus de la liste (favoris, à lire, etc.)
 // refacto : design de l'apercus
 // à faire : gestion des datas

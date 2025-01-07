@@ -157,7 +157,7 @@ const MyList: FC = () => {
 
       <ul className="search-results-list">
         {books.map((book, index) => (
-            <SearchResultItem book={book} handleDetailsClick={handleDetailsClick} />
+            <SearchResultItem book={book} handleDetailsClick={handleDetailsClick} key={index}/>
         ))}
       </ul>
     </>
