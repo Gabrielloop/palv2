@@ -108,6 +108,13 @@ const MyList: FC<{ userId: number }> = ({ userId }) => {
   // Fetching logic for custom lists
   const fetchCustomList = async (listId: number) => {
     try {
+      const listeInfo = await db.listes.where("id").equals(listId).first();
+      if (!listeInfo) {
+        setError("Liste non trouvée.");
+        return;
+      }
+      setListTitle(listeInfo.nom);
+      
       const userLists = await db.liste_book
         .where("userId")
         .equals(userId)

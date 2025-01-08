@@ -13,6 +13,9 @@ export const addBook = async (book: dbBook) => {
 };
 
 // Ajouter une liste à la base de données
+
+// Ajouter un observable,
+
 export const addListe = async (liste: dbListe) => {
   try {
     const id = await db.listes.add(liste);
