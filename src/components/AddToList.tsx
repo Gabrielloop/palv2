@@ -63,7 +63,7 @@ const AddToListForm: React.FC<AddToListFormProps> = ({ isbn, userId }) => {
     const fetchUserLists = async () => {
       try {
         const lists = await getUserListes(userId); // Utilise la fonction centralisée
-        setUserLists(lists);
+        //setUserLists(lists);
       } catch (error) {
         console.error("Erreur lors de la récupération des listes :", error);
       }

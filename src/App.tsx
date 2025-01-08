@@ -27,7 +27,7 @@ function App() {
             <BrowserRouter>
             <AuthContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
                 <Routes>
-                    {isLoggedIn ?
+                    {!isLoggedIn ?
                     <Route element={<Layout/>}>
                         <Route path="/" element={<Navigate to="/listes" replace/>}/>
                         <Route path="/login" element={<Navigate to="/listes" replace/>}/>
