@@ -10,8 +10,7 @@ import { dbListe } from "../../db"; // Typage pour `dbListe`
 import BaseLists from "./BaseLists";
 import Carousel from "components/Carousel";
 import { fromEventPattern, BehaviorSubject } from "rxjs";
-import { listSubject$ } from "../../db/indexedDb.service";
-import { getUserListes } from "../../db/indexedDb.service";
+import { listSubject$, getUserListes } from "../../service/dbListe.service";
 
 const Listes: FC<{ localtitle: string }> = ({ localtitle }) => {
   const [userLists, setUserLists] = useState<dbListe[]>([]);

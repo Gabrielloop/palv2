@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
-import { addListe } from "../db/indexedDb.service";
+import { addListe } from "../service/dbListe.service";
 import listeViergeImage from "../assets/liste_vierge.jpg";
 
 
