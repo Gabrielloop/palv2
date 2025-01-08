@@ -1,12 +1,12 @@
 import { BehaviorSubject } from 'rxjs';
-import { dbListe } from '../@types/bookItem';
+import { DbListe } from '../@types/bookItem';
 import { db } from '../db';
 
 // Déclaration des observables
-export const listSubject$ = new BehaviorSubject<dbListe[]>([]);
+export const listSubject$ = new BehaviorSubject<DbListe[]>([]);
 
 // Ajouter une liste à la base de données
-export const addListe = async (liste: dbListe) => {
+export const addListe = async (liste: DbListe) => {
   try {
     const id: string = await db.listes.add(liste);
     const currentLists = await getUserListes(1);
@@ -17,7 +17,7 @@ export const addListe = async (liste: dbListe) => {
 };
 
 // Récupérer les listes d'un utilisateur
-export const getUserListes = async (userId: number): Promise<dbListe[]> => {
+export const getUserListes = async (userId: number): Promise<DbListe[]> => {
   try {
     const listes = await db.listes.where("userId").equals(userId).toArray();
     console.log(`Listes récupérées pour l'utilisateur ${userId}:`, listes);

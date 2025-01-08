@@ -5,7 +5,7 @@ import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { addBookToList, removeBookFromList, isBookInList} from "../service/indexedDb.service";
 import { getUserListes } from "../service/dbListe.service";
-import { dbListe } from "../@types/bookItem";
+import { DbListe } from "../@types/bookItem";
 
 interface AddToListFormProps {
   isbn: string; // ISBN du livre à gérer
@@ -15,7 +15,7 @@ interface AddToListFormProps {
 const AddToListForm: React.FC<AddToListFormProps> = ({ isbn, userId }) => {
   const [selectedList, setSelectedList] = useState<string>(""); // Liste sélectionnée
   const [error, setError] = useState<string>(""); // Message d'erreur
-  const [userLists, setUserLists] = useState<dbListe[]>([]); // Listes de l'utilisateur
+  const [userLists, setUserLists] = useState<DbListe[]>([]); // Listes de l'utilisateur
   const [booksInLists, setBooksInLists] = useState<{ [key: number]: boolean }>({}); // Indique si le livre est dans chaque liste
 
   // Fonction de gestion du changement de sélection
@@ -63,7 +63,7 @@ const AddToListForm: React.FC<AddToListFormProps> = ({ isbn, userId }) => {
     const fetchUserLists = async () => {
       try {
         const lists = await getUserListes(userId); // Utilise la fonction centralisée
-        //setUserLists(lists);
+        setUserLists(lists);
       } catch (error) {
         console.error("Erreur lors de la récupération des listes :", error);
       }

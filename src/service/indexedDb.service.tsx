@@ -1,11 +1,11 @@
 import Dexie from "dexie";
-import { dbBook, dbListe } from "../@types/bookItem";
+import { DbBook, DbListe } from "../@types/bookItem";
 import { db } from "../db";
 
 
 
 // Ajouter un livre à la base de données
-export const addBook = async (book: dbBook) => {
+export const addBook = async (book: DbBook) => {
   try {
     await db.books.add(book);
     console.log("Livre ajouté :", book);
@@ -102,3 +102,26 @@ export const isBookInList = async (userId: number, listeId: number, bookId: stri
     return false;
   }
 };
+
+// Récupérer les livres d'une liste d'un utilisateur
+export const getBooksFromList = async (userId: number, listeId: number): Promise<DbBook[]> => {
+  try {
+    const relations = await db.liste_book
+      .where("userId")
+      .equals(userId)
+      .and((rel) => rel.listeId === listeId)
+      .toArray();
+
+    const bookIds = relations.map((rel) => rel.bookId);
+    const books = await db.books.where("identifier").anyOf(bookIds).toArray();
+
+    console.log(`Livres récupérés pour la liste ${listeId} de l'utilisateur ${userId}.`);
+    return books;
+  } catch (error) {
+    console.error(
+      `Erreur lors de la récupération des livres pour la liste ${listeId} de l'utilisateur ${userId} :`,
+      error
+    );
+    return [];
+  }
+}
