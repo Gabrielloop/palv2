@@ -9,31 +9,33 @@ import { db } from "../../db";
 import { dbListe } from "../../db"; // Typage pour `dbListe`
 import BaseLists from "./BaseLists";
 import Carousel from "components/Carousel";
-import { fromEventPattern } from "rxjs";
+import { fromEventPattern, BehaviorSubject } from "rxjs";
+import { listSubject$ } from "../../db/indexedDb.service";
+
 
 const Listes: FC<{ localtitle: string }> = ({ localtitle }) => {
   const [userLists, setUserLists] = useState<dbListe[]>([]);
 
-  // Fonction pour récupérer les listes d'un utilisateur
-  const fetchUserLists = useCallback(async () => {
-    try {
-      const lists = await db.listes.where("userId").equals(1).toArray(); // Filtrer par userId
-      setUserLists(lists);
-    } catch (error) {
-      console.error("Erreur lors de la récupération des listes :", error);
-    }
-  }, []);
-
-// Créer un behavior subject pour les listes []
-
-
-
-
-
-  // Charger les listes à l'initialisation
   useEffect(() => {
-    fetchUserLists();
-  }, [fetchUserLists]);
+    const subscription = listSubject$.subscribe((lists) => {
+      console.log("Mise à jour reçue par listSubject :", lists);
+      setUserLists(lists);
+    });
+    // Récupérer les listes initiales depuis la base de données
+    (async () => {
+      try {
+        const initialLists = await db.listes.toArray();
+        console.log("Listes initiales depuis la DB :", initialLists);
+        console.log("Avant mise à jour :", listSubject$.value);
+        listSubject$.next(initialLists); // Met à jour le BehaviorSubject
+        console.log("Après mise à jour :", listSubject$.value);
+      } catch (error) {
+        console.error("Erreur lors du chargement des listes :", error);
+      }
+    })();
+
+    return () => subscription.unsubscribe(); // Nettoyer l'abonnement
+  }, []);
 
   return (
     <>

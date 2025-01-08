@@ -1,6 +1,10 @@
 import Dexie from "dexie";
 import { dbBook, dbListe } from "../@types/bookItem";
 import { db } from "../db";
+import { BehaviorSubject } from "rxjs";
+
+// Déclaration des observables
+export const listSubject$ = new BehaviorSubject<dbListe[]>([]);
 
 // Ajouter un livre à la base de données
 export const addBook = async (book: dbBook) => {
@@ -14,12 +18,16 @@ export const addBook = async (book: dbBook) => {
 
 // Ajouter une liste à la base de données
 
-// Ajouter un observable,
-
 export const addListe = async (liste: dbListe) => {
   try {
-    const id = await db.listes.add(liste);
+    
+    const id: string = await db.listes.add(liste);
     console.log("Liste ajoutée avec ID :", id);
+    // Ajout de l'observable
+    const currentLists = listSubject$.value || [];
+    console.log("IndexDB : Liste actuelle :", currentLists);
+    console.log("IndexDB : Liste ajoutée :", liste);
+    listSubject$.next([...currentLists, { ...liste, id: Number(id) }]); // Mise à jour du BehaviorSubject
   } catch (error) {
     console.error("Erreur lors de l'ajout de la liste :", error);
   }
