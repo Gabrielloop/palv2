@@ -9,7 +9,6 @@ import { Box } from "@mui/material";
 import bookData from "../../dataFake/book_data.json";
 import RateMyBook from "components/RateMyBook";
 import TextField from "@mui/material/TextField";
-
 // à faire : gestion des erreurs
 
 const BookDetails: React.FC = () => {
@@ -18,7 +17,7 @@ const BookDetails: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
 
- 
+
   useEffect(() => {
     if (isbn) {
       fetchBookDetails(isbn);
@@ -46,15 +45,7 @@ const BookDetails: React.FC = () => {
       setLoading(false);
     }
   };
-
-
-  const getBookDetailsFromData = (isbn: string) => {
-    const bookDetails = bookData.find((book) => book.isbn === isbn);
-    return bookDetails || null;
-  };
-
-
-  const bookDetails = isbn ? getBookDetailsFromData(isbn) : null;
+// ici
 
 
   const renderAuthors = (creators: string | string[]) => {
@@ -119,14 +110,10 @@ const BookDetails: React.FC = () => {
           >
             <h2>{book.title}</h2>
             <span>{renderAuthors(book.creators)}</span>
-            {bookDetails && (
+            
               <RateMyBook
-                fav={bookDetails?.favoris ?? false}
-                classement={bookDetails?.classement ?? 0}
-                avancement={bookDetails?.avancement ?? 0}
-                isbn={isbn ?? ""}
-              />
-            )}
+                isbn={renderISBN() || ""}
+            />
           </div>
           <div
             style={{
@@ -150,8 +137,7 @@ const BookDetails: React.FC = () => {
             </p>
           </div>
 
-          {bookDetails && (
-            
+
               <Box
                 component="form"
                 sx={{ "& .MuiTextField-root": {
@@ -169,11 +155,11 @@ const BookDetails: React.FC = () => {
                   label="Multiline"
                   multiline
                   rows={4}
-                  defaultValue={bookDetails?.commentaire}
+                  defaultValue="Default Value"
                   style={{ color: "white" }}
                 />
               </Box>
-          )}
+          
         </div>
       </div>
     </>

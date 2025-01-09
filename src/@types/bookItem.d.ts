@@ -8,6 +8,11 @@ export interface DbFavoris {
     bookId: string;
 }
 
+export interface DbWishlist {
+    userId: number;
+    bookId: string;
+}
+
 export interface DbNote {
     userID: number;
     bookId: string;
@@ -38,4 +43,10 @@ export interface DbAvancement {
     userId: number;
     bookId: string;
     avancement: number;
+}
+
+export interface DbUser {
+    userId: number;
+    userName: string;
+    userMail: string;
 }

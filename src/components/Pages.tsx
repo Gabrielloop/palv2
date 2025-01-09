@@ -7,7 +7,7 @@ const Pages: FC<{children:any}> = ({children}) => {
     return (
             <Box className={"box-page-content"}>
                 <Helmet>
-                    <title>Ma visiothèque</title>
+                    <title>Mon app</title>
                 </Helmet>
             {children}
             </Box>

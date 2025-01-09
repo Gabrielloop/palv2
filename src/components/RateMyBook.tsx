@@ -2,23 +2,22 @@ import React from "react";
 import { Box, Rating, Typography } from "@mui/material";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import Slider from "@mui/material/Slider";
+import isFavoris from "../service/dbBookOptions.service";
 
 // Composant pour afficher les options d'un livre (favoris, classement, avancement)
 // refacto : design.
 
 interface BookInfoProps {
-  fav: boolean;
-  classement: number;
-  avancement: number;
   isbn: string;
 }
 
 const BookInfo: React.FC<BookInfoProps> = ({
-  fav,
-  classement,
-  avancement,
   isbn,
 }) => {
+
+  const fav=isFavoris(1,isbn);
+
+
   return (
     <Box
       sx={{

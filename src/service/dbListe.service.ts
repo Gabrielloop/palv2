@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { DbListe } from '../@types/bookItem';
 import { db } from '../db';
-
+import { removeBookFromList } from '../service/dbBook.service';
 
 
 // Déclaration des observables
@@ -33,15 +33,23 @@ export const getUserListes = async (userId: number): Promise<DbListe[]> => {
 // Supprimer une liste de la base de données
 export const deleteListe = async (userId:number, listeId: number): Promise<boolean> => {
   try {
-    const liste = await db.listes.where("id").equals(listeId).first();
+    const toClean = (await db.liste_book.where("listeId").equals(listeId).filter(item => item.userId === userId).toArray());
+    if (toClean.length > 0) {
+      for (const item of toClean) {
+        await removeBookFromList(userId, listeId, item.bookId);
+        console.log(`Livre ${item.bookId} retiré de la liste ${listeId} pour l'utilisateur ${userId}.`);
+      }
+    }
+    const liste = await db.listes.where("id").equals(listeId).filter(item => item.userId === userId).first();
     if (!liste || !liste.id) {
       console.warn(`Aucune liste trouvée avec ID : ${listeId}`);
       return false; // Rien à supprimer
     }
-    await db.listes.delete(liste.id.toString());
-    const currentLists = await getUserListes(1);
-    listSubject$.next(currentLists); // Mise à jour du BehaviorSubject
-    console.log(`Liste avec ID ${listeId} supprimée.`);
+    //  await db.listes.delete(liste.id.toString());
+        await db.listes.where("id").equals(listeId).filter(item => item.userId === userId).delete();
+    // const currentLists = await getUserListes(1);
+    // listSubject$.next(currentLists); // Mise à jour du BehaviorSubject
+    console.info(`Liste avec ID ${listeId} supprimée.`);
     return true;
   } catch (error) {
     console.error(`Erreur lors de la suppression de la liste avec ID ${listeId}:`, error);

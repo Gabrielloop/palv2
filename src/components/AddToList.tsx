@@ -3,7 +3,7 @@ import { Box, MenuItem, Select, FormControl, InputLabel, SelectChangeEvent } fro
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
-import { addBookToList, removeBookFromList, isBookInList} from "../service/indexedDb.service";
+import { addBookToList, removeBookFromList, isBookInList} from "../service/dbBook.service";
 import { getUserListes } from "../service/dbListe.service";
 import { DbListe } from "../@types/bookItem";
 

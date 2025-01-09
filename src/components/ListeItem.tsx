@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { Box, Typography } from "@mui/material";
 import { db } from "../db"; // IndexedDB instance
-import { isBookInList } from "../service/indexedDb.service"; // Service centralisé
+import { isBookInList } from "../service/dbBook.service"; // Service centralisé
 import BookCover from "./BookCover";
 
 interface ListeItemProps {
