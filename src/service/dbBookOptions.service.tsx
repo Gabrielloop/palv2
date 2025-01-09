@@ -30,17 +30,17 @@ export const toggleFavoris = async (userId: number, bookId: string): Promise<boo
 
   export const toggleWishlist = async (userId: number, bookId: string): Promise<boolean> => {
     try {
-      const whishlisted = await db.wishlists
+      const wishlists = await db.wishlist
         .where("userId")
         .equals(userId)
         .and((wish) => wish.bookId === bookId)
         .first();
   
-      if (whishlisted) {
-        await db.wishlists.where("userId").equals(userId).and((wish) => wish.bookId === bookId).delete();
+      if (wishlists) {
+        await db.wishlist.where("userId").equals(userId).and((wish) => wish.bookId === bookId).delete();
         console.log(`Livre ${bookId} retiré de la wishlist de l'utilisateur ${userId}.`);
       } else {
-        await db.wishlists.add({ userId, bookId });
+        await db.wishlist.add({ userId, bookId });
         console.log(`Livre ${bookId} ajouté à la wishlist de l'utilisateur ${userId}.`);
       }
   
@@ -121,7 +121,7 @@ export const isTracked = async (userId: number, bookId: string): Promise<boolean
 
     export const isWishlisted = async (userId: number, bookId: string): Promise<boolean> => {
         try {
-            const wishlist = await db.wishlists
+            const wishlist = await db.wishlist
             .where("userId")
             .equals(userId)
             .and((wl) => wl.bookId === bookId)

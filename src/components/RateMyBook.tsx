@@ -100,20 +100,22 @@ const BookInfo: React.FC<BookInfoProps> = ({ isbn }) => {
           <span>{bookInFav ? "Favori" : "Non favori"}</span>
         </div>
         <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            color: bookIsWishlisted ? "yellow" : "gray",
-            cursor: "pointer",
-          }}
+          className={`wishlist-toggle ${
+            bookIsWishlisted ? "wishlisted" : "not-wishlisted"
+          }`}
           onClick={handleToggleWish}
         >
-{bookIsWishlisted ? (
-  <span>Wish</span>
-) : (
-  <span>Hors Wish</span>
-)}
+          {bookIsWishlisted ? (
+            <>
+              <ShoppingCartIcon />
+              <span>Wishlist</span>
+            </>
+          ) : (
+            <>
+              <AddShoppingCartIcon />
+              <span>Whislist</span>
+            </>
+          )}
         </div>
         <div
           style={{

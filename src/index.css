@@ -499,3 +499,17 @@ background-color: var(--black-text-tr);
 .liste-vide-options{
     font-weight: 800;
 }
+.wishlist-toggle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .wishlist-toggle.wishlisted {
+    color: yellow;
+  }
+  
+  .wishlist-toggle.not-wishlisted {
+    color: gray;
+  }

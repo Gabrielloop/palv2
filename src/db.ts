@@ -58,7 +58,7 @@ export class dbUser {
 export class MyDatabase extends Dexie {
   books!: Dexie.Table<dbBook, string>;
   favoris!: Dexie.Table<dbFavoris, string>;
-  wishlists!: Dexie.Table<dbWishlist, string>;
+  wishlist!: Dexie.Table<dbWishlist, string>;
   notes!: Dexie.Table<dbNote, string>;
   commentaires!: Dexie.Table<dbCommentaire, string>;
   listes!: Dexie.Table<dbListe, string>;
