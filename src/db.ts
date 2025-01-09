@@ -6,6 +6,7 @@ export class dbBook {
 }
 
 export class dbFavoris {
+  id?: number;
   userId!: number;
   bookId!: string;
 }
