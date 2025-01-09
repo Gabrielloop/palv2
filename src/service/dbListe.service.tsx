@@ -2,6 +2,8 @@ import { BehaviorSubject } from 'rxjs';
 import { DbListe } from '../@types/bookItem';
 import { db } from '../db';
 
+
+
 // Déclaration des observables
 export const listSubject$ = new BehaviorSubject<DbListe[]>([]);
 
@@ -25,5 +27,24 @@ export const getUserListes = async (userId: number): Promise<DbListe[]> => {
   } catch (error) {
     console.error(`Erreur lors de la récupération des listes pour l'utilisateur ${userId}:`, error);
     return [];
+  }
+};
+
+// Supprimer une liste de la base de données
+export const deleteListe = async (userId:number, listeId: number): Promise<boolean> => {
+  try {
+    const liste = await db.listes.where("id").equals(listeId).first();
+    if (!liste || !liste.id) {
+      console.warn(`Aucune liste trouvée avec ID : ${listeId}`);
+      return false; // Rien à supprimer
+    }
+    await db.listes.delete(liste.id.toString());
+    const currentLists = await getUserListes(1);
+    listSubject$.next(currentLists); // Mise à jour du BehaviorSubject
+    console.log(`Liste avec ID ${listeId} supprimée.`);
+    return true;
+  } catch (error) {
+    console.error(`Erreur lors de la suppression de la liste avec ID ${listeId}:`, error);
+    return false;
   }
 };

@@ -10,6 +10,7 @@ import HeaderContainer from "components/HeaderContainer";
 import { Button } from "@mui/material";
 import ExpandCircleDownIcon from '@mui/icons-material/ExpandCircleDown';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import Message from "components/Message";
 
 const isISBN = (query: string): boolean => {
   const isbnRegex = /^(?:\d{9}[\dX]|\d{13})$/;
@@ -77,9 +78,11 @@ const Research: React.FC = () => {
 
   const renderResults = () => {
     if (loading) return <SkeletonLoader />;
-    if (error) return <p className="error-message">{error}</p>;
+    if (error) return <Message text={error} type="error" />;  
     if (!loading && results.length === 0)
-      return <p>Aucun résultat trouvé pour "{query}".</p>;
+      return (
+        <Message text={`Aucun livre trouvé pour ${query}`} type="information" />
+      );
 
     const sortedBooks = sortBooksByISBN(results);
 

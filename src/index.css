@@ -396,9 +396,66 @@ background-color: var(--black-text-tr);
 }
 
 .apercus-base-liste{
-    width : 190px;
+    position: relative;
+    width : 150px;
     height : 50px;
     box-shadow: #000 2px 5px 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    align-items: center;
+    justify-items: center;
+
+}
+.apercus-base-liste-fond{
+    position: absolute;
+    width : 150px;
+    height : 50px;
+    z-index: 1;
+}
+.apercus-base-liste-titre{
+    flex:3;
+    text-align: center;
+    font-size: x-large;
+}
+.apercus-base-liste-badge{
+    flex:1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: x-large;
+    color: white;
+}
+
+.fond-fav{
+    color: pink;
+    font-weight: 900;
+    background:
+      radial-gradient(at 80% 80%,#ff4747 25.4%,#0000 26%),
+      radial-gradient(at 20% 80%,#ff4747 25.4%,#0000 26%),
+      conic-gradient(from -45deg at 50% 41%,#ff4747 90deg,#ff478b 0) 
+        12.5px 0 !important;
+    background-size: 25px 25px !important;
+}
+.fond-notStart{
+    color: orange;
+    font-weight: 900;
+    background-color: rgb(179, 110, 26) !important;
+}
+.fond-inProgress{
+    color: orange;
+    font-weight: 900;
+    background-color: rgb(39, 179, 53) !important;
+}
+.fond-finished{
+    color: rgb(208, 208, 144);
+    font-weight: 900;
+    background-color: rgb(22, 8, 68) !important;
+}
+.fond-save{
+    color: rgb(198, 198, 198);
+    font-weight: 900;
+    background-color: rgb(29, 29, 29) !important;
 }
 /* Animation pour faire défiler le contenu */
 @keyframes scroll-animation {
@@ -408,4 +465,37 @@ background-color: var(--black-text-tr);
     100% {
         transform: translateX(-100%);  /* Le contenu défile de sa largeur totale */
     }
+}
+
+/* Messages erreurs/informations */
+.msg {
+    width:80%;
+    margin: auto;
+    background-color: var(--black-text-tr);
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    border:#4E6490 2px solid;
+    font-weight: 600;
+}
+.msg-information {
+    color: blue;
+    border-color:blue;
+}
+.msg-error {
+    color: orange;
+    border-color:orange;
+}
+.msg-warning {
+    color: red;
+    border-color:red;
+}
+.msg-success {
+    color: green;
+    border-color:green;
+}
+.liste-vide-options{
+    font-weight: 800;
 }

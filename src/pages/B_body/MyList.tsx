@@ -9,6 +9,10 @@ import { searchByISBNs, Book } from "../../api/bnfServices";
 import { db } from "db"; // IndexedDB instance
 import HeaderContainer from "components/HeaderContainer";
 import SkeletonLoader from "components/SkeletonLoader";
+import Message from "components/Message";
+import ListeVideOptions from "components/ListeVideOptions";
+import { getBooksFromFavoris, getBooksAdvancement, getBookUser, getBooksFromList } from "service/dbBook.service";
+
 
 export const myBaseList = [
   { key: 0, name: "Favoris", type: "fav", icon: "pink" },
@@ -56,7 +60,7 @@ const MyList: FC<{ userId: number }> = ({ userId }) => {
 
 
 
-  
+
   // Fetching logic for predefined lists
   const fetchBaseList = async (listType: string) => {
     try {
@@ -64,35 +68,23 @@ const MyList: FC<{ userId: number }> = ({ userId }) => {
   
       switch (listType) {
         case "fav":
-          const favoris = await db.favoris.where("userId").equals(userId).toArray();
-          bookIds = favoris.map((fav) => fav.bookId); // `bookId` est un ISBN
+          const favoris = await getBooksFromFavoris(1);
+          bookIds = favoris.map((fav) => fav.bookId);
           break;
         case "notStart":
-          const notStarted = await db.avancements
-            .where("userId")
-            .equals(userId)
-            .and((av) => av.avancement === 0)
-            .toArray();
-          bookIds = notStarted.map((av) => av.bookId); // `bookId` est un ISBN
+          const notStarted = await getBooksAdvancement(1);
+          bookIds = notStarted.filter((av) => av.avancement === 0).map((av) => av.bookId); // `bookId` est un ISBN
           break;
         case "inProgress":
-          const inProgress = await db.avancements
-            .where("userId")
-            .equals(userId)
-            .and((av) => av.avancement > 0 && av.avancement < 100)
-            .toArray();
-          bookIds = inProgress.map((av) => av.bookId); // `bookId` est un ISBN
+          const inProgress = await getBooksAdvancement(1);
+          bookIds = inProgress.filter((av) => av.avancement> 0 && av.avancement < 100).map((av) => av.bookId); // `bookId` est un ISBN
           break;
         case "finished":
-          const finished = await db.avancements
-            .where("userId")
-            .equals(userId)
-            .and((av) => av.avancement === 100)
-            .toArray();
-          bookIds = finished.map((av) => av.bookId); // `bookId` est un ISBN
+          const finished = await getBooksAdvancement(1);
+          bookIds = finished.filter((av) => av.avancement === 100).map((av) => av.bookId); // `bookId` est un ISBN
           break;
         case "save":
-          const allBooks = await db.books.where("userId").equals(userId).toArray();
+          const allBooks = await getBookUser(1);
           bookIds = allBooks.map((book) => book.identifier); // Utilisez `identifier` comme clé
           break;
         default:
@@ -118,15 +110,8 @@ const MyList: FC<{ userId: number }> = ({ userId }) => {
       }
       setListTitle(listeInfo.nom);
       
-      const userLists = await db.liste_book
-        .where("userId")
-        .equals(userId)
-        .and((rel) => rel.listeId === listId)
-        .toArray();
-  
-      const bookIds = userLists.map((rel) => rel.bookId); // `bookId` correspond à `identifier`
-  
-      await fetchBooks(bookIds); // Appeler fetchBooks avec les `identifier`
+      const userLists = await getBooksFromList(1, listId);
+      await fetchBooks(userLists); // Appeler fetchBooks avec les `identifier`
     } catch (err) {
       console.error("Erreur lors de la récupération de la liste personnalisée :", err);
       setError("Une erreur s'est produite lors de la récupération des livres.");
@@ -168,12 +153,12 @@ const MyList: FC<{ userId: number }> = ({ userId }) => {
     } else {
       setError("ISBN invalide.");
     }
+    
   };
-
   return (
     <>
       <Helmet>
-        <title>{listTitle || "Liste"}</title>
+        <title>{listTitle}</title>
       </Helmet>
 
       <HeaderContainer>
@@ -183,12 +168,18 @@ const MyList: FC<{ userId: number }> = ({ userId }) => {
         </Box>
       </HeaderContainer>
 
-      <h2>{listTitle || "Chargement..."}</h2>
+      <h2>{listTitle} ({books.length})</h2>
 
       {loading && <SkeletonLoader />}
-      {error && <p>{error}</p>}
-      {!loading && !error && books.length === 0 && <p>Aucun livre trouvé.</p>}
-
+      {error && <Message text={error} type="error" />}
+      {!loading && !error && books.length === 0 && (
+          <Message text="Aucun livre trouvé" type="information" />
+        )
+      }
+      {books.length === 0 && (
+          <ListeVideOptions/>
+        )
+      }
       <ul className="search-results-list">
         {books.map((book, index) => (
           <SearchResultItem key={index} book={book} handleDetailsClick={handleDetailsClick} />

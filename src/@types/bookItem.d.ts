@@ -5,18 +5,18 @@ export interface DbBook {
 
 export interface DbFavoris {
     userId: number;
-    bookId: number;
+    bookId: string;
 }
 
 export interface DbNote {
     userID: number;
-    bookId: number;
+    bookId: string;
     note: number;
 }
 
 export interface DbCommentaire {
     userId: number;
-    bookId: number;
+    bookId: string;
     commentaire: string;
     date: Date;
 }
@@ -30,12 +30,12 @@ export interface DbListe {
 
 export interface Liste_book {
     userId: number;
-    bookId: number;
+    bookId: string;
     listeId: number;
 }
 
 export interface DbAvancement {
     userId: number;
-    bookId: number;
+    bookId: string;
     avancement: number;
 }

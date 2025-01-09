@@ -2,6 +2,7 @@ import React, {FC} from 'react';
 import {Helmet} from "react-helmet-async";
 import Grid2 from "@mui/material/Grid2";
 import ListeItem from "../../components/ListeItem";
+import OptionsListes from 'components/OptionsListes';
 
 const myCategoryList = [
     {key: 0, name: "Albums"},
@@ -39,17 +40,7 @@ const Setting: FC<{ localtitle: string }> = ({localtitle}) => {
                     </tr>
                     </thead>
                     <tbody>
-                    {myCategoryList.map((lists, index) =>
-                        (
-                                <tr key={lists.name}>
-                                    <th scope="row">{lists.name}</th>
-                                    <td>X</td>
-                                    <td>options a b c</td>
-                                </tr>
-                        ))
-                    }
-
-
+                        <OptionsListes/>
                     </tbody>
                     <tfoot>
                     <tr>
