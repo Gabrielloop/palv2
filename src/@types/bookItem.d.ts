@@ -26,10 +26,10 @@ export interface DbCommentaire {
     date: Date;
 }
 
-export interface DbListe {
+export interface DbLists {
     id?: number;
     userId: number;
-    nom: string;
+    name: string;
     type: string;
 }
 

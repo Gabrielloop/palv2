@@ -1,5 +1,5 @@
 import Dexie from "dexie";
-import { DbBook, DbFavoris, DbListe, DbAvancement } from "../@types/bookItem";
+import { DbBook, DbFavoris, DbLists, DbAvancement } from "../@types/bookItem";
 import { db } from "../db";
 
 export const toggleFavoris = async (
@@ -288,6 +288,29 @@ export const getAvancement = async (userId: number, bookId: string): Promise<num
       error
     );
     return 0;
+  }
+}
+
+export const getBooksByAvancementStep = async (userId:number, avancement: number): Promise<string[]> => {
+ switch (avancement) {
+  case 0:
+    return (await db.avancements
+      .where("userId")
+      .equals(userId)
+      .and((av) => av.avancement === 0)
+      .toArray()).map(av => av.bookId);
+  case 100:
+    return (await db.avancements
+      .where("userId")
+      .equals(userId)
+      .and((av) => av.avancement === 100)
+      .toArray()).map(av => av.bookId);
+  default:
+    return (await db.avancements
+      .where("userId")
+      .equals(userId)
+      .and((av) => av.avancement > 0 && av.avancement < 100)
+      .toArray()).map(av => av.bookId);
   }
 }
 

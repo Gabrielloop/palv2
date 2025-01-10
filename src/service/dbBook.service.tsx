@@ -1,5 +1,5 @@
 import Dexie from "dexie";
-import { DbBook, DbFavoris, DbListe, DbAvancement} from "../@types/bookItem";
+import { DbBook, DbFavoris, DbLists, DbAvancement} from "../@types/bookItem";
 import { db } from "../db";
 
 // Ajouter un livre à la base de données

@@ -3,7 +3,7 @@ import * as React from "react";
 import { useNavigate } from "react-router";
 import { Box, Button, Typography } from "@mui/material";
 import bookData from "../dataFake/book_data.json"; // Importer les données des livres
-import { getBooksFromFavoris, getBookUser, getBooksAdvancement } from "../service/dbBook.service"; // Importer la fonction pour récupérer les livres d'une liste
+import { getBooksFromFavoris, getBookUser, getBooksAdvancement} from "../service/dbBook.service";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 
 // Composant apeler dans la liste des basiques pour afficher un apercus de la liste (favoris, à lire, etc.)

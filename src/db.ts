@@ -29,10 +29,10 @@ export class dbCommentaire {
   date!: Date;
 }
 
-export class dbListe {
+export class dbLists {
   id?: number;
   userId!: number;
-  nom!: string;
+  name!: string;
   type!: string;
 }
 
@@ -61,7 +61,7 @@ export class MyDatabase extends Dexie {
   wishlist!: Dexie.Table<dbWishlist, string>;
   notes!: Dexie.Table<dbNote, string>;
   commentaires!: Dexie.Table<dbCommentaire, string>;
-  listes!: Dexie.Table<dbListe, string>;
+  lists!: Dexie.Table<dbLists, string>;
   liste_book!: Dexie.Table<liste_book, string>;
   avancements!: Dexie.Table<dbAvancement, string>;
   users!: Dexie.Table<dbUser, string>; 
@@ -74,7 +74,7 @@ export class MyDatabase extends Dexie {
       wishlist: '++id,userId, bookId',
       notes: '++id,userId, bookId',
       commentaires: '++id,userId, bookId',
-      listes: '++id,userId, nom, type',
+      lists: '++id,userId, name, type',
       liste_book: '++id,userId, bookId, listeId',
       avancements: '++id,userId, bookId, avancement',
       users: '++id,userName, userMail'

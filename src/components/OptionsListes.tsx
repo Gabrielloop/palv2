@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getUserListes } from '../service/dbListe.service';
-import { DbListe } from '../@types/bookItem';
+import { DbLists } from '../@types/bookItem';
 import { deleteListe } from '../service/dbListe.service';
 interface Liste {
     id: number;
@@ -14,7 +14,7 @@ const OptionsListes: React.FC = () => {
             const dbListes = await getUserListes(1);
             const result: Liste[] = dbListes.map(dbListe => ({
                 id: dbListe.id ?? 0,
-                name: dbListe.nom || 'Liste sans nom'
+                name: dbListe.name || 'Liste sans nom'
             }));
             setUserLists(result);
         };
@@ -32,7 +32,7 @@ const handleDelete = async (listeId: number) => {
       const updatedLists = await getUserListes(1);
       const result: Liste[] = updatedLists.map(dbListe => ({
         id: dbListe.id ?? 0,
-        name: dbListe.nom || 'Liste sans nom'
+        name: dbListe.name || 'Liste sans nom'
       }));
       setUserLists(result);
     } else {

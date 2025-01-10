@@ -4,6 +4,9 @@ import bookData from "../dataFake/book_data.json"; // Assurez-vous d'importer le
 import BookCover from "./BookCover";
 import ProgressBar from "./ProgressBar";
 import { useNavigate } from "react-router-dom";
+import { getBooksByAvancementStep, getAvancement } from "../service/dbBookOptions.service";
+import { searchByISBNs } from "../api/bnfServices";
+
 
 // Composant qui affiche un carrousel des livres en cours de lecture (avancement entre 0 et 100)
 //TODO à faire : optimiser le précahrgement des couvertures
@@ -14,46 +17,77 @@ import { useNavigate } from "react-router-dom";
 const Carousel: React.FC = () => {
   // Filtrer les livres dont l'avancement est entre 0 et 100
   // Trie les livres par avancement décroissant
-  const filteredBooks = bookData.filter(
-    (book) => book.avancement > 0 && book.avancement < 100
-  ).sort((a, b) => b.avancement - a.avancement);
+
+ const bookIsbnInProgress = getBooksByAvancementStep(1, 1); // userId , step
+  const [filteredBooks, setFilteredBooks] = useState<any[]>([]);
+  const [avancement, setAvancement] = useState<number>(0);
+  const [booksWithAvanvement, setBooksWithAvanvement] = useState<{ avancement: number; title: string; identifier: string; creators: string; date: string; publisher: string; docType?: string }[]>([]);
+  
+  useEffect(() => {
+    const fetchBooks = async () => {
+      const isbnList = await bookIsbnInProgress;
+      const books = await searchByISBNs(isbnList);
+      setFilteredBooks(books);
+      // Ajouter une propriété `avancement` à chaque livre
+      const newBooks = [...books];
+      const newBookAvancement = await Promise.all(newBooks.map(async (book) => {
+        const avancement = await getAvancement(1, book.identifier); // userId, isbn
+        return { ...book, avancement };
+      }));
+      
+      setBooksWithAvanvement(newBookAvancement.sort((a, b) => b.avancement - a.avancement));
+
+    };
+    
+    fetchBooks();
+  }, []);
+
+ 
 
   // État pour garder l'index du livre actuel et les livres précédent et suivant
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [prevBook, setPrevBook] = useState<any>(null);
   const [nextBook, setNextBook] = useState<any>(null);
 
-  const currentBook = filteredBooks[currentIndex]; // Le livre actuel à afficher
-  const navigate = useNavigate(); // Hook de navigation de react-router
 
+  const currentBook = booksWithAvanvement[currentIndex];
+  
+  const navigate = useNavigate();
+
+  console.log('booksWithAvanvement', booksWithAvanvement);
+  console.log('filteredBooks', filteredBooks);
+  console.log('currentBook', currentBook);
+  
   // Fonction pour passer au livre suivant/precedent
   // Permet grace au modulo de vérifier qu'on ne dépasse pas la longeur de la table
   const nextBookHandler = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % filteredBooks.length);
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % booksWithAvanvement.length);
   };
   const prevBookHandler = () => {
     setCurrentIndex(
       (prevIndex) =>
-        (prevIndex - 1 + filteredBooks.length) % filteredBooks.length
+        (prevIndex - 1 + booksWithAvanvement.length) % booksWithAvanvement.length
     );
   };
 
   // Fonction pour naviguer vers la page du livre principal
   const handleBookClick = () => {
-    if (currentBook.isbn) {
-      navigate(`/livre/${currentBook.isbn}`);
+    if (currentBook.identifier) {
+      navigate(`/livre/${currentBook.identifier}`);
     }
   };
 
   // Mettre à jour les livres précédent et suivant
   useEffect(() => {
     const prevIndex =
-      (currentIndex - 1 + filteredBooks.length) % filteredBooks.length;
-    const nextIndex = (currentIndex + 1) % filteredBooks.length;
-    setPrevBook(filteredBooks[prevIndex]);
-    setNextBook(filteredBooks[nextIndex]);
-  }, [currentIndex, filteredBooks]);
+      (currentIndex - 1 + booksWithAvanvement.length) % booksWithAvanvement.length;
+    const nextIndex = (currentIndex + 1) % booksWithAvanvement.length;
+    setPrevBook(booksWithAvanvement[prevIndex]);
+    setNextBook(booksWithAvanvement[nextIndex]);
+  }, [currentIndex, booksWithAvanvement]);
 
+
+  console.log('currentBook', currentBook);
   return (
     <Box
       sx={{
@@ -104,7 +138,7 @@ const Carousel: React.FC = () => {
               }}
               onClick={prevBookHandler}
             >
-              {prevBook && prevBook.isbn && <BookCover isbn={prevBook.isbn} />}
+              {prevBook && prevBook.identifier && <BookCover isbn={prevBook.identifier} />}
             </Box>
 
             {/* Livre actuel */}
@@ -121,7 +155,7 @@ const Carousel: React.FC = () => {
               <Box
                 sx={{ width: "200px", height: "280px", marginBottom: "10px" }}
               >
-                {currentBook.isbn && <BookCover isbn={currentBook.isbn} />}
+                {currentBook.identifier && <BookCover isbn={currentBook.identifier} />}
               </Box>
               <ProgressBar value={currentBook.avancement} />
             </Box>
@@ -138,7 +172,7 @@ const Carousel: React.FC = () => {
               }}
               onClick={nextBookHandler}
             >
-              {nextBook && nextBook.isbn && <BookCover isbn={nextBook.isbn} />}
+              {nextBook && nextBook.identifier && <BookCover isbn={nextBook.identifier} />}
             </Box>
           </Box>
         )}

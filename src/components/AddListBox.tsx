@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, TextField, Button } from "@mui/material";
-import { addListe } from "../service/dbListe.service";
+import { addList } from "../service/dbListe.service";
 import listeViergeImage from "../assets/liste_vierge.jpg";
 
 
@@ -15,12 +15,12 @@ const AddListeBox: React.FC = () => {
 
     const newListe = {
       userId: 1, // ID utilisateur fixe pour le test
-      nom: listName,
+      name: listName,
       type: "liste",
     };
 
     try {
-      await addListe(newListe);
+      await addList(newListe);
       alert(`Liste "${listName}" ajoutée avec succès !`);
       setListName(""); // Réinitialise le champ texte après l'ajout
     } catch (error) {

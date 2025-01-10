@@ -5,7 +5,7 @@ import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { addBookToList, removeBookFromList, isBookInList} from "../service/dbBook.service";
 import { getUserListes } from "../service/dbListe.service";
-import { DbListe } from "../@types/bookItem";
+import { DbLists } from "../@types/bookItem";
 
 interface AddToListFormProps {
   isbn: string; // ISBN du livre à gérer
@@ -15,7 +15,7 @@ interface AddToListFormProps {
 const AddToListForm: React.FC<AddToListFormProps> = ({ isbn, userId }) => {
   const [selectedList, setSelectedList] = useState<string>(""); // Liste sélectionnée
   const [error, setError] = useState<string>(""); // Message d'erreur
-  const [userLists, setUserLists] = useState<DbListe[]>([]); // Listes de l'utilisateur
+  const [userLists, setUserLists] = useState<DbLists[]>([]); // Listes de l'utilisateur
   const [booksInLists, setBooksInLists] = useState<{ [key: number]: boolean }>({}); // Indique si le livre est dans chaque liste
 
   // Fonction de gestion du changement de sélection
@@ -102,7 +102,7 @@ const AddToListForm: React.FC<AddToListFormProps> = ({ isbn, userId }) => {
         >
           {userLists.map((list) => (
             <MenuItem key={list.id} value={list.id?.toString() || ""}>
-              {list.nom}
+              {list.name}
               {/* Affiche un symbole si le livre est dans la liste */}
               {booksInLists[list.id!] && (
                 <CheckCircleOutlineIcon

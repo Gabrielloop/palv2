@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import './App.css';
-import Listes from "./pages/B_body/Listes";
+import Listes from "./pages/B_body/UserLists";
 import {BrowserRouter, Navigate, Route, Router, Routes} from "react-router";
 import Pages from "./components/Pages";
 import Layout from "./layout/Layout";
@@ -31,7 +31,7 @@ function App() {
                     <Route element={<Layout/>}>
                         <Route path="/" element={<Navigate to="/listes" replace/>}/>
                         <Route path="/login" element={<Navigate to="/listes" replace/>}/>
-                        <Route path="/listes" element={<Listes localtitle={"Listes"} key={"liste"} />}/>
+                        <Route path="/listes" element={<Listes localtitle={"Lists"} key={"list"} />}/>
                         <Route path="/listes/:mylist" element={<MyList userId={1}/>}/>
                         <Route path="/options" element={<Setting localtitle={'Options'}/>}/>
                         <Route path="/recherches" element={<Research/>}/>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback, useTransition } from "react";
 import { FC } from "react";
 import { Helmet } from "react-helmet-async";
-import { dbListe } from "../../db"; // Typage pour `dbListe`
+import { dbLists } from "../../db";
 import { listSubject$, getUserListes } from "../../service/dbListe.service";
 import Box from "@mui/material/Box";
 import ScrollX from "components/ScrollX";
@@ -11,7 +11,7 @@ import BaseLists from "./BaseLists";
 import Carousel from "components/Carousel";
 
 const Listes: FC<{ localtitle: string }> = ({ localtitle }) => {
-  const [userLists, setUserLists] = useState<dbListe[]>([]);
+  const [userLists, setUserLists] = useState<dbLists[]>([]);
   const [isPending, startTransition] = useTransition();
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const Listes: FC<{ localtitle: string }> = ({ localtitle }) => {
                 <Box key={list.id}>
                   <ListeItem
                     categoryId={list.id || 0}
-                    categoryTitle={list.nom}
+                    categoryTitle={list.name}
                     categoryType={list.type}
                     userId={1}
                   />

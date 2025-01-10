@@ -5,25 +5,28 @@ import { Helmet } from "react-helmet-async";
 import { useNavigate, useLocation } from "react-router-dom";
 import ArrowReturn from "components/ArrowReturn";
 import SearchResultItem from "../../components/SearchResultItem";
-import { searchByISBNs, Book } from "../../api/bnfServices";
-import { db } from "db"; // IndexedDB instance
 import HeaderContainer from "components/HeaderContainer";
 import SkeletonLoader from "components/SkeletonLoader";
 import Message from "components/Message";
 import ListeVideOptions from "components/ListeVideOptions";
-import { getBooksFromFavoris, getBooksAdvancement, getBookUser, getBooksFromList } from "service/dbBook.service";
+import {
+  getBooksFromFavoris,
+  getBookUser,
+  getBooksFromList,
+} from "service/dbBook.service";
+import { getBooksByAvancementStep } from "service/dbBookOptions.service";
+import { searchByISBNs } from "api/bnfServices";
+import { BookInter } from "../../@types/bookInterApi";
+import { set } from "react-hook-form";
+import { getPresetListsTitle } from "service/dbPresetLists.service";
+import { getListTitle } from "service/dbListe.service";
 
+interface MyListProps {
+  userId: number;
+}
 
-export const myBaseList = [
-  { key: 0, name: "Favoris", type: "fav", icon: "pink" },
-  { key: 1, name: "A lire", type: "notStart", icon: "brown" },
-  { key: 2, name: "En cours", type: "inProgress", icon: "brown" },
-  { key: 3, name: "Terminé", type: "finished", icon: "brown" },
-  { key: 4, name: "Enregistré", type: "save", icon: "orange" },
-];
-
-const MyList: FC<{ userId: number }> = ({ userId }) => {
-  const [books, setBooks] = useState<Book[]>([]);
+const MyList: FC<MyListProps> = ({ userId }) => {
+  const [books, setBooks] = useState<BookInter[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [listTitle, setListTitle] = useState<string>("");
@@ -32,120 +35,65 @@ const MyList: FC<{ userId: number }> = ({ userId }) => {
   const lastSegment = location.pathname.split("/").pop();
   const navigate = useNavigate();
 
-  const listId = lastSegment ? String(lastSegment) : null;
+  const listId: string | null = lastSegment ? lastSegment : null;
 
-  // Centralized book fetching logic
-  const fetchBooks = async (bookIds: string[]) => {
-    try {
-      if (bookIds.length === 0) {
-        setError("Aucun livre trouvé.");
-        return;
-      }
-  
-      // Récupérer les livres par `identifier`
-      const booksData = await db.books.where("identifier").anyOf(bookIds).toArray();
-      const isbns = booksData.map((book) => book.identifier);
-  
-      if (isbns.length > 0) {
-        const fetchedBooks = await searchByISBNs(isbns);
-        setBooks(fetchedBooks);
-      } else {
-        setError("Aucun ISBN associé aux livres.");
-      }
-    } catch (err) {
-      console.error("Erreur lors de la récupération des livres :", err);
-      setError("Une erreur s'est produite lors de la récupération des livres.");
-    }
-  };
-
-
-
-
-  // Fetching logic for predefined lists
-  const fetchBaseList = async (listType: string) => {
-    try {
-      let bookIds: string[] = [];
-  
-      switch (listType) {
-        case "fav":
-          const favoris = await getBooksFromFavoris(1);
-          bookIds = favoris.map((fav) => fav.bookId);
-          break;
-        case "notStart":
-          const notStarted = await getBooksAdvancement(1);
-          bookIds = notStarted.filter((av) => av.avancement === 0).map((av) => av.bookId); // `bookId` est un ISBN
-          break;
-        case "inProgress":
-          const inProgress = await getBooksAdvancement(1);
-          bookIds = inProgress.filter((av) => av.avancement> 0 && av.avancement < 100).map((av) => av.bookId); // `bookId` est un ISBN
-          break;
-        case "finished":
-          const finished = await getBooksAdvancement(1);
-          bookIds = finished.filter((av) => av.avancement === 100).map((av) => av.bookId); // `bookId` est un ISBN
-          break;
-        case "save":
-          const allBooks = await getBookUser(1);
-          bookIds = allBooks.map((book) => book.identifier); // Utilisez `identifier` comme clé
-          break;
-        default:
-          setError("Catégorie non trouvée.");
-          return;
-      }
-  
-      await fetchBooks(bookIds); // Appeler fetchBooks avec les `identifier`
-    } catch (err) {
-      console.error("Erreur lors de la récupération des livres :", err);
-      setError("Une erreur s'est produite lors de la récupération des livres.");
-    }
-  };
-  
-
-  // Fetching logic for custom lists
-  const fetchCustomList = async (listId: number) => {
-    try {
-      const listeInfo = await db.listes.where("id").equals(listId).first();
-      if (!listeInfo) {
-        setError("Liste non trouvée.");
-        return;
-      }
-      setListTitle(listeInfo.nom);
-      
-      const userLists = await getBooksFromList(1, listId);
-      await fetchBooks(userLists); // Appeler fetchBooks avec les `identifier`
-    } catch (err) {
-      console.error("Erreur lors de la récupération de la liste personnalisée :", err);
-      setError("Une erreur s'est produite lors de la récupération des livres.");
-    }
-  };
+  // A faire : ajouter le titre de la liste
 
   useEffect(() => {
-    const fetchListData = async () => {
+    const getBookFromAnyList = async (listId:any) => {
       setLoading(true);
       setError(null);
-
       if (!listId) {
         setError("ID de liste invalide.");
         setLoading(false);
         return;
       }
-
       if (!isNaN(Number(listId))) {
-        await fetchCustomList(Number(listId));
+        const isbnList=await getBooksFromList(userId, Number(listId));
+        const booksList = await searchByISBNs(isbnList);
+        setBooks(booksList);
+        setListTitle(await getListTitle(Number(listId)));
+        setLoading(false);
       } else {
-        const matchedCategory = myBaseList.find((category) => category.type === listId);
-        if (matchedCategory) {
-          setListTitle(matchedCategory.name);
-          await fetchBaseList(listId);
-        } else {
-          setError("Catégorie non trouvée.");
+        setListTitle(getPresetListsTitle(listId));
+        switch (listId) {
+          case "fav":
+            const favList = await getBooksFromFavoris(userId);
+            const isbnListFav=favList.map(book => book.bookId.toString());
+            const booksList=await searchByISBNs(isbnListFav);
+            setBooks(booksList);
+            break;
+          case "notStart":
+            const bookNoStart = await getBooksByAvancementStep(userId, 0);
+            const booksListNoStart=await searchByISBNs(bookNoStart);
+            setBooks(booksListNoStart);
+            break;
+          case "inProgress":
+            const bookInProgress = await getBooksByAvancementStep(userId, 1);
+            const booksListInProgress=await searchByISBNs(bookInProgress);
+            setBooks(booksListInProgress);
+            break;
+          case "finished":
+            const bookFinished = await getBooksByAvancementStep(userId, 100);
+            const booksListFinished=await searchByISBNs(bookFinished);
+            setBooks(booksListFinished);
+            break;
+          case "save":
+            const bookUser = (await getBookUser(userId));
+            const bookListUser = await searchByISBNs(bookUser.map(book => book.identifier.toString()));
+            setBooks(bookListUser);
+            break;
+          default:
+            setError("Catégorie non trouvée.");
+            setLoading(false);
+            return;
         }
+        setLoading(false);
       }
-
-      setLoading(false);
+      
     };
-
-    fetchListData();
-  }, [listId, userId]);
+    getBookFromAnyList(listId);
+  }, [listId]);
 
   const handleDetailsClick = (isbn: string) => {
     if (isbn) {
@@ -153,8 +101,8 @@ const MyList: FC<{ userId: number }> = ({ userId }) => {
     } else {
       setError("ISBN invalide.");
     }
-    
   };
+  console.log('books:',books.length);
   return (
     <>
       <Helmet>
@@ -168,21 +116,23 @@ const MyList: FC<{ userId: number }> = ({ userId }) => {
         </Box>
       </HeaderContainer>
 
-      <h2>{listTitle} ({books.length})</h2>
+      <h2>
+        {listTitle} ({books.length})
+      </h2>
 
       {loading && <SkeletonLoader />}
       {error && <Message text={error} type="error" />}
       {!loading && !error && books.length === 0 && (
-          <Message text="Aucun livre trouvé" type="information" />
-        )
-      }
-      {books.length === 0 && (
-          <ListeVideOptions/>
-        )
-      }
+        <Message text="Aucun livre trouvé" type="information" />
+      )}
+      {books.length === 0 && <ListeVideOptions />}
       <ul className="search-results-list">
         {books.map((book, index) => (
-          <SearchResultItem key={index} book={book} handleDetailsClick={handleDetailsClick} />
+          <SearchResultItem
+            key={index}
+            book={book}
+            handleDetailsClick={handleDetailsClick}
+          />
         ))}
       </ul>
     </>
