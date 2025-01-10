@@ -291,6 +291,29 @@ export const getAvancement = async (userId: number, bookId: string): Promise<num
   }
 }
 
+export const updateComment = async (userId: number, bookId: string, commentaire: string): Promise<string> => {
+  try {
+    if (await isComment(userId, bookId)) {
+      await db.commentaires
+      .where("userId")
+      .equals(userId)
+      .and((com) => com.bookId === bookId)
+      .modify({ commentaire });
+      return commentaire;
+    }
+      await db.commentaires.add({ userId, bookId, commentaire, date: new Date() });
+    console.log(
+      `Commentaire du livre ${bookId} pour l'utilisateur ${userId} ajouté : ${commentaire}.`
+    );
+      return commentaire;
+  } catch (error) {
+    console.error(
+      `Erreur lors de la mise à jour du commentaire du livre ${bookId} pour l'utilisateur ${userId} :`,
+      error
+    );
+    return "";
+  }
+}
 
 
 

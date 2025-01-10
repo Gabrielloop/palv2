@@ -9,7 +9,7 @@ import { Box } from "@mui/material";
 import bookData from "../../dataFake/book_data.json";
 import RateMyBook from "components/RateMyBook";
 import TextField from "@mui/material/TextField";
-import { getComment } from "service/dbBookOptions.service";
+import { getComment, updateComment } from "service/dbBookOptions.service";
 // à faire : gestion des erreurs
 
 const BookDetails: React.FC = () => {
@@ -69,6 +69,13 @@ const BookDetails: React.FC = () => {
     return isbn || "ISBN inconnu";
   };
 
+
+  const handleUpdateComment = async (value:string) => {
+    setBookComment(value);
+    if (isbn) {
+      await updateComment(1, isbn, value);
+    }
+  }
 
   if (loading) return <p>Chargement des détails...</p>;
   if (error) return <p>{error}</p>;
@@ -136,9 +143,6 @@ const BookDetails: React.FC = () => {
             <p>
               <strong>Année :</strong> {renderYear(book.date)}
             </p>
-            <p>
-            {bookComment ? bookComment : "pas de commentaire"}
-            </p>
           </div>
 
 
@@ -156,14 +160,24 @@ const BookDetails: React.FC = () => {
               >
                 <TextField
                   id="outlined-multiline-static"
-                  label="Multiline"
+                  label="Mon commentaire sur ce livre"
                   multiline
                   rows={4}
-                  defaultValue="Default Value"
-                  style={{ color: "white" }}
+                  defaultValue={bookComment}
+                  InputProps={{
+                    style: { color: "white" }, // Couleur du texte
+                  }}
+                  InputLabelProps={{
+                    style: { color: "white" }, // Couleur du label
+                  }}
+                  onChange={(e) => setBookComment(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleUpdateComment((e.target as HTMLInputElement).value);
+                    }
+                  }}
                 />
               </Box>
-          
         </div>
       </div>
     </>
