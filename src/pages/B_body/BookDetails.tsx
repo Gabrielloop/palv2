@@ -9,6 +9,7 @@ import { Box } from "@mui/material";
 import bookData from "../../dataFake/book_data.json";
 import RateMyBook from "components/RateMyBook";
 import TextField from "@mui/material/TextField";
+import { getComment } from "service/dbBookOptions.service";
 // à faire : gestion des erreurs
 
 const BookDetails: React.FC = () => {
@@ -16,7 +17,7 @@ const BookDetails: React.FC = () => {
   const [book, setBook] = useState<Book | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
-
+  const [bookComment, setBookComment] = useState<string | null>(null);
 
   useEffect(() => {
     if (isbn) {
@@ -28,6 +29,7 @@ const BookDetails: React.FC = () => {
   const fetchBookDetails = async (isbn: string) => {
     setLoading(true);
     setError(null);
+    setBookComment(await getComment(1, isbn));
 
     try {
       const result = await searchByQuery(isbn);
@@ -45,7 +47,6 @@ const BookDetails: React.FC = () => {
       setLoading(false);
     }
   };
-// ici
 
 
   const renderAuthors = (creators: string | string[]) => {
@@ -134,6 +135,9 @@ const BookDetails: React.FC = () => {
             </p>
             <p>
               <strong>Année :</strong> {renderYear(book.date)}
+            </p>
+            <p>
+            {bookComment ? bookComment : "pas de commentaire"}
             </p>
           </div>
 

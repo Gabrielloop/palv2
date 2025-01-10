@@ -5,13 +5,18 @@ import Slider from "@mui/material/Slider";
 import {
   isFavoris,
   isComment,
+  getNote,
   isTracked,
   isWishlisted,
   toggleFavoris,
   toggleWishlist,
+  updateNote,
+  updateAvancement,
+  getAvancement
 } from "../service/dbBookOptions.service";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { get } from "react-hook-form";
 
 // Composant pour afficher les options d'un livre (favoris, classement, avancement)
 // refacto : design.
@@ -24,16 +29,17 @@ const BookInfo: React.FC<BookInfoProps> = ({ isbn }) => {
   // Récupération des données de l'utilisateur
 
   const [bookInFav, setBookInFav] = React.useState<boolean>(false);
-  const [bookIsCommented, setBookIsCommented] = React.useState<boolean>(false);
-  const [bookIsTracked, setBookIsTracked] = React.useState<boolean>(false);
+  const [bookNote, setBookNote] = React.useState<number>(0);
+  const [bookAvancement, setBookAvancement] = React.useState<number>(0);
   const [bookIsWishlisted, setBookIsWishlisted] =
     React.useState<boolean>(false);
 
   React.useEffect(() => {
     const fetchData = async () => {
       setBookInFav(await isFavoris(1, isbn));
-      setBookIsCommented(await isComment(1, isbn));
-      setBookIsTracked(await isTracked(1, isbn));
+      const note = await getNote(1, isbn);
+      setBookNote(note);
+      setBookAvancement(await getAvancement(1, isbn));
       setBookIsWishlisted(await isWishlisted(1, isbn));
     };
     fetchData();
@@ -49,6 +55,14 @@ const BookInfo: React.FC<BookInfoProps> = ({ isbn }) => {
     setBookIsWishlisted(newWish);
     await toggleWishlist(1, isbn);
   };
+  const handleChangeNote = async (value:number) => {
+    setBookNote(value);
+    await updateNote(1, isbn,value);
+  };
+const handleChangeAvancement = async (value:number) => {
+    setBookAvancement(value);
+    await updateAvancement(1, isbn,value);
+  }
 
   return (
     <Box
@@ -69,12 +83,15 @@ const BookInfo: React.FC<BookInfoProps> = ({ isbn }) => {
         }}
       >
         <Slider
-          defaultValue={50}
           aria-label="Default"
+          value={bookAvancement}
           valueLabelDisplay="auto"
           sx={{ width: "90%" }}
+          onChangeCommitted={(event, value) => {
+            handleChangeAvancement(value as number);
+          }}
         />
-        <span>Avancement : 50 %</span>
+        <span>Avancement : {bookAvancement ? bookAvancement : "0"} %</span>
       </Box>
       <Box
         sx={{
@@ -125,7 +142,14 @@ const BookInfo: React.FC<BookInfoProps> = ({ isbn }) => {
             color: "rgb(256,172,4)",
           }}
         >
-          <Rating name="size-large" defaultValue={2} size="large" />
+          <Rating
+          name="size-large" defaultValue={0}
+          value={bookNote}
+          onChange={(event, newValue) => {
+            handleChangeNote(newValue?newValue:0);
+          }}
+          size="large"
+          />
           <span>Ma note</span>
         </div>
       </Box>
