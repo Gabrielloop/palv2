@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getUserListes } from '../service/dbListe.service';
-import { DbLists } from '../@types/bookItem';
+import { DbLists } from '../@types/database';
 import { deleteListe } from '../service/dbListe.service';
 interface Liste {
     id: number;

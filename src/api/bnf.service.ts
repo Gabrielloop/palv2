@@ -1,17 +1,11 @@
 import axios from "axios";
 import { XMLParser } from "fast-xml-parser";
+import { Book } from "../@types/api";
+
 
 // Utilisation de l'API bnf
-// à faire : gestion des erreurs.
+// TODO : Refacto la façon de traiter le retour de l'API (cleaner)
 
-export interface Book {
-    title: string;
-    identifier: string;
-    creators: string;
-    date: string;
-    publisher: string;
-    docType?: string;
-}
 
 // Point de terminaison SRU
 const SRU_ENDPOINT = "http://localhost:5000/api/sru";

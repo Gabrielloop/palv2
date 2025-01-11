@@ -513,3 +513,41 @@ background-color: var(--black-text-tr);
   .wishlist-toggle.not-wishlisted {
     color: gray;
   }
+
+.track-badge {
+    font-weight: 700;
+    font-size: smaller;
+    padding: 0px 7px;
+    margin-left: 10px;
+    border: #000 1px solid;
+    background-color: var(--black-text-tr);
+    border-radius: 10px;
+}
+.track-notStarted{
+background-color: red
+}
+.track-inProgress{
+background-color: orange;
+}
+.track-finished{
+background-color: green;
+}
+.list-badge {
+
+}
+.list-badge-container{
+position: relative;
+display: flex;
+justify-content: center;
+}
+.list-badge-number{
+position: absolute;
+z-index: 10;
+color:#000;
+font-weight: 700;
+font-size: smaller;
+top: 2px;
+}
+.list-badge-icon{
+    color: var(--off-white);
+}

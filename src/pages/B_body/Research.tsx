@@ -1,7 +1,8 @@
 // Research.tsx
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { searchByQuery, Book } from "../../api/bnfServices";
+import { searchByQuery } from "../../api/bnf.service";
+import { Book } from "../../@types/api";
 import SearchResultItem from "../../components/SearchResultItem";
 import SearchBar from "components/SearchBar";
 import AdvancedSearchForm from "components/AdvancedSearchForm";

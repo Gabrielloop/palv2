@@ -1,5 +1,5 @@
 import React from "react";
-import { MessageProps } from "../@types/componentsType";
+import { MessageProps } from "../@types/props";
 
 const Message: React.FC<MessageProps> = ({ text, type }) => {
   switch (type) {

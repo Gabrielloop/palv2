@@ -1,5 +1,5 @@
 import Dexie from "dexie";
-import { DbBook, DbFavoris, DbLists, DbAvancement } from "../@types/bookItem";
+import { DbBook, DbFavoris, DbLists, DbAvancement } from "../@types/database";
 import { db } from "../db";
 
 export const toggleFavoris = async (
@@ -209,6 +209,28 @@ export const isWishlisted = async (
     return false;
   }
 };
+
+export const getListOfBooks = async (userId: number,isbn:string): Promise<number[]> => {
+  try {
+    const list = await db.liste_book
+      .where("userId")
+      .equals(userId)
+      .and((ls) => ls.bookId === isbn)
+      .toArray();
+
+    const books = list.map((ls) => ls.listeId);
+    console.log(
+      `Liste de l'utilisateur ${userId} ayant le livre ${books}.`
+    );
+    return books;
+  } catch (error) {
+    console.error(
+      `Erreur lors de la récupération des listes du livre pour l'utilisateur ${userId} :`,
+      error
+    );
+    return [];
+  }
+}
 
 export const getNote = async (userId: number, bookId: string): Promise<number> => {
   try {

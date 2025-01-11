@@ -15,8 +15,8 @@ import {
   getBooksFromList,
 } from "service/dbBook.service";
 import { getBooksByAvancementStep } from "service/dbBookOptions.service";
-import { searchByISBNs } from "api/bnfServices";
-import { BookInter } from "../../@types/bookInterApi";
+import { searchByISBNs } from "../../api/bnf.service";
+import { BookInter } from "../../@types/api";
 import { set } from "react-hook-form";
 import { getPresetListsTitle } from "service/dbPresetLists.service";
 import { getListTitle } from "service/dbListe.service";

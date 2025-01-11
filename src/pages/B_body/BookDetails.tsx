@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { searchByQuery, Book } from "../../api/bnfServices";
+import { searchByQuery } from "../../api/bnf.service";
+import { Book } from "../../@types/api";
 import BookCover from "../../components/BookCover";
 import HeaderContainer from "components/HeaderContainer";
 import ArrowReturn from "components/ArrowReturn";

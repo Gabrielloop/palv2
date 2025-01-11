@@ -1,12 +1,17 @@
-import React from "react";
-import BookCover from "./BookCover"; 
-import bookData from "../dataFake/book_data.json"; 
-import { Box } from "@mui/material"; 
+import React, { use } from "react";
+import BookCover from "./BookCover";
+import bookData from "../dataFake/book_data.json";
+import { Box } from "@mui/material";
 import BookmarkOutlinedIcon from "@mui/icons-material/BookmarkOutlined";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import ChatOutlinedIcon from "@mui/icons-material/ChatOutlined";
-import Rating from "@mui/material/Rating"; 
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Rating from "@mui/material/Rating";
 import ProgressBar from "./ProgressBar";
+import { useState } from "react";
+import { set } from "react-hook-form";
+import { useEffect } from "react";
+import { getAvancement, getNote, isFavoris, isComment, isWishlisted, getListOfBooks } from "../service/dbBookOptions.service";
 
 // Composant pour l'affichage d'un résultats (recherche, ou liste)
 // à faire : optimiser l'utilisation des fonction (externalisé)
@@ -23,18 +28,17 @@ interface SearchResultItemProps {
   handleDetailsClick: (identifier: string) => void;
 }
 
+// Fonction pour nettoyer les variables
+// exporter ses fonctions pour les utiliser dès la query
 const cleanParentheses = (text: string | undefined) => {
   if (typeof text === "string") {
     return text.replace(/\s?\(.*?\)\s?/g, "").trim();
   }
   return text || "";
 };
-
-// Fonction pour nettoyer les variables
 const cleanCreatorName = (creator: string | undefined) => {
   if (typeof creator === "string") {
-
-    let cleanedCreator = creator.replace(/Auteur du texte/g, "").trim();
+    let cleanedCreator = creator.replace(/. Auteur du texte/g, "").trim();
     return cleanParentheses(cleanedCreator);
   }
   return creator || "";
@@ -61,13 +65,53 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
   const handleClick = () => {
     handleDetailsClick(book.identifier);
   };
-  const bookDetails = book.identifier
-    ? getBookDetailsFromData(book.identifier)
-    : null;
+
+  const [bookNote, setBookNote] = useState<number>(0);
+  const [bookProgress, setBookProgress] = useState<number>(0);
+  const [bookFavorite, setBookFavorite] = useState<boolean>(false);
+  const [bookComment, setBookComment] = useState<boolean>(false);
+  const [bookIsWishlisted, setBookIsWishlisted] = useState<boolean>(false);
+  const [bookUserList, setBookUserList] = useState<number[]>([]);
+
+  useEffect(() => {
+    const fetchNote = async () => {
+      const note:number = await getNote(1, book.identifier);
+      setBookNote(note);
+    };
+    const fetchProgress = async () => {
+      const progress:number = await getAvancement(1, book.identifier);
+      setBookProgress(progress);
+    }
+    const fetchFavorite = async () => {
+      const favorite:boolean = await isFavoris(1, book.identifier);
+      setBookFavorite(favorite);
+    }
+    const fetchWishlisted = async () => {
+      const wishlisted:boolean = await isWishlisted(1, book.identifier);
+      setBookIsWishlisted(wishlisted);
+    }
+    const fetchComment = async () => {
+      const comment:boolean = await isComment(1, book.identifier);
+      setBookComment(comment);
+    }
+    const fetchUserList = async () => {
+      const list:number[] = await getListOfBooks(1,book.identifier);
+      setBookUserList(list);
+    }
+    fetchUserList();
+    fetchComment();
+    fetchWishlisted();
+    fetchNote();
+    fetchProgress();
+    fetchFavorite();
+    setBookUserList([]);
+  }, [book.identifier]);
+
   const itemClass =
     book.identifier === "ISBN inconnu"
       ? "search-result-item-unknown"
       : "search-result-item";
+
   return (
     <div
       className={itemClass}
@@ -78,7 +122,7 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
         alignItems: "center",
         cursor: "pointer",
         height: "90px",
-        overflow: "hidden"
+        overflow: "hidden",
       }}
       onClick={handleClick}
     >
@@ -108,23 +152,20 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
         </div>
         <div>
           {/* Affichage des informations du livre provenant de book_data.json */}
-          {bookDetails && (
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "start",
-                width: "100%",
-              }}
-            >
-              <Rating
-                name="size-small"
-                defaultValue={bookDetails.classement}
-                size="small"
-              />
-              {/*<ProgressBar value={bookDetails.avancement}/>*/}
-            </Box>
-          )}
+
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "start",
+              width: "100%",
+            }}
+          >
+            {(bookNote != null && bookNote>0) && (<Rating name="size-small" defaultValue={bookNote} size="small" />)}
+            {(bookProgress==null || bookProgress === 0) && (<span className="track-badge track-notStarted">non lu</span>)}
+            {(bookProgress!=null && bookProgress === 100) && (<span className="track-badge track-finished">terminé</span>)}
+            {(bookProgress!=null && bookProgress > 0 && bookProgress < 100) && (<span className="track-badge track-inProgress">lu à {bookProgress}%</span>)}
+          </Box>
         </div>
       </div>
       {/* Affichage de la barre laterale */}
@@ -139,17 +180,42 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
           gap: "1px",
         }}
       >
-        {bookDetails && (
-          <BookmarkOutlinedIcon
+        {(bookUserList.length > 0) && (
+          <div className="list-badge list-badge-container">
+            <div className="list-badge-number">{bookUserList.length}</div>
+            <div className="list-badge-icon"><BookmarkOutlinedIcon
             sx={{ color: "var(--off-white)", fontSize: "1.5rem" }}
-          />
+          /></div>
+          
+          </div>
         )}
-        {bookDetails && bookDetails.favoris && (
-          <FavoriteOutlinedIcon
-            sx={{ color: "var(--off-white)", fontSize: "1.5rem" }}
-          />
+        {bookFavorite==true && (
+          <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            color: bookFavorite ? "red" : "gray",
+            cursor: "pointer",
+          }}
+        >
+          <FavoriteOutlinedIcon />
+        </div>
         )}
-        {bookDetails && bookDetails.commentaire && (
+        {bookIsWishlisted==true && (
+          <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            color: bookIsWishlisted ? "yellow" : "gray",
+            cursor: "pointer",
+          }}
+        >
+          <ShoppingCartIcon />
+        </div>
+        )}
+        {bookComment==true && (
           <ChatOutlinedIcon
             sx={{ color: "var(--off-white)", fontSize: "1.5rem" }}
           />

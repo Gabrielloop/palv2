@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Box } from "@mui/material";
-import bookData from "../dataFake/book_data.json"; // Assurez-vous d'importer les données des livres
 import BookCover from "./BookCover";
 import ProgressBar from "./ProgressBar";
 import { useNavigate } from "react-router-dom";
 import { getBooksByAvancementStep, getAvancement } from "../service/dbBookOptions.service";
-import { searchByISBNs } from "../api/bnfServices";
+import { searchByISBNs } from "../api/bnf.service";
 
 
 // Composant qui affiche un carrousel des livres en cours de lecture (avancement entre 0 et 100)

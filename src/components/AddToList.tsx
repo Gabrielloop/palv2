@@ -5,7 +5,7 @@ import RemoveOutlinedIcon from "@mui/icons-material/RemoveOutlined";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import { addBookToList, removeBookFromList, isBookInList} from "../service/dbBook.service";
 import { getUserListes } from "../service/dbListe.service";
-import { DbLists } from "../@types/bookItem";
+import { DbLists } from "../@types/database";
 
 interface AddToListFormProps {
   isbn: string; // ISBN du livre à gérer

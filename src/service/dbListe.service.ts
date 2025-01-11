@@ -1,5 +1,5 @@
 import { BehaviorSubject } from 'rxjs';
-import { DbLists } from '../@types/bookItem';
+import { DbLists } from '../@types/database';
 import { db } from '../db';
 import { removeBookFromList } from '../service/dbBook.service';
 
