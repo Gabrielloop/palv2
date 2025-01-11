@@ -3,11 +3,8 @@ import React, {FC, useContext} from 'react';
 import {useForm, SubmitHandler} from "react-hook-form"
 import { useNavigate } from 'react-router';
 import {AuthContext} from "../../context/AuthContext";
-
-interface LoginFormInput {
-    email: string
-    password: string
-}
+import {LoginFormInput} from "../../@types/form";
+import Message from 'components/general/Message';
 
 const LoginForm: FC<{}> = ({}) => {
     const navigate = useNavigate()
@@ -19,7 +16,6 @@ const LoginForm: FC<{}> = ({}) => {
             password: "",
         },
     })
-
     const onSubmit: SubmitHandler<LoginFormInput> = (data) => {
         console.log(data)
         console.log(errors);
@@ -27,7 +23,6 @@ const LoginForm: FC<{}> = ({}) => {
         navigate('/liste');
     }
     return (
-        /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
             <Box
                 className={"login-form"}
                 component="form"
@@ -54,11 +49,9 @@ const LoginForm: FC<{}> = ({}) => {
                         {...register("password")}
                     />
                 <Button variant="contained" type="submit">Se connecter</Button>
-                {errors.email && <span>This field is required</span>}
-
+                {errors.email && <Message text="Email obigatoire" type='warning'/>}
             </Box>
     )
 }
-
 
 export default LoginForm;

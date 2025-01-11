@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--primary-denim);
+  background: linear-gradient(
+    0deg,
+    var(--primary-denim) 0%,
+    rgb(117, 117, 185) 100%
+  );
+  background-image: url(assets/fond.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Conteneur de l'appication */
+.app-wrapper-container {
+  color: var(--off-white);
+}
