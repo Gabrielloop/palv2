@@ -36,15 +36,12 @@ const ListeItem: React.FC<ListeItemProps> = ({
           .equals(userId)
           .and((rel) => rel.listeId === categoryId)
           .toArray();
-        console.log(`Relations récupérées pour la liste ${categoryId}:`, relations);
     
         if (relations.length > 0) {
           const bookIds = relations.map((rel) => rel.bookId); // Récupérer les `bookId` (identifier)
-          console.log(`bookIds récupérés pour la liste ${categoryId}:`, bookIds);
     
           // Récupérer les livres en utilisant le champ `identifier`
           const books = await db.books.where("identifier").anyOf(bookIds).toArray();
-          console.log(`Livres récupérés pour la liste ${categoryId}:`, books);
     
           // Extraire les ISBN des livres valides
           const isbns = books.map((book) => book.identifier);
@@ -55,7 +52,7 @@ const ListeItem: React.FC<ListeItemProps> = ({
           setBookCount(0);
         }
       } catch (error) {
-        console.error("Erreur lors de la récupération des livres :", error);
+        console.error(error);
       }
     };
 

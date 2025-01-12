@@ -12,29 +12,21 @@ export const toggleFavoris = async (
       .equals(userId)
       .and((fav) => fav.bookId === bookId)
       .first();
-
     if (favoris) {
       await db.favoris
         .where("userId")
         .equals(userId)
         .and((fav) => fav.bookId === bookId)
         .delete();
-      console.log(
-        `Livre ${bookId} retiré des favoris pour l'utilisateur ${userId}.`
-      );
+      console.log('delete favoris :',userId,bookId);
     } else {
       await db.favoris.add({ userId, bookId });
-      console.log(
-        `Livre ${bookId} ajouté aux favoris pour l'utilisateur ${userId}.`
-      );
+      console.log('add favoris :',userId,bookId);
     }
 
     return true;
   } catch (error) {
-    console.error(
-      `Erreur lors de la modification des favoris pour le livre ${bookId} et l'utilisateur ${userId}:`,
-      error
-    );
+    console.error('error toggle favoris :',error);
     return false;
   }
 };
@@ -49,29 +41,21 @@ export const toggleWishlist = async (
       .equals(userId)
       .and((wish) => wish.bookId === bookId)
       .first();
-
     if (wishlists) {
       await db.wishlist
         .where("userId")
         .equals(userId)
         .and((wish) => wish.bookId === bookId)
         .delete();
-      console.log(
-        `Livre ${bookId} retiré de la wishlist de l'utilisateur ${userId}.`
-      );
+      console.log('delete wishlist :',userId,bookId);
     } else {
       await db.wishlist.add({ userId, bookId });
-      console.log(
-        `Livre ${bookId} ajouté à la wishlist de l'utilisateur ${userId}.`
-      );
+      console.log('add wishlist :',userId,bookId);
     }
 
     return true;
   } catch (error) {
-    console.error(
-      `Erreur lors de la modification de la wishlist pour le livre ${bookId} et l'utilisateur ${userId}:`,
-      error
-    );
+    console.error('error toggle wishlist :',error);
     return false;
   }
 };
@@ -88,17 +72,8 @@ export const isFavoris = async (
       .first();
 
     const isFav = !!favoris;
-    console.log(
-      `Le livre ${bookId} est ${
-        isFav ? "présent" : "absent"
-      } dans les favoris pour l'utilisateur ${userId}.`
-    );
     return isFav;
   } catch (error) {
-    console.error(
-      `Erreur lors de la vérification du livre ${bookId} dans les favoris pour l'utilisateur ${userId} :`,
-      error
-    );
     return false;
   }
 };
@@ -115,17 +90,8 @@ export const isNoted = async (
       .first();
 
     const isNot = !!note;
-    console.log(
-      `Le livre ${bookId} est ${
-        isNot ? "noté" : "non noté"
-      } par l'utilisateur ${userId}.`
-    );
     return isNot;
   } catch (error) {
-    console.error(
-      `Erreur lors de la vérification du livre ${bookId} dans les notes pour l'utilisateur ${userId} :`,
-      error
-    );
     return false;
   }
 };
@@ -142,17 +108,8 @@ export const isComment = async (
       .first();
 
     const isCom = !!comment;
-    console.log(
-      `Le livre ${bookId} est ${
-        isCom ? "commenté" : "non commenté"
-      } par l'utilisateur ${userId}.`
-    );
     return isCom;
   } catch (error) {
-    console.error(
-      `Erreur lors de la vérification du livre ${bookId} dans les commentaires pour l'utilisateur ${userId} :`,
-      error
-    );
     return false;
   }
 };
@@ -168,17 +125,8 @@ export const isTracked = async (
       .first();
 
     const isTr = !!tracked;
-    console.log(
-      `Le livre ${bookId} est ${
-        isTr ? "suivi" : "non suivi"
-      } par l'utilisateur ${userId}.`
-    );
     return isTr;
   } catch (error) {
-    console.error(
-      `Erreur lors de la vérification du livre ${bookId} dans les suivis pour l'utilisateur ${userId} :`,
-      error
-    );
     return false;
   }
 };
@@ -195,17 +143,8 @@ export const isWishlisted = async (
       .first();
 
     const isWl = !!wishlist;
-    console.log(
-      `Le livre ${bookId} est ${
-        isWl ? "présent" : "absent"
-      } dans la wishlist pour l'utilisateur ${userId}.`
-    );
     return isWl;
   } catch (error) {
-    console.error(
-      `Erreur lors de la vérification du livre ${bookId} dans la wishlist pour l'utilisateur ${userId} :`,
-      error
-    );
     return false;
   }
 };
@@ -219,15 +158,8 @@ export const getListOfBooks = async (userId: number,isbn:string): Promise<number
       .toArray();
 
     const books = list.map((ls) => ls.listeId);
-    console.log(
-      `Liste de l'utilisateur ${userId} ayant le livre ${books}.`
-    );
     return books;
   } catch (error) {
-    console.error(
-      `Erreur lors de la récupération des listes du livre pour l'utilisateur ${userId} :`,
-      error
-    );
     return [];
   }
 }
@@ -241,21 +173,11 @@ export const getNote = async (userId: number, bookId: string): Promise<number> =
       .first();
 
     if (note) {
-      console.log(
-        `Note du livre ${bookId} pour l'utilisateur ${userId} : ${note.note}.`
-      );
       return note.note;
     }
-    console.log(
-      `Aucune note trouvée pour le livre ${bookId} et l'utilisateur ${userId}.`
-    );
-    return 0;
+      return 0;
   } catch (error) {
-    console.error(
-      `Erreur lors de la récupération de la note du livre ${bookId} pour l'utilisateur ${userId} :`,
-      error
-    );
-    return 0;
+      return 0;
   }
 }
 
@@ -268,20 +190,10 @@ export const getComment = async (userId: number, bookId: string): Promise<string
       .first();
 
     if (comment) {
-      console.log(
-        `Commentaire du livre ${bookId} pour l'utilisateur ${userId} : ${comment.commentaire}.`
-      );
-      return comment.commentaire;
+    return comment.commentaire;
     }
-    console.log(
-      `Aucun commentaire trouvé pour le livre ${bookId} et l'utilisateur ${userId}.`
-    );
     return "";
   } catch (error) {
-    console.error(
-      `Erreur lors de la récupération du commentaire du livre ${bookId} pour l'utilisateur ${userId} :`,
-      error
-    );
     return "";
   }
 }
@@ -295,20 +207,10 @@ export const getAvancement = async (userId: number, bookId: string): Promise<num
       .first();
 
     if (avancement) {
-      console.log(
-        `Avancement du livre ${bookId} pour l'utilisateur ${userId} : ${avancement.avancement}.`
-      );
-      return avancement.avancement;
+    return avancement.avancement;
     }
-    console.log(
-      `Aucun avancement trouvé pour le livre ${bookId} et l'utilisateur ${userId}.`
-    );
     return 0;
   } catch (error) {
-    console.error(
-      `Erreur lors de la récupération de l'avancement du livre ${bookId} pour l'utilisateur ${userId} :`,
-      error
-    );
     return 0;
   }
 }
@@ -344,24 +246,17 @@ export const updateComment = async (userId: number, bookId: string, commentaire:
       .equals(userId)
       .and((com) => com.bookId === bookId)
       .modify({ commentaire });
+      console.info('update comment :',commentaire,userId,bookId);
       return commentaire;
     }
       await db.commentaires.add({ userId, bookId, commentaire, date: new Date() });
-    console.log(
-      `Commentaire du livre ${bookId} pour l'utilisateur ${userId} ajouté : ${commentaire}.`
-    );
+      console.info('add comment :',commentaire,userId,bookId);
       return commentaire;
   } catch (error) {
-    console.error(
-      `Erreur lors de la mise à jour du commentaire du livre ${bookId} pour l'utilisateur ${userId} :`,
-      error
-    );
+    console.error('error update comment :',error);
     return "";
   }
 }
-
-
-
 export const updateNote = async (userId: number, bookId: string, note: number): Promise<number> => {
   try {
     if (await isNoted(userId, bookId)) {
@@ -370,18 +265,14 @@ export const updateNote = async (userId: number, bookId: string, note: number): 
       .equals(userId)
       .and((nt) => nt.bookId === bookId)
       .modify({ note });
+      console.log('update note :',note,userId,bookId);
       return note;
     }
       await db.notes.add({ userId, bookId, note });
-    console.log(
-      `Note du livre ${bookId} pour l'utilisateur ${userId} ajoutée : ${note}.`
-    );
+    console.log('add note :',note,userId,bookId);
       return note;
   } catch (error) {
-    console.error(
-      `Erreur lors de la mise à jour de la note du livre ${bookId} pour l'utilisateur ${userId} :`,
-      error
-    );
+    console.error('error update note :',error);
     return 0;
   }
 }
@@ -394,18 +285,14 @@ export const updateAvancement = async (userId: number, bookId: string, avancemen
       .equals(userId)
       .and((av) => av.bookId === bookId)
       .modify({ avancement });
+      console.log('update avancement :',avancement,userId,bookId);
       return avancement;
     }
       await db.avancements.add({ userId, bookId, avancement });
-    console.log(
-      `Avancement du livre ${bookId} pour l'utilisateur ${userId} ajouté : ${avancement}.`
-    );
+    console.log('add avancement :',avancement,userId,bookId);
       return avancement;
   } catch (error) {
-    console.error(
-      `Erreur lors de la mise à jour de l'avancement du livre ${bookId} pour l'utilisateur ${userId} :`,
-      error
-    );
+    console.error('error update avancement :',error);
     return 0;
   }
 }

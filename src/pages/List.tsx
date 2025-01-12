@@ -24,7 +24,6 @@ import { getListTitle } from "service/dbListe.service";
 interface MyListProps {
   userId: number;
 }
-
 const MyList: FC<MyListProps> = ({ userId }) => {
   const [books, setBooks] = useState<BookInter[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
@@ -36,8 +35,6 @@ const MyList: FC<MyListProps> = ({ userId }) => {
   const navigate = useNavigate();
 
   const listId: string | null = lastSegment ? lastSegment : null;
-
-  // A faire : ajouter le titre de la liste
 
   useEffect(() => {
     const getBookFromAnyList = async (listId:any) => {
@@ -84,7 +81,7 @@ const MyList: FC<MyListProps> = ({ userId }) => {
             setBooks(bookListUser);
             break;
           default:
-            setError("Catégorie non trouvée.");
+            setError("Liste non trouvée.");
             setLoading(false);
             return;
         }
@@ -102,11 +99,10 @@ const MyList: FC<MyListProps> = ({ userId }) => {
       setError("ISBN invalide.");
     }
   };
-  console.log('books:',books.length);
   return (
     <>
       <Helmet>
-        <title>{listTitle}</title>
+        <title>Liste : {listTitle}</title>
       </Helmet>
 
       <HeaderContainer>

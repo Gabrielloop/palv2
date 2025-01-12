@@ -3,52 +3,47 @@ import * as React from "react";
 import { useNavigate } from "react-router";
 import { getBooksFromFavoris, getBookUser, getBooksAdvancement} from "../../service/dbBook.service";
 import { ListeItemProps } from "../../@types/props";
+import { useAuth } from "hooks/useAuth";
 
 // Composant apeler dans la liste des basiques pour afficher un apercus de la liste (favoris, à lire, etc.)
-// refacto : design de l'apercus
 // à faire : gestion des datas
 // refacto : element out of date
 
-export const BaseListsItem: React.FC<ListeItemProps> = ({
+export const DashboardPresetListButton: React.FC<ListeItemProps> = ({
   categoryType,
   categoryTitle
 }) => {
   const navigate = useNavigate();
   const [isbnList, setIsbnList] = useState<string[]>([]);
   const [bookCount, setBookCount] = useState<number>(0);
+  const loginUserId = useAuth()?.loginUserId ?? 0;  // Récupération du contexte utilisateur
 
   const path_liste = `/listes/${categoryType}`;
 
   useEffect(() => {
     const fetchBooks = async () => {
       if (categoryType === "fav") {
-        const favoris = await getBooksFromFavoris(1);
+        const favoris = await getBooksFromFavoris(loginUserId);
         setBookCount(favoris.length);
-        console.log("Favoris :", favoris);
       }
       if (categoryType === "notStart") {
-        const books = await getBooksAdvancement(1);
-        const notStart = books.filter(book => book.avancement === 0);
+        const books = await getBooksAdvancement(loginUserId);
+        const notStart = books.filter(book => book.avancement < 1);
         setBookCount(notStart.length);
-        console.log("A lire :", notStart);
       }
       if (categoryType === "finished") {
-        const books = await getBooksAdvancement(1);
+        const books = await getBooksAdvancement(loginUserId);
         const finished = books.filter(book => book.avancement === 100);
         setBookCount(finished.length);
-        console.log("Terminé :", finished);
       }
       if (categoryType === "inProgress") {
-        const books = await getBooksAdvancement(1);
+        const books = await getBooksAdvancement(loginUserId);
         const inProgress = books.filter(book => book.avancement > 0 && book.avancement < 100);
         setBookCount(inProgress.length);
-        console.log("A lire :", inProgress);
       }
-
       if (categoryType === "save") {
-        const save = await getBookUser(1);
+        const save = await getBookUser(loginUserId);
         setBookCount(save.length);
-        console.log("Save :", save);
       }
     };
     fetchBooks();
@@ -73,4 +68,4 @@ export const BaseListsItem: React.FC<ListeItemProps> = ({
   );
 };
 
-export default BaseListsItem;
+export default DashboardPresetListButton;

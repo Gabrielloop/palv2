@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import './App.css';
 import Listes from "./pages/Dashboard";
 import {BrowserRouter, Navigate, Route, Router, Routes} from "react-router";
 import Pages from "./layout/AppWrapper";
@@ -11,7 +10,6 @@ import Setting from "./pages/Settings";
 import Login from "./pages/Login";
 import { AuthContext } from './context/AuthContext';
 import BookDetails from 'pages/BookDetails';
-import { set } from 'react-hook-form';
 
 
 function App() {
@@ -23,8 +21,7 @@ function App() {
     const handleLogout = () => {
         setIsLoggedIn(false);
     };
-    console.log('user is connected:', isLoggedIn ? 'yes' : 'no');
-    console.log('user id:', loginUserId);
+    console.log('user is connected:', isLoggedIn ? 'yes' : 'no', 'user id:', loginUserId);
     return (
         <Pages>
             <BrowserRouter>

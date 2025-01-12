@@ -68,7 +68,7 @@ export const searchByQuery = async (
         const records = Array.isArray(rawRecords) ? rawRecords : rawRecords ? [rawRecords] : [];
 
         if (records.length === 0) {
-            console.warn("Aucun enregistrement trouvé.");
+            console.warn("any record found");
             return [];
         }
 
@@ -98,9 +98,9 @@ export const searchByQuery = async (
         return books;
     } catch (error: unknown) {
         if (error instanceof Error) {
-            console.error("Erreur lors de la requête SRU :", error.message);
+            console.error("error :", error.message);
         } else {
-            console.error("Erreur inconnue lors de la requête SRU");
+            console.error("unknown error");
         }
         return [];
     }
@@ -109,11 +109,8 @@ export const searchByQuery = async (
 // Fonction pour rechercher plusieurs ISBNs
 export const searchByISBNs = async (isbns: string[]): Promise<Book[]> => {
     const books: Book[] = [];
-    console.log("Isbns : ", isbns);
-    console.log("Livres récupérés : ", books);
     for (const isbn of isbns) {
         const book = await searchByQuery(isbn);
-        console.log(`Livres récupérés pour ${isbn} : `, book);
         if (book) {
             books.push(...book);
         }

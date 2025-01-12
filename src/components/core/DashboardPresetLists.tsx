@@ -2,16 +2,16 @@ import React from "react";
 import { FC } from "react";
 import { Box } from "@mui/material";
 import ScrollX from "../general/BoxScrollOnX";
-import BaseListsItem from "./DashboardPresetListButton";
+import DashboardPresetListButton from "./DashboardPresetListButton";
 import {presetLists} from "../../service/dbPresetLists.service";
 
-const BaseLists: FC<{}> = ({}) => {
+const DashboardPresetLists: FC<{}> = ({}) => {
   return (
     <>
       <ScrollX>
           {presetLists.map((lists, index) => (
             <Box key={index}>
-              <BaseListsItem
+              <DashboardPresetListButton
                 categoryTitle={lists.name}
                 categoryType={lists.type}
               />
@@ -22,4 +22,4 @@ const BaseLists: FC<{}> = ({}) => {
   );
 };
 
-export default BaseLists;
+export default DashboardPresetLists;

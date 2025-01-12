@@ -7,7 +7,7 @@ import Box from "@mui/material/Box";
 import ScrollX from "components/general/BoxScrollOnX";
 import AddListeBox from "components/core/DashboardAddList";
 import ListeItem from "../components/core/DashboardListPreview";
-import BaseLists from "../components/core/DashboardPresetLists";
+import DashboardPresetLists from "../components/core/DashboardPresetLists";
 import Carousel from "components/ui/Carousel";
 import { useAuth } from "hooks/useAuth";
 
@@ -60,7 +60,7 @@ const Listes: FC<{ localtitle: string }> = ({ localtitle }) => {
           </ScrollX>
         )}
       </Box>
-      <BaseLists />
+      <DashboardPresetLists />
       <Carousel />
     </>
   );

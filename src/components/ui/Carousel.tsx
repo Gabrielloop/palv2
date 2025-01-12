@@ -53,10 +53,6 @@ const Carousel: React.FC = () => {
   
   const navigate = useNavigate();
 
-  console.log('booksWithAvanvement', booksWithAvanvement);
-  console.log('filteredBooks', filteredBooks);
-  console.log('currentBook', currentBook);
-  
   // Fonction pour passer au livre suivant/precedent
   // Permet grace au modulo de vérifier qu'on ne dépasse pas la longeur de la table
   const nextBookHandler = () => {
@@ -86,7 +82,7 @@ const Carousel: React.FC = () => {
   }, [currentIndex, booksWithAvanvement]);
 
 
-  console.log('currentBook', currentBook);
+
   return (
     <Box
       sx={{

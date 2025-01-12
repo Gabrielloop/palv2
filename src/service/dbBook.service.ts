@@ -1,6 +1,7 @@
 import Dexie from "dexie";
 import { DbBook, DbFavoris, DbLists, DbAvancement} from "../@types/database";
 import { db } from "../db";
+import { getAvancement } from "./dbBookOptions.service";
 
 // Ajouter un livre à la base de données
 export const addBook = async (book: DbBook) => {
@@ -23,8 +24,11 @@ export const addBook = async (book: DbBook) => {
         console.log(`Livre ${bookId} ajouté à dbBook.`);
   
         // Ajouter une entrée dans dbAvancement pour ce livre avec avancement initial à 0
-        await db.avancements.add({ bookId, userId, avancement: 0 });
-        console.log(`Livre ${bookId} ajouté à dbAvancement avec avancement initial à 0.`);
+        const alreadyInAvancement = getAvancement(userId, bookId);
+        if (!alreadyInAvancement) {
+          await db.avancements.add({ bookId, userId, avancement: 0 });
+          console.log(`Livre ${bookId} ajouté à dbAvancement avec avancement initial à 0.`);
+        }
       }
   
       // Ajouter la relation entre la liste, le livre et l'utilisateur
@@ -48,15 +52,8 @@ export const isBookInList = async (userId: number, listeId: number, bookId: stri
         .first();
   
       const isInList = !!relation;
-      console.log(
-        `Le livre ${bookId} est ${isInList ? "présent" : "absent"} dans la liste ${listeId} pour l'utilisateur ${userId}.`
-      );
       return isInList;
     } catch (error) {
-      console.error(
-        `Erreur lors de la vérification du livre ${bookId} dans la liste ${listeId} pour l'utilisateur ${userId} :`,
-        error
-      );
       return false;
     }
   };
@@ -65,14 +62,12 @@ export const isBookInList = async (userId: number, listeId: number, bookId: stri
 export const getBooksFromFavoris = async (userId: number): Promise<DbFavoris[]> => {
     try {
         const favoris = await db.favoris.where("userId").equals(userId).toArray();
-        console.log("Favoris récupérés :", favoris);
         return favoris.map(favori => ({
             ...favori,
             bookId: favori.bookId.toString()
         }));
     
     } catch (error) {
-        console.error("Erreur lors de la récupération des favoris :", error);
         return [];
     }  
 }
@@ -81,10 +76,8 @@ export const getBooksFromFavoris = async (userId: number): Promise<DbFavoris[]> 
 export const getBooksAdvancement = async (userId: number): Promise<DbAvancement[]> => {
     try {
         const avancements = await db.avancements.where("userId").equals(userId).toArray();
-        console.log("Avancements récupérés :", avancements);
         return avancements;
     } catch (error) {
-        console.error("Erreur lors de la récupération des avancements :", error);
         return [];
     }
 }
@@ -93,10 +86,8 @@ export const getBooksAdvancement = async (userId: number): Promise<DbAvancement[
 export const getBookUser = async (userId: number): Promise<DbBook[]> => {
     try {
         const books = await db.books.where("userId").equals(userId).toArray();
-        console.log("Livres récupérés :", books);
         return books;
     } catch (error) {
-        console.error("Erreur lors de la récupération des livres :", error);
         return [];
     }
 }
@@ -111,7 +102,6 @@ export const getBooksFromList = async (userId: number, listId: number): Promise<
             .toArray();
         return books.map(book => book.bookId.toString());
     } catch (error) {
-        console.error("Erreur lors de la récupération des livres de la liste :", error);
         return [];
     }
 }
@@ -125,11 +115,8 @@ export const removeBookFromList = async (userId: number, listeId: number, bookId
         .delete();
   
       if (deletedCount > 0) {
-        console.log(`Livre ${bookId} retiré de la liste ${listeId} pour l'utilisateur ${userId}.`);
+        console.log('delete from liste_book:',bookId);
       } else {
-        console.log(
-          `Aucune correspondance trouvée pour le livre ${bookId} dans la liste ${listeId} pour l'utilisateur ${userId}.`
-        );
       }
   
       // Vérifier si le livre est toujours dans une autre liste de l'utilisateur
@@ -143,14 +130,8 @@ export const removeBookFromList = async (userId: number, listeId: number, bookId
         // Si le livre n'est plus associé à aucune liste de l'utilisateur, le supprimer de dbBook
         await db.books.where("identifier").equals(bookId).delete();
         await db.avancements.where("bookId").equals(bookId).delete();
-        console.log(
-          `Livre ${bookId} supprimé de dbBook car il n'est plus dans aucune liste de l'utilisateur ${userId}.`
-        );
+        console.log('delete bookId:',bookId);
       }
     } catch (error) {
-      console.error(
-        `Erreur lors de la suppression du livre ${bookId} de la liste ${listeId} pour l'utilisateur ${userId} :`,
-        error
-      );
     }
   };
