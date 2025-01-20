@@ -173,11 +173,7 @@ tr:hover {
 /* Desktop */
 @media (min-width: 1025px) {
 }
-.login-input {
-  background-color: var(--off-white);
-  width: 100%;
-  margin: auto;
-}
+
 .login-form {
   border: 1px solid var(--off-white-tr);
   background-color: var(--off-white-tr);
@@ -187,9 +183,11 @@ tr:hover {
   margin-top: 100px;
   display: flex;
   flex-direction: column;
-  justify-content: stretch;
 }
-
+.login-input {
+  background-color: var(--off-white);
+  margin: auto;
+}
 .liste-Favoris button {
   background-color: pink !important;
   color: red !important;

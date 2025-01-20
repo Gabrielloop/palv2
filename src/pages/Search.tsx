@@ -1,36 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import HeaderContainer from "layout/HeaderContainer";
 import SearchBar from "components/core/SearchBar";
 import AdvancedSearchForm from "components/core/SearchAdvancedForm";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
 import SearchResultsList from "components/core/SearchResultsList";
+
+const isISBN = (query: string): boolean => {
+  const isbnRegex = /^(?:\d{9}[\dX]|\d{13})$/;
+  return isbnRegex.test(query.trim());
+};
 
 const Search: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
   const [query, setQuery] = useState<string>("");
-
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [isOpen, setIsOpen] = useState(false);
 
   // Routage en fonction de la recherche (ISBN ou texte)
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const q = params.get("q");
     if (q) {
-      setQuery(q);
-      const isISBN = (query: string): boolean => {
-        const isbnRegex = /^(?:\d{9}[\dX]|\d{13})$/;
-        return isbnRegex.test(query.trim());
-      };
+      setSearchQuery(q);
       if (isISBN(q)) {
         navigate(`/livre/${q}`);
-      } else {
-        // recherche
       }
     }
   }, [location.search]);
@@ -39,12 +35,12 @@ const Search: React.FC = () => {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (query.trim()) {
+      setSearchQuery(query.trim());
       navigate(`/search?q=${encodeURIComponent(query.trim())}`);
     }
   };
 
   // Gestion de l'accordéon de recherche avancée
-  const [isOpen, setIsOpen] = useState(false);
   const toggleAccordion = () => {
     setIsOpen(!isOpen);
   };
@@ -59,7 +55,10 @@ const Search: React.FC = () => {
               setQuery={setQuery}
               handleSearch={handleSearch}
             />
-            <button onClick={toggleAccordion}>
+            <button
+              onClick={toggleAccordion}
+              aria-label="Toggle advanced search"
+            >
               {isOpen ? <ExpandLessIcon /> : <ExpandCircleDownIcon />}
             </button>
           </div>
@@ -75,7 +74,7 @@ const Search: React.FC = () => {
           )}
         </div>
       </HeaderContainer>
-      <SearchResultsList query={query} currentPage={1} />
+      <SearchResultsList query={searchQuery} currentPage={1} />
     </div>
   );
 };
