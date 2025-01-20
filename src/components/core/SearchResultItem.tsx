@@ -57,6 +57,9 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
   handleDetailsClick,
 }) => {
   const handleClick = () => {
+    if (book.identifier.length !== 13) {
+      return;
+    }
     handleDetailsClick(book.identifier);
   };
 
@@ -106,6 +109,12 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
       ? "search-result-item-unknown"
       : "search-result-item";
 
+  const handle =
+  book.identifier === "ISBN inconnu"
+  ? handleClick
+   : handleClick
+
+
   return (
     <div
       className={itemClass}
@@ -118,7 +127,8 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
         height: "90px",
         overflow: "hidden",
       }}
-      onClick={handleClick}
+      
+      onClick={handle}
     >
       {/* Colonne pour la couverture */}
       <div style={{ flex: 0.75, paddingRight: "5px", width: "75px" }}>

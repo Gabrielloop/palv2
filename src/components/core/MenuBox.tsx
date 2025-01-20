@@ -14,8 +14,7 @@ import {useLocation} from "react-router-dom";
 
 const pages: any = [
     {name: "Mes listes", navigation: "/listes", icn: <ListAltIcon/>, colorClass: "bg-primary"},
-    {name: "Recherches", navigation: "/recherches", icn: <SearchIcon/>, colorClass: "bg-secondary"},
-    
+    {name: "Recherche", navigation: "/search", icn: <SearchIcon/>, colorClass: "bg-secondary"},
     {name: "Options", navigation: "/options", icn: <SettingsIcon/>, colorClass: "bg-dark"}
 ];
 /*{name: "Scanner", navigation: "/options", icn: <QrCodeScannerIcon/>, colorClass: "bg-dark"}, */

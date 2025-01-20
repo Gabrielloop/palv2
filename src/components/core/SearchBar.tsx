@@ -12,20 +12,25 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({ query, setQuery, handleSearch }) => {
   return (
       <Box component="form" onSubmit={handleSearch} sx={{ display: "flex", flexDirection: "row", width: "100%" }}>
-      <TextField
+        <TextField
         className="my-search-bar"
         label="Rechercher par titre ou ISBN"
         variant="outlined"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+          handleSearch(e);
+          }
+        }}
         fullWidth
-        style={{ width: "100%"}}
-      />
-      {/* Bouton facultatif pour soumettre le formulaire
-      <Button type="submit" variant="contained" color="primary" sx={{ width: "100%" }}>
+        style={{ width: "100%" }}
+        />
+        {/* Bouton facultatif pour soumettre le formulaire
+        <Button type="submit" variant="contained" color="primary" sx={{ width: "100%" }}>
         Rechercher
-      </Button> */}
-    </Box>
+        </Button> */}
+      </Box>
   );
 };
 

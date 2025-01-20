@@ -37,7 +37,8 @@ const extractDocType = (types: any[]): string | undefined => {
 
 // Fonction principale pour rechercher des livres
 export const searchByQuery = async (
-    query: string
+    query: string,
+    page: number
 ): Promise<Book[] | null> => {
     const isbnRegex = /^(?:\d{9}[\dX]|\d{13})$/;
     let finalQuery: string;
@@ -54,6 +55,7 @@ export const searchByQuery = async (
         version: "1.2",
         operation: "searchRetrieve",
         query: finalQuery,
+        startRecord: 1+(page-1)*10,
         maximumRecords: maximumRecords,
         recordSchema: "dc",
     };
@@ -110,7 +112,7 @@ export const searchByQuery = async (
 export const searchByISBNs = async (isbns: string[]): Promise<Book[]> => {
     const books: Book[] = [];
     for (const isbn of isbns) {
-        const book = await searchByQuery(isbn);
+        const book = await searchByQuery(isbn, 1);
         if (book) {
             books.push(...book);
         }

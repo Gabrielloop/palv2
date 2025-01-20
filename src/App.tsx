@@ -5,12 +5,11 @@ import Pages from "./layout/AppWrapper";
 import Layout from "./layout/LayoutLogin";
 import LayoutWB from "./layout/LayoutForLogin";
 import MyList from "./pages/List";
-import Research from "./pages/Research";
 import Setting from "./pages/Settings";
 import Login from "./pages/Login";
 import { AuthContext } from './context/AuthContext';
 import BookDetails from 'pages/BookDetails';
-
+import Search from 'pages/Search';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -34,7 +33,7 @@ function App() {
                         <Route path="/listes" element={<Listes localtitle={"Lists"} key={"list"} />}/>
                         <Route path="/listes/:mylist" element={<MyList userId={loginUserId}/>}/>
                         <Route path="/options" element={<Setting localtitle={'Options'}/>}/>
-                        <Route path="/recherches" element={<Research/>}/>
+                        <Route path="/search" element={<Search/>}/>
                         <Route path="/livre/:isbn" element={<BookDetails/>}/>
                         <Route path="*" element={<div>404</div>}/>
                     </Route>

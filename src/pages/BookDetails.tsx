@@ -32,7 +32,7 @@ const BookDetails: React.FC = () => {
     setBookComment(await getComment(1, isbn));
 
     try {
-      const result = await searchByQuery(isbn);
+      const result = await searchByQuery(isbn,1);
       if (result && result.length > 0) {
         setBook(result[0]);
       } else {
@@ -144,8 +144,6 @@ const BookDetails: React.FC = () => {
               <strong>Année :</strong> {renderYear(book.date)}
             </p>
           </div>
-
-
               <Box
                 component="form"
                 sx={{ "& .MuiTextField-root": {
@@ -153,7 +151,6 @@ const BookDetails: React.FC = () => {
                   backgroundColor: "rgba(0,0,0,0.8)",
                   borderRadius: "20px",
                   backdropFilter: "blur(10px)",
-                  
                  } }}
                 noValidate
                 autoComplete="off"
