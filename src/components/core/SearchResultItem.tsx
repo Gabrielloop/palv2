@@ -57,7 +57,7 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
   handleDetailsClick,
 }) => {
   const handleClick = () => {
-    if (book.identifier.length !== 13) {
+    if (book.identifier.length > 13 || book.identifier.length < 10) {
       return;
     }
     handleDetailsClick(book.identifier);

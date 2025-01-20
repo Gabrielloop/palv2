@@ -28,6 +28,10 @@ const BookCover: React.FC<BookCoverProps> = ({ isbn }) => {
 
   // Fonction pour récupérer la couverture du livre via l'API Open Library
   const fetchBookCover = async (isbn: string) => {
+    if (isbn.length === 10) {
+      // on ajoute 978 devant : 
+      isbn = `978${isbn}`;
+    }
     const url = `http://localhost:5000/fetch-cover?isbn=${isbn}`;
 
     try {
