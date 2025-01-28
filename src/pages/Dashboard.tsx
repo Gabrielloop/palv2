@@ -44,7 +44,10 @@ const Listes: FC<{ localtitle: string }> = ({ localtitle }) => {
           <p>Chargement...</p>
         ) : (
           <ScrollX boxName="listes">
-            <Box sx={{ display: "flex", gap: "10px" }}>
+            <Box sx={{
+                display: "flex",
+                gap : "10px"
+                }}>
               {userLists.map((list) => (
                 <Box key={list.id}>
                   <ListeItem
