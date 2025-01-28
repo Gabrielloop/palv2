@@ -30,7 +30,7 @@ code {
   justify-content: center !important;
   z-index: 50;
   gap: 2px;
-  border-top: 1px solid var(--primary-denim);
+  border-top: 1px solid black;
   backdrop-filter: blur(10px);
   background-color: var(--black-text-tr);
 }
@@ -207,6 +207,21 @@ tr:hover {
   margin-block-start: 0;
   padding-inline-start: 0;
 }
+.search-results-display > * {
+  width: 120px;
+  max-height: 170px;
+  overflow: hidden;
+}
+.search-results-display {
+  margin: 0;
+  margin-block-start: 0;
+  padding-inline-start: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  justify-items: left;
+  gap: 5px;
+}
 .search-result {
   display: flex;
   flex-wrap: wrap;
@@ -240,13 +255,16 @@ tr:hover {
 }
 .header-container {
   position: sticky;
+  display: flex;
+  justify-content: space-around;
   top: 0;
   width: 100%;
   margin: auto;
   z-index: 50;
-  border-top: 1px solid var(--primary-denim);
+  border-bottom: 1px solid black;
   backdrop-filter: blur(10px);
   background-color: var(--black-text-tr);
+  transition: all 1s;
 }
 .my-search-bar:first-child {
   background-color: var(--black-text-tr);
@@ -257,8 +275,6 @@ tr:hover {
 }
 
 .accordion-container {
-  border-radius: 8px;
-  margin-bottom: 16px;
   width: 100%;
   overflow: hidden;
 }
@@ -268,7 +284,7 @@ tr:hover {
   justify-content: space-between;
   width: 100%;
   align-items: stretch;
-  background-color: transparent; /* Si vous voulez une couleur d'arrière-plan sur l'en-tête */
+  background-color: transparent;
   color: white;
   cursor: pointer;
   padding: 5px;
@@ -475,6 +491,19 @@ tr:hover {
 }
 .liste-vide-options {
   font-weight: 800;
+  font-size: larger;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin: auto;
+  width: 90%;
+  height: auto;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  margin-top: 50px;
 }
 .wishlist-toggle {
   display: flex;

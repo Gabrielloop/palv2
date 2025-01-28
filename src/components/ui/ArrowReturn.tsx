@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { IconButton } from "@mui/material";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 // Composant pour afficher une flèche de retour avec le lien vers la page précédente
 // à faire : gérer le retour vers une ancre.
@@ -15,7 +14,7 @@ const ArrowReturn: React.FC = () => {
 
   return (
     <div className="my-div-circle" onClick={() => navigate(-1)} style={{ cursor: "pointer" }}>
-      <ArrowBackIcon sx={{ height: 50 }} />
+      <ArrowBackIosIcon sx={{ height: 50 }} />
     </div>
   );
 };

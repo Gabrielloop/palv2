@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Button, TextField } from "@mui/material";
+import { Box, Button, Switch, TextField } from "@mui/material";
+import SwitchDisplayResult from "../ui/SwitchDisplayResult";
 
 // Composant pour la barre de recherche
 
@@ -30,6 +31,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ query, setQuery, handleSearch }) 
         <Button type="submit" variant="contained" color="primary" sx={{ width: "100%" }}>
         Rechercher
         </Button> */}
+        
       </Box>
   );
 };

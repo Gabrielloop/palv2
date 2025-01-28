@@ -6,6 +6,7 @@ import AdvancedSearchForm from "components/core/SearchAdvancedForm";
 import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import SearchResultsList from "components/core/SearchResultsList";
+import SwitchDisplayResult from "components/ui/SwitchDisplayResult";
 
 const isISBN = (query: string): boolean => {
   const isbnRegex = /^(?:\d{9}[\dX]|\d{13})$/;
@@ -59,6 +60,7 @@ const Search: React.FC = () => {
               onClick={toggleAccordion}
               aria-label="Toggle advanced search"
             >
+            
               {isOpen ? <ExpandLessIcon /> : <ExpandCircleDownIcon />}
             </button>
           </div>
@@ -71,9 +73,12 @@ const Search: React.FC = () => {
                 onSearch={(params) => console.log(params)}
               />
             </div>
+            
           )}
         </div>
+        
       </HeaderContainer>
+      <SwitchDisplayResult />
       <SearchResultsList query={searchQuery} currentPage={1} />
     </div>
   );

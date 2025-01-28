@@ -1,7 +1,7 @@
 import Dexie from "dexie";
 import { DbBook, DbFavoris, DbLists, DbAvancement} from "../@types/database";
 import { db } from "../db";
-import { getAvancement } from "./dbBookOptions.service";
+import { getAvancement, isInAvancement } from "./dbBookOptions.service";
 
 // Ajouter un livre à la base de données
 export const addBook = async (book: DbBook) => {
@@ -24,11 +24,13 @@ export const addBook = async (book: DbBook) => {
         console.log(`Livre ${bookId} ajouté à dbBook.`);
   
         // Ajouter une entrée dans dbAvancement pour ce livre avec avancement initial à 0
-        const alreadyInAvancement = getAvancement(userId, bookId);
+          // vérification de la présqence de book dans avancement :
+        const alreadyInAvancement = await isInAvancement(userId, bookId);
+        console.log('already in at :' + alreadyInAvancement);
         if (!alreadyInAvancement) {
           await db.avancements.add({ bookId, userId, avancement: 0 });
           console.log(`Livre ${bookId} ajouté à dbAvancement avec avancement initial à 0.`);
-        }
+        } else {console.log(`Livre ${bookId} a déjà un avancement` +alreadyInAvancement);}
       }
   
       // Ajouter la relation entre la liste, le livre et l'utilisateur
@@ -134,4 +136,19 @@ export const removeBookFromList = async (userId: number, listeId: number, bookId
       }
     } catch (error) {
     }
+
+    
+
   };
+  // Récupération d'une liste de 5 livre de la dbBook ramdom :
+  export const getRandomBooks = async (n:number): Promise<DbBook[]> => {
+    try {
+        const books = await db.books.orderBy('identifier').limit(n).toArray();
+        const shuffledBooks = books.sort(() => 0.5 - Math.random());
+        const randomBooks = shuffledBooks.slice(0, n);
+        return randomBooks;
+        return books;
+    } catch (error) {
+        return [];
+    }
+};

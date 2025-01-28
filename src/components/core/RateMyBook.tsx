@@ -16,7 +16,7 @@ import {
 } from "../../service/dbBookOptions.service";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { get } from "react-hook-form";
+import { set } from "react-hook-form";
 
 // Composant pour afficher les options d'un livre (favoris, classement, avancement)
 // refacto : design.
@@ -33,7 +33,8 @@ const BookInfo: React.FC<BookInfoProps> = ({ isbn }) => {
   const [bookAvancement, setBookAvancement] = React.useState<number>(0);
   const [bookIsWishlisted, setBookIsWishlisted] =
     React.useState<boolean>(false);
-
+  const [sliderValue, setSliderValue] = React.useState<number>(0);
+  
   React.useEffect(() => {
     const fetchData = async () => {
       setBookInFav(await isFavoris(1, isbn));
@@ -41,6 +42,7 @@ const BookInfo: React.FC<BookInfoProps> = ({ isbn }) => {
       setBookNote(note);
       setBookAvancement(await getAvancement(1, isbn));
       setBookIsWishlisted(await isWishlisted(1, isbn));
+      setSliderValue(await getAvancement(1, isbn));
     };
     fetchData();
   }, [isbn]);
@@ -59,10 +61,22 @@ const BookInfo: React.FC<BookInfoProps> = ({ isbn }) => {
     setBookNote(value);
     await updateNote(1, isbn,value);
   };
+
+let timer: NodeJS.Timeout;
+
 const handleChangeAvancement = async (value:number) => {
-    setBookAvancement(value);
-    await updateAvancement(1, isbn,value);
+  // ajouter un timer pour éviter de spammer la base de données
+  if (timer) {
+    clearTimeout(timer);
   }
+  timer = setTimeout(async () => {
+    setBookAvancement(value);
+    await updateAvancement(1, isbn, value);
+  }, 250);}
+  
+const handleChangeAvancementValue = (event: Event, value: number | number[]) => {
+  setSliderValue(value as number);
+};
 
   return (
     <Box
@@ -84,9 +98,10 @@ const handleChangeAvancement = async (value:number) => {
       >
         <Slider
           aria-label="Default"
-          value={bookAvancement}
+          value={sliderValue}
           valueLabelDisplay="auto"
           sx={{ width: "90%" }}
+          onChange={handleChangeAvancementValue}
           onChangeCommitted={(event, value) => {
             handleChangeAvancement(value as number);
           }}
@@ -97,7 +112,7 @@ const handleChangeAvancement = async (value:number) => {
         sx={{
           display: "flex",
           width: "100%",
-          alignItems: "center",
+          alignItems: "end",
           justifyContent: "space-evenly",
           gap: 2,
           borderTop: "1px solid rgba(255,255,255,0.2)",
@@ -114,7 +129,7 @@ const handleChangeAvancement = async (value:number) => {
           onClick={handleToggleFav}
         >
           <FavoriteOutlinedIcon />
-          <span>{bookInFav ? "Favori" : "Non favori"}</span>
+          <span>{bookInFav ? "Favori" : "Favori"}</span>
         </div>
         <div
           className={`wishlist-toggle ${

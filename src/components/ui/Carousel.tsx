@@ -96,7 +96,6 @@ const Carousel: React.FC = () => {
         backgroundColor: "var(--black-text-tr)",
         height: "400px",
         MozBoxSizing: "border-box",
-        marginBottom: "78px"
       }}
     >
       <h3>Lectures en cours</h3>

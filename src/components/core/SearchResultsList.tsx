@@ -4,8 +4,10 @@ import { searchByQuery } from "../../api/bnf.service";
 import Message from "../general/Message";
 import SkeletonLoader from "../../components/ui/SearchResultSkeleton";
 import SearchResultItem from "../../components/core/SearchResultItem";
-import { Button } from "@mui/material";
+import { Button, Switch } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { viewModeSubject$ } from "../../service/viewModeService";
+import SwitchDisplayResult from "components/ui/SwitchDisplayResult";
 
 interface SearchResultsListProps {
   query: string;
@@ -22,6 +24,19 @@ const SearchResultsList: React.FC<SearchResultsListProps> = ({
   const [page, setPage] = useState<number>(currentPage);
 
   const navigate = useNavigate();
+
+
+  // observable pour l'affichage en liste ou en display
+  const [isListView, setIsListView] = useState(true); // État local pour refléter l'observable
+
+    useEffect(() => {
+        // S'abonner à l'observable pour écouter les changements
+        const subscription = viewModeSubject$.subscribe(setIsListView);
+
+        return () => subscription.unsubscribe(); // Nettoyage de l'abonnement
+    }, []);
+
+  
 
   // Charger les résultats pour une page donnée
   const fetchResults = useCallback(
@@ -78,17 +93,27 @@ const SearchResultsList: React.FC<SearchResultsListProps> = ({
 
   return (
     <div>
+      {/* Valeur de l'affichage en liste ou en display */}
+
+
       {/* Liste des résultats */}
+      
+
+<div
+  className={`${isListView ? "search-results-list" : "search-results-display"}`}
+  >
       {results.map((book: Book, index: number) => (
         <SearchResultItem
           key={index} // Utiliser un ID unique si possible
           book={book}
           handleDetailsClick={handleDetailsClick}
+          listView={isListView}
         />
       ))}
+</div>
 
       {/* Bouton pour charger plus de résultats */}
-      {results.length > 0 && (
+      {(results.length - page * 10) == 0 && (
         <Button
           variant="contained"
           color="primary"
@@ -96,7 +121,9 @@ const SearchResultsList: React.FC<SearchResultsListProps> = ({
           disabled={loading}
           style={{ margin: "1rem auto", display: "block" }}
         >
-          {loading ? "Chargement..." : "Voir plus de résultats"}
+          {
+            loading ? "Chargement..." : "Voir plus de résultats"
+          }
         </Button>
       )}
     </div>

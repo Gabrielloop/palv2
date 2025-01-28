@@ -11,6 +11,7 @@ import { useState } from "react";
 import { set } from "react-hook-form";
 import { useEffect } from "react";
 import { getAvancement, getNote, isFavoris, isComment, isWishlisted, getListOfBooks } from "../../service/dbBookOptions.service";
+import ResultDisplayMode from "components/ui/ResultDisplayMode";
 
 // Composant pour l'affichage d'un résultats (recherche, ou liste)
 // à faire : optimiser l'utilisation des fonction (externalisé)
@@ -25,6 +26,7 @@ interface SearchResultItemProps {
     date: string;
   };
   handleDetailsClick: (identifier: string) => void;
+  listView: boolean;
 }
 
 // Fonction pour nettoyer les variables
@@ -55,6 +57,7 @@ const cleanPublisher = (publisher: string | undefined) => {
 const SearchResultItem: React.FC<SearchResultItemProps> = ({
   book,
   handleDetailsClick,
+  listView
 }) => {
   const handleClick = () => {
     if (book.identifier.length > 13 || book.identifier.length < 10) {
@@ -116,6 +119,10 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
 
 
   return (
+    <>
+    {/* Affichage de chaque résultat de recherche */}
+    {/* vérification si affichage liste ou display */}
+    {listView ? (
     <div
       className={itemClass}
       style={{
@@ -225,7 +232,22 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
           />
         )}
       </Box>
-    </div>
+    </div>) : (
+      <div>
+      <ResultDisplayMode
+        book={book}
+        handleDetailsClick={handleDetailsClick}
+        bookNote={bookNote}
+        bookProgress={bookProgress}
+        bookFavorite={bookFavorite}
+        bookComment={bookComment}
+        bookIsWishlisted={bookIsWishlisted}
+        bookUserList={bookUserList}
+      />
+      </div>
+    )
+   }
+    </>
   );
 };
 

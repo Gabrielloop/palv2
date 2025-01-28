@@ -43,7 +43,7 @@ const Listes: FC<{ localtitle: string }> = ({ localtitle }) => {
         {isPending && userLists.length === 0 ? (
           <p>Chargement...</p>
         ) : (
-          <ScrollX>
+          <ScrollX boxName="listes">
             <Box sx={{ display: "flex", gap: "10px" }}>
               {userLists.map((list) => (
                 <Box key={list.id}>
@@ -60,8 +60,9 @@ const Listes: FC<{ localtitle: string }> = ({ localtitle }) => {
           </ScrollX>
         )}
       </Box>
-      <DashboardPresetLists />
+      <DashboardPresetLists group='presets' />
       <Carousel />
+      <DashboardPresetLists group='track'/>
     </>
   );
 };

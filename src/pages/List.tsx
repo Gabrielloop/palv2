@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { FC } from "react";
-import { Box } from "@mui/material";
+import { Box, Switch } from "@mui/material";
 import { Helmet } from "react-helmet-async";
 import { useNavigate, useLocation } from "react-router-dom";
 import ArrowReturn from "components/ui/ArrowReturn";
@@ -8,7 +8,7 @@ import SearchResultItem from "../components/core/SearchResultItem";
 import HeaderContainer from "layout/HeaderContainer";
 import SkeletonLoader from "components/ui/SearchResultSkeleton";
 import Message from "components/general/Message";
-import ListeVideOptions from "components/core/EmptyListOptions";
+import EmptyListOptions from "components/core/EmptyListOptions";
 import {
   getBooksFromFavoris,
   getBookUser,
@@ -20,6 +20,8 @@ import { BookInter } from "../@types/api";
 import { set } from "react-hook-form";
 import { getPresetListsTitle } from "service/dbPresetLists.service";
 import { getListTitle } from "service/dbListe.service";
+import SwitchDisplayResult from "components/ui/SwitchDisplayResult";
+import { viewModeSubject$ } from "service/viewModeService";
 
 interface MyListProps {
   userId: number;
@@ -35,6 +37,16 @@ const MyList: FC<MyListProps> = ({ userId }) => {
   const navigate = useNavigate();
 
   const listId: string | null = lastSegment ? lastSegment : null;
+
+    // observable pour l'affichage en liste ou en display
+    const [isListView, setIsListView] = useState(true); // État local pour refléter l'observable
+  
+      useEffect(() => {
+          // S'abonner à l'observable pour écouter les changements
+          const subscription = viewModeSubject$.subscribe(setIsListView);
+  
+          return () => subscription.unsubscribe(); // Nettoyage de l'abonnement
+      }, []);
 
   useEffect(() => {
     const getBookFromAnyList = async (listId:any) => {
@@ -106,31 +118,39 @@ const MyList: FC<MyListProps> = ({ userId }) => {
       </Helmet>
 
       <HeaderContainer>
+        <div style={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
+        }}>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <ArrowReturn />
-          <span>Mes listes</span>
+          <span>Mes listes / <b>{listTitle}</b> ({books.length})</span>
         </Box>
+        <SwitchDisplayResult />
+        </div>
       </HeaderContainer>
-
-      <h2>
-        {listTitle} ({books.length})
-      </h2>
 
       {loading && <SkeletonLoader />}
       {error && <Message text={error} type="error" />}
       {!loading && !error && books.length === 0 && (
         <Message text="Aucun livre trouvé" type="information" />
       )}
-      {books.length === 0 && <ListeVideOptions />}
-      <ul className="search-results-list">
+      {books.length === 0 && <EmptyListOptions />}
+
+      <div
+        className={`${isListView ? "search-results-list" : "search-results-display"}`}
+      >
         {books.map((book, index) => (
           <SearchResultItem
             key={index}
             book={book}
             handleDetailsClick={handleDetailsClick}
+            listView={isListView}
           />
         ))}
-      </ul>
+      </div>
     </>
   );
 };

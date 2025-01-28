@@ -76,27 +76,27 @@ const BookDetails: React.FC = () => {
       await updateComment(1, isbn, value);
     }
   }
+  if (!book) { return null; }
 
-  if (loading) return <p>Chargement des détails...</p>;
-  if (error) return <p>{error}</p>;
-  if (!book) return <p>Aucun détail disponible pour cet ISBN.</p>;
   return (
     <>
       <HeaderContainer>
-        <Box
-          sx={{
+        <Box style={{
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            gap: "5px",
-            padding: "5px",
-          }}
-        >
+            width: "100%",
+          }}>
           <ArrowReturn />
           <AddToListForm isbn={book.identifier} userId={1}/>
         </Box>
       </HeaderContainer>
 
+      {loading && <p>Chargement des détails...</p>}
+      {error && <p>{error}</p>}
+      {!book && <p>Aucun détail disponible pour cet ISBN.</p>}
+      {book && (
+       
       <div style={{ padding: "5px" }}>
 
         <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
@@ -177,6 +177,7 @@ const BookDetails: React.FC = () => {
               </Box>
         </div>
       </div>
+      )}
     </>
   );
 };

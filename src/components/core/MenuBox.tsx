@@ -2,11 +2,11 @@ import {FC} from 'react';
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import {useNavigate} from "react-router";
+import {useLocation} from "react-router-dom";
 import ListAltIcon from '@mui/icons-material/ListAlt';
 import SearchIcon from '@mui/icons-material/Search';
 import SettingsIcon from '@mui/icons-material/Settings';
 import QrCodeScannerIcon from '@mui/icons-material/QrCodeScanner';
-import {useLocation} from "react-router-dom";
 
 // Composant du menu principale
 // à faire : alignement des icones.

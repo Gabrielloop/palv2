@@ -215,6 +215,24 @@ export const getAvancement = async (userId: number, bookId: string): Promise<num
   }
 }
 
+// vérifier si le livre existe dans avancement et retourner un boolean
+export const isInAvancement = async (userId: number, bookId: string): Promise<boolean> => {
+  try {
+    const avancement = await db.avancements
+      .where("userId")
+      .equals(userId)
+      .and((av) => av.bookId === bookId)
+      .first();
+
+    return !!avancement;
+  } catch (error) {
+    console.error('error checking avancement :', error);
+    return false;
+  }
+}
+
+
+
 export const getBooksByAvancementStep = async (userId:number, avancement: number): Promise<string[]> => {
  switch (avancement) {
   case 0:
@@ -279,7 +297,8 @@ export const updateNote = async (userId: number, bookId: string, note: number): 
 
 export const updateAvancement = async (userId: number, bookId: string, avancement: number): Promise<number> => {
   try {
-    if (await isTracked(userId, bookId)) {
+    const isInAvancementCt= await isInAvancement(userId, bookId);
+    if (isInAvancementCt) {
       await db.avancements
       .where("userId")
       .equals(userId)
@@ -287,9 +306,9 @@ export const updateAvancement = async (userId: number, bookId: string, avancemen
       .modify({ avancement });
       console.log('update avancement :',avancement,userId,bookId);
       return avancement;
-    }
+    } else {
       await db.avancements.add({ userId, bookId, avancement });
-    console.log('add avancement :',avancement,userId,bookId);
+    console.log('tarck ' + isInAvancementCt +' add avancement :',avancement,userId,bookId);}
       return avancement;
   } catch (error) {
     console.error('error update avancement :',error);
