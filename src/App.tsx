@@ -1,40 +1,39 @@
 import React, {useState} from 'react';
-import './App.css';
-import Listes from "./pages/B_body/Listes";
+import Listes from "./pages/Dashboard";
 import {BrowserRouter, Navigate, Route, Router, Routes} from "react-router";
-import Pages from "./components/Pages";
-import Layout from "./layout/Layout";
-import LayoutWB from "./layout/LayoutWB";
-import MyList from "./pages/B_body/MyList";
-import Research from "./pages/B_body/Research";
-import Setting from "./pages/B_body/Setting";
-import Login from "./pages/B_body/Login";
+import Pages from "./layout/AppWrapper";
+import Layout from "./layout/LayoutLogin";
+import LayoutWB from "./layout/LayoutForLogin";
+import MyList from "./pages/List";
+import Setting from "./pages/Settings";
+import Login from "./pages/Login";
 import { AuthContext } from './context/AuthContext';
-import BookDetails from 'pages/B_body/BookDetails';
-
+import BookDetails from 'pages/BookDetails';
+import Search from 'pages/Search';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [loginUserId, setLoginUserId] = useState(1);
     const handleLogin = () => {
         setIsLoggedIn(true);
     };
     const handleLogout = () => {
         setIsLoggedIn(false);
     };
-    console.log(isLoggedIn);
+    console.log('user is connected:', isLoggedIn ? 'yes' : 'no', 'user id:', loginUserId);
     return (
         <Pages>
             <BrowserRouter>
-            <AuthContext.Provider value={{isLoggedIn, setIsLoggedIn}}>
+            <AuthContext.Provider value={{isLoggedIn, setIsLoggedIn, loginUserId, setLoginUserId}}>
                 <Routes>
                     {isLoggedIn ?
                     <Route element={<Layout/>}>
                         <Route path="/" element={<Navigate to="/listes" replace/>}/>
                         <Route path="/login" element={<Navigate to="/listes" replace/>}/>
-                        <Route path="/listes" element={<Listes localtitle={"Listes"} key={"liste"} />}/>
-                        <Route path="/listes/:mylist" element={<MyList userId={1}/>}/>
+                        <Route path="/listes" element={<Listes localtitle={"Lists"} key={"list"} />}/>
+                        <Route path="/listes/:mylist" element={<MyList userId={loginUserId}/>}/>
                         <Route path="/options" element={<Setting localtitle={'Options'}/>}/>
-                        <Route path="/recherches" element={<Research/>}/>
+                        <Route path="/search" element={<Search/>}/>
                         <Route path="/livre/:isbn" element={<BookDetails/>}/>
                         <Route path="*" element={<div>404</div>}/>
                     </Route>

@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--primary-denim);
+  background: linear-gradient(
+    0deg,
+    var(--primary-denim) 0%,
+    rgb(117, 117, 185) 100%
+  );
+  background-image: url(assets/fond.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+/* Conteneur de l'appication */
+.app-wrapper-container {
+  color: var(--off-white);
+}
+
+.login-anim-container {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.login-anim-moving-div {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  height: 200%;
+  width: 200%;
+  background-color: #3b82f6; /* Bleu */
+  background-image: url(../assets/fond.avif);
+  transition: transform 0.5s ease-out;
+}
+
+.login-anim-fixed-div {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.login-anim-random-square {
+  position: absolute;
+  width: 50px;
+  height: 80px;
+  background-color: white;
+  border: 1px solid #ccc;
+}
