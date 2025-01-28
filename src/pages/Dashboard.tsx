@@ -10,6 +10,7 @@ import ListeItem from "../components/core/DashboardListPreview";
 import DashboardPresetLists from "../components/core/DashboardPresetLists";
 import Carousel from "components/ui/Carousel";
 import { useAuth } from "hooks/useAuth";
+import TrackingBookList from "components/core/TrakingBookList";
 
 const Listes: FC<{ localtitle: string }> = ({ localtitle }) => {
   const [userLists, setUserLists] = useState<dbLists[]>([]);
@@ -65,6 +66,7 @@ const Listes: FC<{ localtitle: string }> = ({ localtitle }) => {
       </Box>
       <DashboardPresetLists group='presets' />
       <Carousel />
+      <TrackingBookList />
       <DashboardPresetLists group='track'/>
     </>
   );

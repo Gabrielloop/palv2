@@ -17,7 +17,7 @@ const Carousel: React.FC = () => {
   // Filtrer les livres dont l'avancement est entre 0 et 100
   // Trie les livres par avancement décroissant
 
- const bookIsbnInProgress = getBooksByAvancementStep(1, 1); // userId , step
+  const bookIsbnInProgress = getBooksByAvancementStep(1, 1); // userId , step
   const [filteredBooks, setFilteredBooks] = useState<any[]>([]);
   const [avancement, setAvancement] = useState<number>(0);
   const [booksWithAvanvement, setBooksWithAvanvement] = useState<{ avancement: number; title: string; identifier: string; creators: string; date: string; publisher: string; docType?: string }[]>([]);
