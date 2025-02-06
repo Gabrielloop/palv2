@@ -17,6 +17,7 @@ const Search: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [query, setQuery] = useState<string>("");
+  const [advanceQuery, setAdvanceQuery] = useState<string>("");
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -67,8 +68,8 @@ const Search: React.FC = () => {
           {isOpen && (
             <div className={`accordion-content ${isOpen ? "open" : "closed"}`}>
               <AdvancedSearchForm
-                query={query}
-                setQuery={setQuery}
+                advanceQuery={advanceQuery}
+                setAdvanceQuery={setQuery}
                 handleSearch={handleSearch}
                 onSearch={(params) => console.log(params)}
               />
@@ -79,7 +80,9 @@ const Search: React.FC = () => {
         
       </HeaderContainer>
       <SwitchDisplayResult />
+      {query && (
       <SearchResultsList query={searchQuery} currentPage={1} />
+      )}
     </div>
   );
 };

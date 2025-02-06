@@ -11,7 +11,7 @@ const AddListeBox: React.FC = () => {
 
   const handleAddListe = async () => {
     if (listName.trim() === "") {
-      alert("Le nom de la liste ne peut pas être vide !");
+      //alert("Le nom de la liste ne peut pas être vide !");
       return;
     }
     const newListe = {
@@ -21,7 +21,7 @@ const AddListeBox: React.FC = () => {
     };
     try {
       await addList(newListe);
-      alert(`Liste "${listName}" ajoutée avec succès !`);
+      //alert(`Liste "${listName}" ajoutée avec succès !`);
       setListName(""); // Réinitialise le champ texte après l'ajout
     } catch (error) {
       console.error("Erreur lors de l'ajout de la liste :", error);

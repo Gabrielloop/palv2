@@ -29,31 +29,6 @@ interface SearchResultItemProps {
   listView: boolean;
 }
 
-// Fonction pour nettoyer les variables
-// exporter ses fonctions pour les utiliser dès la query
-const cleanParentheses = (text: string | undefined) => {
-  if (typeof text === "string") {
-    return text.replace(/\s?\(.*?\)\s?/g, "").trim();
-  }
-  return text || "";
-};
-const cleanCreatorName = (creator: string | undefined) => {
-  if (typeof creator === "string") {
-    let cleanedCreator = creator.replace(/. Auteur du texte/g, "").trim();
-    return cleanParentheses(cleanedCreator);
-  }
-  return creator || "";
-};
-const cleanTitle = (title: string | undefined) => {
-  if (typeof title === "string") {
-    return title.split(" /")[0];
-  }
-  return title || "";
-};
-const cleanPublisher = (publisher: string | undefined) => {
-  return cleanParentheses(publisher);
-};
-
 const SearchResultItem: React.FC<SearchResultItemProps> = ({
   book,
   handleDetailsClick,
@@ -146,19 +121,19 @@ const SearchResultItem: React.FC<SearchResultItemProps> = ({
       <div style={{ flex: 3, display: "flex", flexDirection: "column" }}>
         <div className="search-result-title search-result-item-tronc">
           {/* Titre */}
-          {cleanTitle(book.title)}
+          {book.title}
         </div>
         <div className="search-result-item-tronc">
           {/* Auteur et Éditeur et Date  */}
           <span className="search-result-date">{book.date}</span>&nbsp;
           <span className="search-result-creator">
-            {cleanCreatorName(book.creators)}
+            {book.creators}
           </span>
         </div>
         <div className="search-result-item-tronc">
           <span className="search-result-isbn">{book.identifier}</span>&nbsp;
           <span className="search-result-editor">
-            {cleanPublisher(book.publisher)}
+            {book.publisher}
           </span>
         </div>
         <div>

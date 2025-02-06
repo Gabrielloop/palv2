@@ -10,6 +10,7 @@ import ListeItem from "../components/core/DashboardListPreview";
 import DashboardPresetLists from "../components/core/DashboardPresetLists";
 import Carousel from "components/ui/Carousel";
 import { useAuth } from "hooks/useAuth";
+import TrackingBookList from "components/core/TrakingBookList";
 
 const Listes: FC<{ localtitle: string }> = ({ localtitle }) => {
   const [userLists, setUserLists] = useState<dbLists[]>([]);
@@ -46,7 +47,10 @@ const Listes: FC<{ localtitle: string }> = ({ localtitle }) => {
           <p>Chargement...</p>
         ) : (
           <ScrollX boxName="listes">
-            <Box sx={{ display: "flex", gap: "10px" }}>
+            <Box sx={{
+                display: "flex",
+                gap : "10px"
+                }}>
               {userLists.map((list) => (
                 <Box key={list.id}>
                   <ListeItem
@@ -64,6 +68,7 @@ const Listes: FC<{ localtitle: string }> = ({ localtitle }) => {
       </Box>
       <DashboardPresetLists group='presets' />
       <Carousel />
+      <TrackingBookList />
       <DashboardPresetLists group='track'/>
     </>
   );
