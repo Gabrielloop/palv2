@@ -7,7 +7,6 @@ import SearchResultItem from "../../components/core/SearchResultItem";
 import { Button, Switch } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { viewModeSubject$ } from "../../service/viewModeService";
-import SwitchDisplayResult from "components/ui/SwitchDisplayResult";
 
 interface SearchResultsListProps {
   query: string;
@@ -104,7 +103,7 @@ const SearchResultsList: React.FC<SearchResultsListProps> = ({
   >
       {results.map((book: Book, index: number) => (
         <SearchResultItem
-          key={index} // Utiliser un ID unique si possible
+          key={index}
           book={book}
           handleDetailsClick={handleDetailsClick}
           listView={isListView}

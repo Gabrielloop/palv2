@@ -1,61 +1,81 @@
 import React, { useState } from "react";
 import { TextField, MenuItem, Select, InputLabel, FormControl, Button } from "@mui/material";
 
+
 // Composant pour afficher le formulaire de recherche avancée
 // à faire : ajouter des options de recherche avancée
 // à faire : le lien avec bnfServices.ts
 // refacto : le design du formulaire
 
 interface AdvancedSearchFormProps {
-  query: string;
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
+  advanceQuery: string;
+  setAdvanceQuery: React.Dispatch<React.SetStateAction<string>>;
   handleSearch: (e: React.FormEvent) => void;
-  onSearch: (params: { title: string, author: string, language: string, isbn: string }) => void;
+  onSearch: (params: { title: string, author: string, publisher: string, year: number }) => void;
 }
 
-const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({ query, setQuery, handleSearch, onSearch }) => {
+const AdvancedSearchForm: React.FC<AdvancedSearchFormProps> = ({ advanceQuery, setAdvanceQuery, handleSearch, onSearch }) => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
-  const [language, setLanguage] = useState('fre');
-  const [isbn, setIsbn] = useState('');
+  const [publisher, setPublisher] = useState('');
+  const [year, setYear] = useState(0);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSearch({ title, author, language, isbn });
+    onSearch({ title, author, publisher, year });
+    setAdvanceQuery(title);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}
+    style={{
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        justifyContent: "space-between",
+        gap: "1rem"
+        }}>
       <TextField
+      sx={{
+        width: "100%",
+      }}
         label="Titre"
         variant="outlined"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
       />
       <TextField
+      sx={{
+        width: "100%",
+      }}
         label="Auteur"
         variant="outlined"
         value={author}
         onChange={(e) => setAuthor(e.target.value)}
       />
-      <FormControl variant="outlined">
-        <InputLabel>Langue</InputLabel>
-        <Select
-          value={language}
-          onChange={(e) => setLanguage(e.target.value)}
-          label="Langue"
-        >
-          <MenuItem value="fre">Français</MenuItem>
-          <MenuItem value="eng">Anglais</MenuItem>
-        </Select>
-      </FormControl>
       <TextField
-        label="ISBN"
+      sx={{
+        width: "55%",
+      }}
+        label="Publié par"
         variant="outlined"
-        value={isbn}
-        onChange={(e) => setIsbn(e.target.value)}
+        value={publisher}
+        onChange={(e) => setPublisher(e.target.value)}
       />
-      <Button variant="contained" color="primary" type="submit">
+      <TextField
+      sx={{
+        width: "40%",
+      }}
+        label="Année"
+        type="number"
+        variant="outlined"
+        value=''
+        onChange={(e) => setYear(Number(e.target.value))}
+      />
+      <Button sx={{
+        width: "100%",
+      }}
+      variant="contained" color="primary" type="submit">
         Recherche Avancée
       </Button>
     </form>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CircularProgress from '@mui/material/CircularProgress';
+import {isbnConvert} from "../../service/isbnConvert";
 
 // COmposant pour afficher la couverture d'un livre
 // par défaut, charge la couverture de la BNF
@@ -16,6 +17,10 @@ interface BookCoverProps {
 }
 
 const BookCover: React.FC<BookCoverProps> = ({ isbn }) => {
+  if (isbn.length === 10) {
+    isbn = isbnConvert(isbn);
+  } else {isbn = isbn}
+
   const [coverUrl, setCoverUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -28,10 +33,8 @@ const BookCover: React.FC<BookCoverProps> = ({ isbn }) => {
 
   // Fonction pour récupérer la couverture du livre via l'API Open Library
   const fetchBookCover = async (isbn: string) => {
-    if (isbn.length === 10) {
-      // on ajoute 978 devant : 
-      isbn = `978${isbn}`;
-    }
+    
+
     const url = `http://localhost:5000/fetch-cover?isbn=${isbn}`;
 
     try {
@@ -89,6 +92,7 @@ const BookCover: React.FC<BookCoverProps> = ({ isbn }) => {
         }}
         onError={handleImageError}
       />
+     
     </div>
   );
 };
